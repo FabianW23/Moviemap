@@ -16,5 +16,7 @@ namespace Moviemap.Web.Data.Entities
         public bool Status { get; set; }
 
         public MovieEntity Movie { get; set; }
+
+        public UserEntity User { get; set; }
     }
 }

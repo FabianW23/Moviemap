@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Moviemap.Web.Data.Entities;
 
 namespace Moviemap.Web.Data
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<UserEntity>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
@@ -19,6 +20,8 @@ namespace Moviemap.Web.Data
         public DbSet<RoomEntity> Rooms { get; set; }
 
         public DbSet<ChairEntity> Chairs { get; set; }
+
+        public DbSet<UserEntity> Users { get; set; }
     }
 }
 
