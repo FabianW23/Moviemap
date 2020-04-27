@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Moviemap.Web.Data;
 using Moviemap.Web.Data.Entities;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Moviemap.Web.Controllers
 {
@@ -22,7 +20,10 @@ namespace Moviemap.Web.Controllers
         // GET: Reservation
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Reservations.ToListAsync());
+            List<ReservationEntity> reservation = await _context.Reservations
+                .Include(r =>r.Chairs)
+                .ToListAsync();
+            return View(reservation);
         }
 
         // GET: Reservation/Details/5
@@ -33,7 +34,7 @@ namespace Moviemap.Web.Controllers
                 return NotFound();
             }
 
-            var reservationEntity = await _context.Reservations
+            ReservationEntity reservationEntity = await _context.Reservations
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (reservationEntity == null)
             {
@@ -73,7 +74,7 @@ namespace Moviemap.Web.Controllers
                 return NotFound();
             }
 
-            var reservationEntity = await _context.Reservations.FindAsync(id);
+            ReservationEntity reservationEntity = await _context.Reservations.FindAsync(id);
             if (reservationEntity == null)
             {
                 return NotFound();
@@ -124,7 +125,7 @@ namespace Moviemap.Web.Controllers
                 return NotFound();
             }
 
-            var reservationEntity = await _context.Reservations
+            ReservationEntity reservationEntity = await _context.Reservations
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (reservationEntity == null)
             {
@@ -139,7 +140,7 @@ namespace Moviemap.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var reservationEntity = await _context.Reservations.FindAsync(id);
+            ReservationEntity reservationEntity = await _context.Reservations.FindAsync(id);
             _context.Reservations.Remove(reservationEntity);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

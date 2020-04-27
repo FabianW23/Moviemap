@@ -18,5 +18,7 @@ namespace Moviemap.Web.Data.Entities
         public MovieEntity Movie { get; set; }
 
         public UserEntity User { get; set; }
+
+        public ICollection<ChairEntity> Chairs { get; set; }
     }
 }
