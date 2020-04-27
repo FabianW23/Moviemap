@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29721.120
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moviemap.Common", "Moviemap.Common\Moviemap.Common.csproj", "{B3512C9A-446A-4BDF-9E63-D480077D46A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moviemap.Web", "Moviemap.Web\Moviemap.Web.csproj", "{58D56A84-5940-4DC9-BE51-92508DA0C372}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B3512C9A-446A-4BDF-9E63-D480077D46A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3512C9A-446A-4BDF-9E63-D480077D46A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3512C9A-446A-4BDF-9E63-D480077D46A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3512C9A-446A-4BDF-9E63-D480077D46A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58D56A84-5940-4DC9-BE51-92508DA0C372}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58D56A84-5940-4DC9-BE51-92508DA0C372}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58D56A84-5940-4DC9-BE51-92508DA0C372}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58D56A84-5940-4DC9-BE51-92508DA0C372}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8E6972BF-C8C3-4802-B994-8604D572E027}
+	EndGlobalSection
+EndGlobal
