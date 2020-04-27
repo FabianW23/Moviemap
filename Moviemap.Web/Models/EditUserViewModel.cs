@@ -28,11 +28,5 @@ namespace Moviemap.Web.Models
         [Display(Name = "Phone Number")]
         [MaxLength(50, ErrorMessage = "The {0} field can not have more than {1} characters.")]
         public string PhoneNumber { get; set; }
-
-        [Display(Name = "Picture")]
-        public IFormFile PictureFile { get; set; }
-
-        [Display(Name = "Picture")]
-        public string PicturePath { get; set; }
     }
 }

@@ -16,6 +16,15 @@
                 @Html.DisplayNameFor(model => model.QrCode)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Movie.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.FullName)
+            </th>
+            <th>
+                Chairs
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Status)
             </th>
             <th></th>
@@ -26,6 +35,15 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.QrCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Movie.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Chairs.Count)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Status)

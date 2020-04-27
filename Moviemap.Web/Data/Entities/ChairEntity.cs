@@ -23,5 +23,7 @@ namespace Moviemap.Web.Data.Entities
         public string ChairType { get; set; }
 
         public RoomEntity Room { get; set; }
+
+        public ReservationEntity Reservation { get; set; }
     }
 }
