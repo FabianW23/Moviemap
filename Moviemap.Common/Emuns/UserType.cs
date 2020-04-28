@@ -4,6 +4,6 @@
     {
         Admin,
         CinemaAdmin,
-        Employee
+        User
     }
 }

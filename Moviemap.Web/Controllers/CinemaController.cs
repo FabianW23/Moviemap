@@ -21,7 +21,7 @@ namespace Moviemap.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Cinemas.Include(c => c.User.Id).ToListAsync());
+            return View(await _context.Cinemas.Include(c => c.User).ToListAsync());
         }
 
         public async Task<IActionResult> Details(int? id)
