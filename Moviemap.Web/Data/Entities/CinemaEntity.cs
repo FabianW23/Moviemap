@@ -14,6 +14,8 @@ namespace Moviemap.Web.Data.Entities
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         public string Name { get; set; }
 
+        public UserEntity User { get; set; }
+
         public ICollection<RoomEntity> Rooms { get; set; }
     }
 }

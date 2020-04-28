@@ -31,6 +31,8 @@ namespace Moviemap.Web.Data.Entities
         [Display(Name = "User Type")]
         public UserType UserType { get; set; }
 
+        public ICollection<CinemaEntity> Cinemas { get; set; }
+
         public ICollection<ReservationEntity> Reservations { get; set; }
     }
 }
