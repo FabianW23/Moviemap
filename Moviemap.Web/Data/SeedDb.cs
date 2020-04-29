@@ -30,7 +30,9 @@ namespace Moviemap.Web.Data
             await CheckCinemaAsync();
             await CheckMovieAsync();
             await CheckRoomAsync();
+            await CheckChairAsync();
             await CheckHoursAsync();
+            await CheckReservationsAsync();
         }
         private async Task CheckRolesAsync()
         {
@@ -143,20 +145,113 @@ namespace Moviemap.Web.Data
         {
             if (!_context.Rooms.Any())
             {
-                await AddRoomAsync("Procinal Puerta de norte", "Sala 1");
-                await AddRoomAsync("Procinal Puerta de norte", "Sala 2");
-                await AddRoomAsync("Procinal Mayorca", "Sala 1");
-                await AddRoomAsync("Procinal Mayorca", "Sala 2");
+                AddRoomAsync("Procinal Puerta de norte", "Sala 1");
+                AddRoomAsync("Procinal Puerta de norte", "Sala 2");
+                AddRoomAsync("Procinal Mayorca", "Sala 1");
+                AddRoomAsync("Procinal Mayorca", "Sala 2");
                 await _context.SaveChangesAsync();
             }
         }
 
-        private async Task AddRoomAsync(string cinemaName, string salaName)
+        private void AddRoomAsync(string cinemaName, string roomName)
         {
             _context.Rooms.Add(new RoomEntity 
             { 
-                Name = salaName, 
+                Name = roomName, 
                 Cinema = _context.Cinemas.FirstOrDefault(c => c.Name == cinemaName)
+            });
+        }
+
+        
+
+        private void AddChairAsync(string name, int roomId, int column, int row)
+        {
+            _context.Chairs.Add(new ChairEntity
+            {
+                Name = name,
+                ColumnLocation = column,
+                RowLocation = row,
+                ChairType = ChairType.Available.ToString(),
+                Room = _context.Rooms.FirstOrDefault(c => c.Id == roomId)
+            });
+        }
+
+        private async Task CheckChairAsync()
+        {
+            if (!_context.Chairs.Any())
+            {
+                AddChairAsync("A1", 1, 0, 0);
+                AddChairAsync("A2", 1, 1, 0);
+                AddChairAsync("A3", 1, 2, 0);
+                AddChairAsync("A4", 1, 3, 0);
+                AddChairAsync("A5", 1, 4, 0);
+                AddChairAsync("A6", 1, 5, 0);
+                AddChairAsync("A7", 1, 6, 0);
+                AddChairAsync("A8", 1, 7, 0);
+                AddChairAsync("A9", 1, 8, 0);
+                AddChairAsync("B1", 1, 0, 1);
+                AddChairAsync("B2", 1, 1, 1);
+                AddChairAsync("B3", 1, 2, 1);
+                AddChairAsync("B4", 1, 3, 1);
+                AddChairAsync("B5", 1, 4, 1);
+                AddChairAsync("B6", 1, 5, 1);
+                AddChairAsync("B7", 1, 6, 1);
+                AddChairAsync("B8", 1, 7, 1);
+                AddChairAsync("B9", 1, 8, 1);
+                AddChairAsync("C1", 1, 0, 2);
+                AddChairAsync("C2", 1, 1, 2);
+                AddChairAsync("C3", 1, 2, 2);
+                AddChairAsync("C4", 1, 3, 2);
+                AddChairAsync("C5", 1, 4, 2);
+                AddChairAsync("C6", 1, 5, 2);
+                AddChairAsync("C7", 1, 6, 2);
+                AddChairAsync("C8", 1, 7, 2);
+                AddChairAsync("C9", 1, 8, 2);
+                AddChairAsync("D1", 1, 0, 3);
+                AddChairAsync("D2", 1, 1, 3);
+                AddChairAsync("D3", 1, 2, 3);
+                AddChairAsync("D4", 1, 3, 3);
+                AddChairAsync("D5", 1, 4, 3);
+                AddChairAsync("D6", 1, 5, 3);
+                AddChairAsync("D7", 1, 6, 3);
+                AddChairAsync("D8", 1, 7, 3);
+                AddChairAsync("D9", 1, 8, 3);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        private async Task CheckReservationsAsync()
+        {
+            if (!_context.Reservations.Any())
+            {
+                AddReservation(await _userHelper.GetUserByEmailAsync("fabian.m.d@hotmail.com"), 1);
+                AddReservation(await _userHelper.GetUserByEmailAsync("fabian.m.d@hotmail.com"), 3);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        private void AddReservation(UserEntity user, int hourId)
+        {
+            _context.Reservations.Add(new ReservationEntity
+            {
+                Status = ReservationStatus.Active.ToString(),
+                User = user,
+                Hour = _context.Hours.FirstOrDefault(h => h.Id == hourId),
+                ReservationChairs = new List<ReservationChairsEntity>
+                    {
+                    new ReservationChairsEntity
+                    {
+                        Chair = _context.Chairs.FirstOrDefault(c => c.Id == 10)
+                    },
+                    new ReservationChairsEntity
+                    {
+                        Chair = _context.Chairs.FirstOrDefault(c => c.Id == 11)
+                    },
+                    new ReservationChairsEntity
+                    {
+                        Chair = _context.Chairs.FirstOrDefault(c => c.Id == 12)
+                    }
+                }
             });
         }
     }

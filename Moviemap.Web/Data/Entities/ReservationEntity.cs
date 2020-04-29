@@ -13,12 +13,12 @@ namespace Moviemap.Web.Data.Entities
         [Display(Name = "Qr Code")]
         public string QrCode { get; set; }
 
-        public bool Status { get; set; }
+        public String Status { get; set; }
 
-        public MovieEntity Movie { get; set; }
+        public HourEntity Hour { get; set; }
 
         public UserEntity User { get; set; }
 
-        public ICollection<ChairEntity> Chairs { get; set; }
+        public ICollection<ReservationChairsEntity> ReservationChairs { get; set; }
     }
 }

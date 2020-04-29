@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Moviemap.Web.Data;
 
 namespace Moviemap.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200428202633_UpdateChairIdentificationToChairName")]
+    partial class UpdateChairIdentificationToChairName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,11 +145,15 @@ namespace Moviemap.Web.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
+                    b.Property<int?>("ReservationId");
+
                     b.Property<int?>("RoomId");
 
                     b.Property<int>("RowLocation");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ReservationId");
 
                     b.HasIndex("RoomId");
 
@@ -216,42 +222,23 @@ namespace Moviemap.Web.Migrations
                     b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("Moviemap.Web.Data.Entities.ReservationChairsEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ChairId");
-
-                    b.Property<int?>("ReservationId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ChairId");
-
-                    b.HasIndex("ReservationId");
-
-                    b.ToTable("ReservationChairsEntity");
-                });
-
             modelBuilder.Entity("Moviemap.Web.Data.Entities.ReservationEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("HourId");
+                    b.Property<int?>("MovieId");
 
                     b.Property<string>("QrCode");
 
-                    b.Property<string>("Status");
+                    b.Property<bool>("Status");
 
                     b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HourId");
+                    b.HasIndex("MovieId");
 
                     b.HasIndex("UserId");
 
@@ -388,6 +375,10 @@ namespace Moviemap.Web.Migrations
 
             modelBuilder.Entity("Moviemap.Web.Data.Entities.ChairEntity", b =>
                 {
+                    b.HasOne("Moviemap.Web.Data.Entities.ReservationEntity", "Reservation")
+                        .WithMany("Chairs")
+                        .HasForeignKey("ReservationId");
+
                     b.HasOne("Moviemap.Web.Data.Entities.RoomEntity", "Room")
                         .WithMany("Chairs")
                         .HasForeignKey("RoomId");
@@ -411,22 +402,11 @@ namespace Moviemap.Web.Migrations
                         .HasForeignKey("RoomId");
                 });
 
-            modelBuilder.Entity("Moviemap.Web.Data.Entities.ReservationChairsEntity", b =>
-                {
-                    b.HasOne("Moviemap.Web.Data.Entities.ChairEntity", "Chair")
-                        .WithMany("ReservationChairs")
-                        .HasForeignKey("ChairId");
-
-                    b.HasOne("Moviemap.Web.Data.Entities.ReservationEntity", "Reservation")
-                        .WithMany("ReservationChairs")
-                        .HasForeignKey("ReservationId");
-                });
-
             modelBuilder.Entity("Moviemap.Web.Data.Entities.ReservationEntity", b =>
                 {
-                    b.HasOne("Moviemap.Web.Data.Entities.HourEntity", "Hour")
-                        .WithMany("Reservations")
-                        .HasForeignKey("HourId");
+                    b.HasOne("Moviemap.Web.Data.Entities.MovieEntity", "Movie")
+                        .WithMany()
+                        .HasForeignKey("MovieId");
 
                     b.HasOne("Moviemap.Web.Data.Entities.UserEntity", "User")
                         .WithMany("Reservations")

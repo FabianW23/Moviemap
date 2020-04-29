@@ -36,5 +36,7 @@ namespace Moviemap.Web.Data.Entities
         public MovieEntity Movie { get; set; }
 
         public RoomEntity Room { get; set; }
+
+        public ICollection<ReservationEntity> Reservations { get; set; }
     }
 }

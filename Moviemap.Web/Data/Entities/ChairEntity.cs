@@ -11,7 +11,7 @@ namespace Moviemap.Web.Data.Entities
         public int Id { get; set; }
 
         [Required(ErrorMessage = "The field {0} is mandatory.")]
-        public string Identification { get; set; }
+        public string Name { get; set; }
 
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         public int ColumnLocation { get; set; }
@@ -24,6 +24,6 @@ namespace Moviemap.Web.Data.Entities
 
         public RoomEntity Room { get; set; }
 
-        public ReservationEntity Reservation { get; set; }
+        public ICollection<ReservationChairsEntity> ReservationChairs { get; set; }
     }
 }
