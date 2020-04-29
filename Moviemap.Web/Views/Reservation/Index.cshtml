@@ -6,9 +6,6 @@
 
 <h2>Index</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -16,10 +13,19 @@
                 @Html.DisplayNameFor(model => model.QrCode)
             </th>
             <th>
+                Movie
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.User.FullName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                Chairs
+            </th>
+            <th>
+                Room
             </th>
             <th></th>
         </tr>
@@ -31,15 +37,25 @@
                 @Html.DisplayFor(modelItem => item.QrCode)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Hour.Movie.Name)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.User.FullName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @foreach (var chairItem in item.ReservationChairs)
+                {
+                    @Html.DisplayFor(modelItem => chairItem.Chair.Name) 
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hour.Room.Name)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> 
             </td>
         </tr>
 }

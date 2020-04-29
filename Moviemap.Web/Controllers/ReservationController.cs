@@ -21,12 +21,17 @@ namespace Moviemap.Web.Controllers
         public async Task<IActionResult> Index()
         {
             List<ReservationEntity> reservation = await _context.Reservations
-                .Include(r =>r.User)
+                .Include(r => r.User)
+                .Include(r => r.ReservationChairs)
+                .ThenInclude(rc => rc.Chair)
+                .Include(r => r.Hour)
+                .ThenInclude(h => h.Movie)
+                .Include(r => r.Hour)
+                .ThenInclude(h => h.Room)
                 .ToListAsync();
             return View(reservation);
         }
 
-        // GET: Reservation/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
