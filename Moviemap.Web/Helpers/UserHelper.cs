@@ -63,6 +63,11 @@ namespace Moviemap.Web.Helpers
             return await _userManager.ConfirmEmailAsync(user, token);
         }
 
+        public async Task<UserEntity> GetUserAsync(string userId)
+        {
+            return await _userManager.FindByIdAsync(userId);
+        }
+
         public async Task CheckRoleAsync(string roleName)
         {
             var roleExists = await _roleManager.RoleExistsAsync(roleName);
@@ -83,6 +88,45 @@ namespace Moviemap.Web.Helpers
         public async Task<IdentityResult> AddUserAsync(UserEntity user, string password)
         {
             return await _userManager.CreateAsync(user, password);
+        }
+
+        public async Task<SignInResult> LoginAsync(LoginViewModel model)
+        {
+            return await _signInManager.PasswordSignInAsync(
+                model.Username,
+                model.Password,
+                model.RememberMe,
+                false);
+        }
+
+        public async Task<SignInResult> ValidatePasswordAsync(UserEntity user, string password)
+        {
+            return await _signInManager.CheckPasswordSignInAsync(user, password, false);
+        }
+
+        public async Task LogoutAsync()
+        {
+            await _signInManager.SignOutAsync();
+        }
+
+        public async Task<IdentityResult> ChangePasswordAsync(UserEntity user, string oldPassword, string newPassword)
+        {
+            return await _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
+        }
+
+        public async Task<IdentityResult> UpdateUserAsync(UserEntity user)
+        {
+            return await _userManager.UpdateAsync(user);
+        }
+
+        public async Task<string> GeneratePasswordResetTokenAsync(UserEntity user)
+        {
+            return await _userManager.GeneratePasswordResetTokenAsync(user);
+        }
+
+        public async Task<IdentityResult> ResetPasswordAsync(UserEntity user, string token, string password)
+        {
+            return await _userManager.ResetPasswordAsync(user, token, password);
         }
     }
 }

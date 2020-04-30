@@ -127,7 +127,6 @@ namespace Moviemap.Web.Data
             }
         }
 
-
         private async Task AddHourssync(int roomId, DateTime startDate, DateTime endtDate, string movie)
         {
             _context.Hours.Add(new HourEntity
@@ -135,6 +134,7 @@ namespace Moviemap.Web.Data
                 StartDate = startDate,
                 EndDate = endtDate,
                 TicketPrice = 13000,
+                IsAvalible = false,
                 Movie = _context.Movies.FirstOrDefault(m => m.Name == movie),
                 Room = _context.Rooms.FirstOrDefault(r => r.Id == roomId)
             });
@@ -224,8 +224,8 @@ namespace Moviemap.Web.Data
         {
             if (!_context.Reservations.Any())
             {
-                AddReservation(await _userHelper.GetUserByEmailAsync("fabian.m.d@hotmail.com"), 1);
-                AddReservation(await _userHelper.GetUserByEmailAsync("fabian.m.d@hotmail.com"), 3);
+                AddReservation(await _userHelper.GetUserByEmailAsync("ferre55@yopmail.com"), 1);
+                AddReservation(await _userHelper.GetUserByEmailAsync("ferre55@yopmail.com"), 3);
                 await _context.SaveChangesAsync();
             }
         }

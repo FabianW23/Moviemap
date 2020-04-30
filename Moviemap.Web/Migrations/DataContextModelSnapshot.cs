@@ -182,6 +182,8 @@ namespace Moviemap.Web.Migrations
 
                     b.Property<DateTime>("EndDate");
 
+                    b.Property<bool>("IsAvalible");
+
                     b.Property<int?>("MovieId");
 
                     b.Property<int?>("RoomId");

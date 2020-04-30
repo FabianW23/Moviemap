@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 
 namespace Moviemap.Web.Data.Entities
@@ -32,6 +33,9 @@ namespace Moviemap.Web.Data.Entities
 
         [Display(Name = "Ticket price")]
         public decimal TicketPrice { get; set; }
+
+        [Required(ErrorMessage = "The field {0} is mandatory.")]
+        public bool IsAvalible { get; set; }
 
         public MovieEntity Movie { get; set; }
 

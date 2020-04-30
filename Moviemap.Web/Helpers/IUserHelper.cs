@@ -17,6 +17,8 @@ namespace Moviemap.Web.Helpers
 
         Task<UserEntity> GetUserByEmailAsync(string email);
 
+        Task<UserEntity> GetUserAsync(string userId);
+
         Task AddUserToRoleAsync(UserEntity user, string roleName);
 
         Task CheckRoleAsync(string roleName);
@@ -24,5 +26,20 @@ namespace Moviemap.Web.Helpers
         Task<string> GenerateEmailConfirmationTokenAsync(UserEntity user);
 
         Task<IdentityResult> ConfirmEmailAsync(UserEntity user, string token);
+
+        Task<SignInResult> LoginAsync(LoginViewModel model);
+
+        Task<SignInResult> ValidatePasswordAsync(UserEntity user, string password);
+
+        Task LogoutAsync();
+
+        Task<IdentityResult> ChangePasswordAsync(UserEntity user, string oldPassword, string newPassword);
+
+        Task<IdentityResult> UpdateUserAsync(UserEntity user);
+
+        Task<string> GeneratePasswordResetTokenAsync(UserEntity user);
+
+        Task<IdentityResult> ResetPasswordAsync(UserEntity user, string token, string password);
+
     }
 }
