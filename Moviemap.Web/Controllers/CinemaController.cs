@@ -1,22 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Moviemap.Web.Data;
 using Moviemap.Web.Data.Entities;
+using Moviemap.Web.Helpers;
+using Moviemap.Web.Models;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Moviemap.Web.Controllers
 {
     public class CinemaController : Controller
     {
         private readonly DataContext _context;
+        private readonly IImageHelper _imageHelper;
+        private readonly IConverterHelper _converterHelper;
 
-        public CinemaController(DataContext context)
+        public CinemaController(DataContext context, IImageHelper imageHelper, IConverterHelper converterHelper)
         {
             _context = context;
+            _imageHelper = imageHelper;
+            _converterHelper = converterHelper;
         }
 
         public async Task<IActionResult> Index()
@@ -31,14 +35,16 @@ namespace Moviemap.Web.Controllers
                 return NotFound();
             }
 
-            var cinemaEntity = await _context.Cinemas
+            CinemaEntity cinemaEntity = await _context.Cinemas
+                .Include(c => c.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
+            CinemaViewModel cinemaViewModel = _converterHelper.ToCinemaViewModel(cinemaEntity);
             if (cinemaEntity == null)
             {
                 return NotFound();
             }
 
-            return View(cinemaEntity);
+            return View(cinemaViewModel);
         }
 
         public IActionResult Create()
@@ -48,15 +54,35 @@ namespace Moviemap.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CinemaEntity cinemaEntity)
+        public async Task<IActionResult> Create(CinemaViewModel cinemaViewModel)
         {
             if (ModelState.IsValid)
             {
+                string path = string.Empty;
+                if (cinemaViewModel.LogoFile != null)
+                {
+                    path = await _imageHelper.UploadImageAsync(cinemaViewModel.LogoFile, "Cinemas");
+                }
+                CinemaEntity cinemaEntity = _converterHelper.ToCinemaEntity(cinemaViewModel, path, true);
                 _context.Add(cinemaEntity);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    if (ex.InnerException.Message.Contains("duplicate"))
+                    {
+                        ModelState.AddModelError(string.Empty, "Already exists a country with the same name");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, ex.InnerException.Message);
+                    }
+                }
             }
-            return View(cinemaEntity);
+            return View(cinemaViewModel);
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -66,44 +92,51 @@ namespace Moviemap.Web.Controllers
                 return NotFound();
             }
 
-            var cinemaEntity = await _context.Cinemas.FindAsync(id);
+            CinemaEntity cinemaEntity = await _context.Cinemas.FindAsync(id);
             if (cinemaEntity == null)
             {
                 return NotFound();
             }
-            return View(cinemaEntity);
+            CinemaViewModel cinemaViewModel = _converterHelper.ToCinemaViewModel(cinemaEntity);
+            return View(cinemaViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, CinemaEntity cinemaEntity)
+        public async Task<IActionResult> Edit(int id, CinemaViewModel cinemaViewModel)
         {
-            if (id != cinemaEntity.Id)
+            if (id != cinemaViewModel.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
+                string path = cinemaViewModel.LogoPath;
+                if (cinemaViewModel.LogoFile != null)
+                {
+                    path = await _imageHelper.UploadImageAsync(cinemaViewModel.LogoFile, "Cinemas");
+                }
+                CinemaEntity cinemaEntity = _converterHelper.ToCinemaEntity(cinemaViewModel, path, false);
+                _context.Update(cinemaEntity);
                 try
                 {
-                    _context.Update(cinemaEntity);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception ex)
                 {
-                    if (!CinemaEntityExists(cinemaEntity.Id))
+                    if (ex.InnerException.Message.Contains("duplicate"))
                     {
-                        return NotFound();
+                        ModelState.AddModelError(string.Empty, "Already exists a country with the same name");
                     }
                     else
                     {
-                        throw;
+                        ModelState.AddModelError(string.Empty, ex.InnerException.Message);
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
-            return View(cinemaEntity);
+            return View(cinemaViewModel);
         }
 
         public async Task<IActionResult> Delete(int? id)
@@ -113,29 +146,17 @@ namespace Moviemap.Web.Controllers
                 return NotFound();
             }
 
-            var cinemaEntity = await _context.Cinemas
+            CinemaEntity cinemaEntity = await _context.Cinemas
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (cinemaEntity == null)
             {
                 return NotFound();
             }
 
-            return View(cinemaEntity);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var cinemaEntity = await _context.Cinemas.FindAsync(id);
             _context.Cinemas.Remove(cinemaEntity);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
-        private bool CinemaEntityExists(int id)
-        {
-            return _context.Cinemas.Any(e => e.Id == id);
-        }
     }
 }
+

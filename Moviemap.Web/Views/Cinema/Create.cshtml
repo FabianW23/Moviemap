@@ -1,5 +1,4 @@
-﻿@model Moviemap.Web.Data.Entities.CinemaEntity
-
+﻿@model Moviemap.Web.Models.CinemaViewModel
 @{
     ViewData["Title"] = "Create";
 }
@@ -10,7 +9,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create"  enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -18,7 +17,13 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <label asp-for="LogoFile" class="control-label"></label>
+                <input asp-for="LogoFile" type="file" class="form-control" />
+                <span asp-validation-for="LogoFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-success">Back to List</a>
             </div>
         </form>
     </div>

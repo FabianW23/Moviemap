@@ -1,0 +1,98 @@
+﻿@model Moviemap.Web.Data.Entities.MovieEntity
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+<br />
+
+<div>
+    <h4>Movie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Duration)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Duration)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LogoPath)
+        </dt>
+        <dd>
+            @if (!string.IsNullOrEmpty(Model.LogoPath))
+            {
+                <img src="@Url.Content(Model.LogoPath)" alt="Image" style="width:200px;height:100px;max-width: 100%; height: auto;" />
+            }
+        </dd>
+    </dl>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Timetables</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-hover table-responsive table-striped" id="MyTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                Start Date
+                            </th>
+                            <th>
+                                End Date
+                            </th>
+                            <th>
+                                Room
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Hours)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StartDateLocal)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EndDateLocal)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Room.Name)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#MyTable').DataTable();
+        });
+    </script>
+}

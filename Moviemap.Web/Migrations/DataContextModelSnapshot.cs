@@ -210,6 +210,8 @@ namespace Moviemap.Web.Migrations
 
                     b.Property<int>("Duration");
 
+                    b.Property<string>("LogoPath");
+
                     b.Property<string>("Name")
                         .IsRequired();
 

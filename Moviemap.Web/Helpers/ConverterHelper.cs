@@ -15,7 +15,8 @@ namespace Moviemap.Web.Helpers
             {
                 Id = isNew ? 0 : model.Id,
                 LogoPath = path,
-                Name = model.Name
+                Name = model.Name,
+                User = model.User
             };
         }
 
@@ -25,7 +26,32 @@ namespace Moviemap.Web.Helpers
             {
                 Id = cinemaEntity.Id,
                 LogoPath = cinemaEntity.LogoPath,
-                Name = cinemaEntity.Name
+                Name = cinemaEntity.Name,
+                User = cinemaEntity.User
+            };
+        }
+
+        public MovieEntity ToMovieEntity(MovieViewModel model, string path, bool isNew)
+        {
+            return new MovieEntity
+            {
+                Id = isNew ? 0 : model.Id,
+                LogoPath = path,
+                Name = model.Name,
+                Description = model.Description,
+                Duration = model.Duration
+            };
+        }
+
+        public MovieViewModel ToMovieViewModel(MovieEntity movieEntity)
+        {
+            return new MovieViewModel
+            {
+                Id = movieEntity.Id,
+                LogoPath = movieEntity.LogoPath,
+                Name = movieEntity.Name,
+                Description = movieEntity.Description,
+                Duration = movieEntity.Duration
             };
         }
     }

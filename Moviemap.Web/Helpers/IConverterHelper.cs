@@ -12,5 +12,9 @@ namespace Moviemap.Web.Helpers
         CinemaEntity ToCinemaEntity(CinemaViewModel model, string path, bool isNew);
 
         CinemaViewModel ToCinemaViewModel(CinemaEntity countryEntity);
+
+        MovieEntity ToMovieEntity(MovieViewModel model, string path, bool isNew);
+
+        MovieViewModel ToMovieViewModel(MovieEntity movieEntity);
     }
 }

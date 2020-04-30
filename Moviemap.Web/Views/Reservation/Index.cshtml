@@ -3,61 +3,80 @@
 @{
     ViewData["Title"] = "Index";
 }
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+<br />
 
-<h2>Index</h2>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Reservations</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-hover table-responsive table-striped" id="MyTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.QrCode)
+                            </th>
+                            <th>
+                                Movie
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.User.FullName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </th>
+                            <th>
+                                Chairs
+                            </th>
+                            <th>
+                                Room
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.QrCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Hour.Movie.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.User.FullName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                                <td>
+                                    @foreach (var chairItem in item.ReservationChairs)
+                                    {
+                                        @Html.DisplayFor(modelItem => chairItem.Chair.Name)
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Hour.Room.Name)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.QrCode)
-            </th>
-            <th>
-                Movie
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User.FullName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                Chairs
-            </th>
-            <th>
-                Room
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.QrCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hour.Movie.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @foreach (var chairItem in item.ReservationChairs)
-                {
-                    @Html.DisplayFor(modelItem => chairItem.Chair.Name) 
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hour.Room.Name)
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> 
-            </td>
-        </tr>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#MyTable').DataTable();
+        });
+    </script>
 }
-    </tbody>
-</table>

@@ -17,6 +17,9 @@ namespace Moviemap.Web.Data.Entities
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         public string Description { get; set; }
 
+        [Display(Name = "Logo")]
+        public string LogoPath { get; set; }
+
         public int Duration { get; set; }
 
         public ICollection<HourEntity> Hours { get; set; }
