@@ -131,8 +131,8 @@ namespace Moviemap.Web.Data
         {
             _context.Hours.Add(new HourEntity
             {
-                StartDate = startDate,
-                EndDate = endtDate,
+                StartDate = startDate.ToUniversalTime(),
+                EndDate = endtDate.ToUniversalTime(),
                 TicketPrice = 13000,
                 IsAvalible = false,
                 Movie = _context.Movies.FirstOrDefault(m => m.Name == movie),

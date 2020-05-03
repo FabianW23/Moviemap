@@ -1,4 +1,6 @@
-﻿using Moviemap.Web.Data.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Moviemap.Web.Data;
+using Moviemap.Web.Data.Entities;
 using Moviemap.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -9,6 +11,15 @@ namespace Moviemap.Web.Helpers
 {
     public class ConverterHelper : IConverterHelper
     {
+        private readonly DataContext _context;
+        private readonly ICombosHelper _combosHelper;
+
+        public ConverterHelper(DataContext context, ICombosHelper combosHelper)
+        {
+            _context = context;
+            _combosHelper = combosHelper;
+        }
+
         public CinemaEntity ToCinemaEntity(CinemaViewModel model, string path, bool isNew)
         {
             return new CinemaEntity
@@ -28,6 +39,35 @@ namespace Moviemap.Web.Helpers
                 LogoPath = cinemaEntity.LogoPath,
                 Name = cinemaEntity.Name,
                 User = cinemaEntity.User
+            };
+        }
+
+        public async Task<HourEntity> ToHourEntity(HourViewModel model, bool isNew)
+        {
+            return new HourEntity
+            {
+                Id = isNew ? 0 : model.Id,
+                TicketPrice = model.TicketPrice,
+                StartDate = model.StartDate.ToUniversalTime(),
+                EndDate = model.EndDate.ToUniversalTime(),
+                IsAvalible = model.IsAvalible,
+                Movie = await _context.Movies.FindAsync(model.MovieId),
+                Room = await _context.Rooms.FindAsync(model.RoomId)
+            };
+        }
+
+        public HourViewModel ToHourViewModel(HourEntity hourEntity)
+        {
+            return new HourViewModel
+            {
+                TicketPrice = hourEntity.TicketPrice,
+                StartDate = hourEntity.StartDate.ToLocalTime(),
+                EndDate = hourEntity.EndDate.ToLocalTime(),
+                IsAvalible = hourEntity.IsAvalible,
+                RoomId = hourEntity.Room.Id,
+                Movie = hourEntity.Movie,
+                Movies = _combosHelper.GetComboMovies(),
+                MovieId = hourEntity.Movie.Id
             };
         }
 
@@ -52,6 +92,27 @@ namespace Moviemap.Web.Helpers
                 Name = movieEntity.Name,
                 Description = movieEntity.Description,
                 Duration = movieEntity.Duration
+            };
+        }
+
+        public async Task<RoomEntity> ToRoomEntity(RoomViewModel model, bool isNew)
+        {
+            return new RoomEntity
+            {
+                Id = isNew ? 0 : model.Id,
+                Name = model.Name,
+                Cinema = await _context.Cinemas.FindAsync(model.CinemaId)
+            };
+        }
+
+        public RoomViewModel ToRoomViewModel(RoomEntity roomEntity, string userEmail)
+        {
+            return new RoomViewModel
+            {
+                Name = roomEntity.Name,
+                Cinema = roomEntity.Cinema,
+                CinemaId = roomEntity.Cinema.Id,
+                Cinemas = _combosHelper.GetComboCinemas(userEmail)
             };
         }
     }

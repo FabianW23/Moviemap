@@ -10,7 +10,7 @@ namespace Moviemap.Web.Data.Entities
     {
         public int Id { get; set; }
 
-        [Display(Name = "Name")]
+        [Display(Name = "Cinema")]
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         public string Name { get; set; }
 

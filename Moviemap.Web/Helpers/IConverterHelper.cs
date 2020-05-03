@@ -16,5 +16,13 @@ namespace Moviemap.Web.Helpers
         MovieEntity ToMovieEntity(MovieViewModel model, string path, bool isNew);
 
         MovieViewModel ToMovieViewModel(MovieEntity movieEntity);
+
+        Task<RoomEntity> ToRoomEntity(RoomViewModel model, bool isNew);
+
+        RoomViewModel ToRoomViewModel(RoomEntity roomEntity, string email);
+
+        Task<HourEntity> ToHourEntity(HourViewModel model, bool isNew);
+
+        HourViewModel ToHourViewModel(HourEntity hourEntity);
     }
 }

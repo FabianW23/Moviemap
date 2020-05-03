@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>RoomEntity</h4>
+    <h4>Room</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -16,9 +16,67 @@
         <dd>
             @Html.DisplayFor(model => model.Name)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Cinema.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cinema.Name)
+        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="AddHour" asp-route-id="@Model.Id" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Create New</a>
+    <a asp-action="Index" class="btn btn-success">Back to List</a>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Countries</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-hover table-responsive table-striped" id="MyTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                movie
+                            </th>
+                            <th>
+                                Start date
+                            </th>
+                            <th>
+                                End date
+                            </th>
+                            <th>
+                                Is avalible?
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Hours.OrderBy(h => h.StartDate))
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Movie.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StartDateLocal)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EndDateLocal)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsAvalible)
+                                </td>
+                                <td>
+                                    <a asp-action="EditHour" asp-route-id="@item.Id" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>

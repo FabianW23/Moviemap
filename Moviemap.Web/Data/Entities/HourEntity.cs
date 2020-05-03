@@ -34,6 +34,7 @@ namespace Moviemap.Web.Data.Entities
         [Display(Name = "Ticket price")]
         public decimal TicketPrice { get; set; }
 
+        [Display(Name = "Is avalible?")]
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         public bool IsAvalible { get; set; }
 
