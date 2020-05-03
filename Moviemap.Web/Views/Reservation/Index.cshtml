@@ -62,6 +62,9 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Hour.Room.Name)
                                 </td>
+                                <td>
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info"><i class="glyphicon glyphicon-align-justify"></i></a> 
+                                </td>
                             </tr>
                         }
                     </tbody>

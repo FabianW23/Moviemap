@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Moviemap.Web.Data;
 using Moviemap.Web.Data.Entities;
@@ -22,11 +23,13 @@ namespace Moviemap.Web.Controllers
             _imageHelper = imageHelper;
         }
 
+        [Authorize(Roles = "CinemaAdmin,Admin")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Movies.ToListAsync());
         }
 
+        [Authorize(Roles = "CinemaAdmin,Admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -46,11 +49,13 @@ namespace Moviemap.Web.Controllers
             return View(movieEntity);
         }
 
+        [Authorize(Roles = "CinemaAdmin")]
         public IActionResult Create()
         {
             return View();
         }
 
+        [Authorize(Roles = "CinemaAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(MovieViewModel movieViewModel)
@@ -84,6 +89,7 @@ namespace Moviemap.Web.Controllers
             return View(movieViewModel);
         }
 
+        [Authorize(Roles = "CinemaAdmin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -100,6 +106,7 @@ namespace Moviemap.Web.Controllers
             return View(movieViewModel);
         }
 
+        [Authorize(Roles = "CinemaAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, MovieViewModel movieViewModel)
@@ -140,6 +147,7 @@ namespace Moviemap.Web.Controllers
             return View(movieViewModel);
         }
 
+        [Authorize(Roles = "CinemaAdmin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

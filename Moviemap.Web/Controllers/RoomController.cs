@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Moviemap.Web.Data;
 using Moviemap.Web.Data.Entities;
@@ -22,6 +23,7 @@ namespace Moviemap.Web.Controllers
             _converterHelper = converterHelper;
         }
 
+        [Authorize(Roles = "CinemaAdmin,Admin")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Rooms
@@ -30,6 +32,7 @@ namespace Moviemap.Web.Controllers
                 .ToListAsync());
         }
 
+        [Authorize(Roles = "CinemaAdmin,Admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -50,6 +53,7 @@ namespace Moviemap.Web.Controllers
             return View(roomEntity);
         }
 
+        [Authorize(Roles = "CinemaAdmin")]
         public async Task<IActionResult> AddHour(int? id)
         {
             RoomEntity roomEntity = await _context.Rooms.FindAsync(id);
@@ -61,6 +65,7 @@ namespace Moviemap.Web.Controllers
             return View(hourViewModel);
         }
 
+        [Authorize(Roles = "CinemaAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddHour(HourViewModel hourViewModel)
@@ -75,6 +80,7 @@ namespace Moviemap.Web.Controllers
             return View(hourViewModel);
         }
 
+        [Authorize(Roles = "CinemaAdmin")]
         public IActionResult Create()
         {
             RoomViewModel model = new RoomViewModel
@@ -100,6 +106,7 @@ namespace Moviemap.Web.Controllers
             return View(roomViewModel);
         }
 
+        [Authorize(Roles = "CinemaAdmin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -117,6 +124,7 @@ namespace Moviemap.Web.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "CinemaAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(RoomViewModel roomViewModel)
@@ -133,6 +141,7 @@ namespace Moviemap.Web.Controllers
             return View(roomViewModel);
         }
 
+        [Authorize(Roles = "CinemaAdmin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -150,6 +159,7 @@ namespace Moviemap.Web.Controllers
             return View(roomEntity);
         }
 
+        [Authorize(Roles = "CinemaAdmin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -165,6 +175,7 @@ namespace Moviemap.Web.Controllers
             return _context.Rooms.Any(e => e.Id == id);
         }
 
+        [Authorize(Roles = "CinemaAdmin")]
         public async Task<IActionResult> EditHour(int? id)
         {
             if (id == null)
@@ -184,6 +195,7 @@ namespace Moviemap.Web.Controllers
             return View(hourViewModel);
         }
 
+        [Authorize(Roles = "CinemaAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditHour(HourViewModel model)

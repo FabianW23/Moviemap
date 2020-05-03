@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Moviemap.Web.Data;
 using Moviemap.Web.Data.Entities;
@@ -17,7 +18,7 @@ namespace Moviemap.Web.Controllers
             _context = context;
         }
 
-        // GET: Reservation
+        [Authorize(Roles = "CinemaAdmin,Admin")]
         public async Task<IActionResult> Index()
         {
             List<ReservationEntity> reservation = await _context.Reservations
