@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Moviemap.Common.Models;
 using Moviemap.Web.Data;
 using Moviemap.Web.Data.Entities;
 using Moviemap.Web.Models;
@@ -113,6 +114,20 @@ namespace Moviemap.Web.Helpers
                 Cinema = roomEntity.Cinema,
                 CinemaId = roomEntity.Cinema.Id,
                 Cinemas = _combosHelper.GetComboCinemas(userEmail)
+            };
+        }
+
+        public UserResponse ToUserResponse(UserEntity user)
+        {
+            return new UserResponse
+            {
+                Id = user.Id,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                Document = user.Document,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                UserType = user.UserType
             };
         }
     }

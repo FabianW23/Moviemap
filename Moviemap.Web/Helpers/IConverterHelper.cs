@@ -1,4 +1,5 @@
-﻿using Moviemap.Web.Data.Entities;
+﻿using Moviemap.Common.Models;
+using Moviemap.Web.Data.Entities;
 using Moviemap.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -24,5 +25,7 @@ namespace Moviemap.Web.Helpers
         Task<HourEntity> ToHourEntity(HourViewModel model, bool isNew);
 
         HourViewModel ToHourViewModel(HourEntity hourEntity);
+
+        UserResponse ToUserResponse(UserEntity model);
     }
 }
