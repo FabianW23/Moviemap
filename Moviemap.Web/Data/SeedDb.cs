@@ -27,6 +27,7 @@ namespace Moviemap.Web.Data
             await CheckUserAsync("202020", "Rocio", "Royal", "fabian.m.d@hotmail.com", "304 395 0527", UserType.CinemaAdmin);
             await CheckUserAsync("303030", "Marin", "Marin", "minertop1023@gmail.com", "304 395 0527", UserType.User);
             await CheckUserAsync("505050", "ferre", "Warchi", "ferre55@yopmail.com", "304 395 0527", UserType.User);
+            AddBrand();
             await CheckCinemaAsync();
             await CheckMovieAsync();
             await CheckRoomAsync();
@@ -96,22 +97,31 @@ namespace Moviemap.Web.Data
             });
         }
 
+        private async Task AddBrand()
+        {
+            _context.Brands.Add(new BrandEntity { Name = "Procinal", LogoPath = $"~/images/Brands/procinal.jpg" });
+            await _context.SaveChangesAsync();
+        }
+
         private async Task CheckCinemaAsync()
         {
             if (!_context.Movies.Any())
             {
-                AddCinema("Procinal Puerta de norte", await _userHelper.GetUserByEmailAsync("fabian.m.d@hotmail.com"));
-                AddCinema("Procinal Mayorca", await _userHelper.GetUserByEmailAsync("fabian.m.d@hotmail.com"));
+                await AddCinema("Procinal Puerta de norte", await _userHelper.GetUserByEmailAsync("fabian.m.d@hotmail.com"), 6.339291372808369, -75.54296314716339);
+                await AddCinema("Procinal Mayorca", await _userHelper.GetUserByEmailAsync("fabian.m.d@hotmail.com"), 6.16057689, -75.60421944);
                 await _context.SaveChangesAsync();
             }
         }
 
-        private void AddCinema(string name, UserEntity user)
+        private async Task AddCinema(string name, UserEntity user, double latitude, double longitude)
         {
             _context.Cinemas.Add(new CinemaEntity
             {
                 Name = name,
-                User = user
+                User = user,
+                Latitude = Convert.ToSingle(latitude),
+                Longitude = Convert.ToSingle(longitude),
+                Brand = await _context.Brands.FindAsync(1)
             });
         }
 

@@ -87,7 +87,7 @@ namespace Moviemap.Web.Controllers
             }
 
             CinemaEntity cinemaEntity = await _context.Cinemas.Include(r => r.Brand)
-                .FirstOrDefaultAsync(r => r.Id == id); ;
+                .FirstOrDefaultAsync(r => r.Id == id);
             if (cinemaEntity == null)
             {
                 return NotFound();
