@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Moviemap.Web.Data;
 
 namespace Moviemap.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200507171428_AddBrandEntity")]
+    partial class AddBrandEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,7 +145,7 @@ namespace Moviemap.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands");
+                    b.ToTable("BrandEntity");
                 });
 
             modelBuilder.Entity("Moviemap.Web.Data.Entities.ChairEntity", b =>
@@ -178,10 +180,6 @@ namespace Moviemap.Web.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("BrandId");
-
-                    b.Property<float>("Latitude");
-
-                    b.Property<float>("Longitude");
 
                     b.Property<string>("Name")
                         .IsRequired();

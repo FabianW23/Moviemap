@@ -8,5 +8,7 @@ namespace Moviemap.Web.Helpers
         IEnumerable<SelectListItem> GetComboCinemas(string userEmail);
 
         IEnumerable<SelectListItem> GetComboMovies();
+
+        IEnumerable<SelectListItem> GetComboBrands();
     }
 }

@@ -12,18 +12,17 @@ using System.Threading.Tasks;
 namespace Moviemap.Web.Controllers
 {
     
-    
     public class CinemaController : Controller
     {
         private readonly DataContext _context;
-        private readonly IImageHelper _imageHelper;
         private readonly IConverterHelper _converterHelper;
+        private readonly ICombosHelper _combosHelper;
 
-        public CinemaController(DataContext context, IImageHelper imageHelper, IConverterHelper converterHelper)
+        public CinemaController(DataContext context, IConverterHelper converterHelper, ICombosHelper combosHelper)
         {
             _context = context;
-            _imageHelper = imageHelper;
             _converterHelper = converterHelper;
+            _combosHelper = combosHelper;
         }
 
         [Authorize(Roles = "CinemaAdmin,Admin")]
@@ -42,20 +41,24 @@ namespace Moviemap.Web.Controllers
 
             CinemaEntity cinemaEntity = await _context.Cinemas
                 .Include(c => c.User)
+                .Include(c => c.Brand)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            CinemaViewModel cinemaViewModel = _converterHelper.ToCinemaViewModel(cinemaEntity);
             if (cinemaEntity == null)
             {
                 return NotFound();
             }
 
-            return View(cinemaViewModel);
+            return View(cinemaEntity);
         }
 
         [Authorize(Roles = "CinemaAdmin")]
         public IActionResult Create()
         {
-            return View();
+            CinemaViewModel model = new CinemaViewModel
+            {
+                Brands = _combosHelper.GetComboBrands()
+            };
+            return View(model);
         }
 
         [Authorize(Roles = "CinemaAdmin")]
@@ -65,30 +68,13 @@ namespace Moviemap.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                string path = string.Empty;
-                if (cinemaViewModel.LogoFile != null)
-                {
-                    path = await _imageHelper.UploadImageAsync(cinemaViewModel.LogoFile, "Cinemas");
-                }
-                CinemaEntity cinemaEntity = _converterHelper.ToCinemaEntity(cinemaViewModel, path, true);
+                CinemaEntity cinemaEntity = await _converterHelper.ToCinemaEntity(cinemaViewModel, true, User.Identity.Name);
                 _context.Add(cinemaEntity);
-                try
-                {
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
-                catch (Exception ex)
-                {
-                    if (ex.InnerException.Message.Contains("duplicate"))
-                    {
-                        ModelState.AddModelError(string.Empty, "Already exists a country with the same name");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError(string.Empty, ex.InnerException.Message);
-                    }
-                }
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
+            cinemaViewModel.Brand = await _context.Brands.FindAsync(cinemaViewModel.BrandId);
+            cinemaViewModel.Brands = _combosHelper.GetComboBrands();
             return View(cinemaViewModel);
         }
 
@@ -100,7 +86,8 @@ namespace Moviemap.Web.Controllers
                 return NotFound();
             }
 
-            CinemaEntity cinemaEntity = await _context.Cinemas.FindAsync(id);
+            CinemaEntity cinemaEntity = await _context.Cinemas.Include(r => r.Brand)
+                .FirstOrDefaultAsync(r => r.Id == id); ;
             if (cinemaEntity == null)
             {
                 return NotFound();
@@ -112,39 +99,17 @@ namespace Moviemap.Web.Controllers
         [Authorize(Roles = "CinemaAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, CinemaViewModel cinemaViewModel)
+        public async Task<IActionResult> Edit(CinemaViewModel cinemaViewModel)
         {
-            if (id != cinemaViewModel.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                string path = cinemaViewModel.LogoPath;
-                if (cinemaViewModel.LogoFile != null)
-                {
-                    path = await _imageHelper.UploadImageAsync(cinemaViewModel.LogoFile, "Cinemas");
-                }
-                CinemaEntity cinemaEntity = _converterHelper.ToCinemaEntity(cinemaViewModel, path, false);
+                CinemaEntity cinemaEntity = await _converterHelper.ToCinemaEntity(cinemaViewModel, false, User.Identity.Name);
                 _context.Update(cinemaEntity);
-                try
-                {
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
-                catch (Exception ex)
-                {
-                    if (ex.InnerException.Message.Contains("duplicate"))
-                    {
-                        ModelState.AddModelError(string.Empty, "Already exists a country with the same name");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError(string.Empty, ex.InnerException.Message);
-                    }
-                }
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
+            cinemaViewModel.Brand = await _context.Brands.FindAsync(cinemaViewModel.BrandId);
+            cinemaViewModel.Brands = _combosHelper.GetComboBrands();
             return View(cinemaViewModel);
         }
 

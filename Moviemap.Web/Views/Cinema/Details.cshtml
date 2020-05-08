@@ -23,13 +23,16 @@
             @Html.DisplayFor(model => model.User.FullName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.LogoPath)
+            @Html.DisplayNameFor(model => model.Latitude)
         </dt>
         <dd>
-            @if (!string.IsNullOrEmpty(Model.LogoPath))
-            {
-                <img src="@Url.Content(Model.LogoPath)" alt="Image" style="width:200px;height:100px;max-width: 100%; height: auto;" />
-            }
+            @Html.DisplayFor(model => model.Latitude)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Longitude)
         </dd>
     </dl>
 </div>

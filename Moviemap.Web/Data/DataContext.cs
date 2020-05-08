@@ -22,6 +22,8 @@ namespace Moviemap.Web.Data
         public DbSet<ChairEntity> Chairs { get; set; }
 
         public DbSet<UserEntity> Users { get; set; }
+
+        public DbSet<BrandEntity> Brands { get; set; }
     }
 }
 

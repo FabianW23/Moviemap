@@ -10,9 +10,9 @@ namespace Moviemap.Web.Helpers
 {
     public interface IConverterHelper
     {
-        CinemaEntity ToCinemaEntity(CinemaViewModel model, string path, bool isNew);
+        BrandEntity ToBrandEntity(BrandViewModel model, string path, bool isNew);
 
-        CinemaViewModel ToCinemaViewModel(CinemaEntity countryEntity);
+        BrandViewModel ToBrandViewModel(BrandEntity countryEntity);
 
         MovieEntity ToMovieEntity(MovieViewModel model, string path, bool isNew);
 
@@ -27,5 +27,12 @@ namespace Moviemap.Web.Helpers
         HourViewModel ToHourViewModel(HourEntity hourEntity);
 
         UserResponse ToUserResponse(UserEntity model);
+
+        List<ReservationResponse> ToReservationResponse(List<ReservationEntity> reservations);
+
+        Task<CinemaEntity> ToCinemaEntity(CinemaViewModel model, bool isNew, string email);
+
+        CinemaViewModel ToCinemaViewModel(CinemaEntity cinemaEntity);
+
     }
 }

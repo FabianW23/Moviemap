@@ -16,6 +16,5 @@ namespace Moviemap.Web.Models
         public int CinemaId { get; set; }
 
         public IEnumerable<SelectListItem> Cinemas { get; set; }
-
     }
 }

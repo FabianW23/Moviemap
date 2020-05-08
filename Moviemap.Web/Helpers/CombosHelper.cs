@@ -15,6 +15,26 @@ namespace Moviemap.Web.Helpers
             _context = context;
         }
 
+        public IEnumerable<SelectListItem> GetComboBrands()
+        {
+            List<SelectListItem> list = _context.Brands
+                 .Select(t => new SelectListItem
+                 {
+                     Text = t.Name,
+                     Value = $"{t.Id}"
+                 })
+                 .OrderBy(t => t.Text)
+                 .ToList();
+
+            list.Insert(0, new SelectListItem
+            {
+                Text = "[Select a brand...]",
+                Value = "0"
+            });
+
+            return list;
+        }
+
         public IEnumerable<SelectListItem> GetComboCinemas(string userEmail)
         {
             List<SelectListItem> list = _context.Cinemas.Where(c => c.User.Email == userEmail)
