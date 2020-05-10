@@ -1,9 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Moviemap.Common.Models;
+﻿using Moviemap.Common.Models;
 using Moviemap.Web.Data;
 using Moviemap.Web.Data.Entities;
 using Moviemap.Web.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -142,12 +140,11 @@ namespace Moviemap.Web.Helpers
                 StartDate = model.StartDate,
                 EndDate = model.EndDate,
                 TicketPrice = model.TicketPrice,
-                Movie = ToMovieResponse(model.Movie),
                 Room = ToRoomResponse(model.Room)
             };
         }
 
-        public MovieResponse ToMovieResponse(MovieEntity model)
+        public MovieResponse ToMovieResponse(MovieEntity model, int cinemaI)
         {
             return new MovieResponse
             {
@@ -155,7 +152,16 @@ namespace Moviemap.Web.Helpers
                 Name = model.Name,
                 Description = model.Description,
                 Duration = model.Duration,
-                LogoPath = model.LogoPath
+                LogoPath = model.LogoPath,
+                Hours = model.Hours.Select(h => new HourResponse
+                {
+                    Id = h.Id,
+                    StartDate = h.StartDate,
+                    EndDate = h.EndDate,
+                    TicketPrice = h.TicketPrice,
+                    Room = ToRoomResponse(h.Room)
+                }).Where(h => h.Room.Cinema.Id == cinemaI)
+                .ToList()
             };
         }
 
@@ -174,8 +180,32 @@ namespace Moviemap.Web.Helpers
             return new CinemaResponse
             {
                 Id = model.Id,
-                Name = model.Name
+                Name = model.Name,
+                Latitude = model.Latitude,
+                Longitude = model.Longitude,
+                Brand = ToBrandResponse(model.Brand)
             };
+        }
+
+        public BrandResponse ToBrandResponse(BrandEntity model)
+        {
+            return new BrandResponse
+            {
+                Id = model.Id,
+                Name = model.Name,
+                LogoPath = model.LogoPath
+            };
+        }
+
+        public List<CinemaResponse> ToCinemaResponse(List<CinemaEntity> cinemas)
+        {
+            List<CinemaResponse> list = new List<CinemaResponse>();
+            foreach (CinemaEntity cinemaEntity in cinemas)
+            {
+                list.Add(ToCinemaResponse(cinemaEntity));
+            }
+
+            return list;
         }
 
         public async Task<RoomEntity> ToRoomEntity(RoomViewModel model, bool isNew)
@@ -241,6 +271,22 @@ namespace Moviemap.Web.Helpers
                 User = cinemaEntity.User,
                 Brands = _combosHelper.GetComboBrands()
             };
+        }
+
+        public List<MovieResponse> ToMovieResponse(List<MovieEntity> movies, int cinemaId)
+        {
+            List<MovieResponse> list = new List<MovieResponse>();
+            foreach (MovieEntity movieEntity in movies)
+            {
+                MovieResponse movieResponse = ToMovieResponse(movieEntity, cinemaId);
+                if (movieResponse.Hours.Count != 0)
+                {
+                    list.Add(movieResponse);
+                }
+
+            }
+
+            return list;
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Moviemap.Common.Models;
 using Moviemap.Web.Data;
 using Moviemap.Web.Data.Entities;
 using Moviemap.Web.Helpers;
@@ -30,9 +31,8 @@ namespace Moviemap.Web.Controllers.API
         public async Task<IActionResult> GetCinemas()
         {
             List<CinemaEntity> cinemas = await _context.Cinemas
-                .Include(c => c.Rooms)
-                .ThenInclude(r => r.Hours)
-                .ThenInclude(h => h.Movie)
+                .Include(c => c.Brand)
+                .OrderBy(c => c.Brand.Name)
                 .ToListAsync();
             if (cinemas.Count == 0)
             {
@@ -40,8 +40,10 @@ namespace Moviemap.Web.Controllers.API
             }
             else
             {
-                return Ok();
+                return Ok(_converterHelper.ToCinemaResponse(cinemas));
             }
         }
+
+        
     }
 }

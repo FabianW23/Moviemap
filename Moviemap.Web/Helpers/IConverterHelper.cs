@@ -34,5 +34,8 @@ namespace Moviemap.Web.Helpers
 
         CinemaViewModel ToCinemaViewModel(CinemaEntity cinemaEntity);
 
+        List<CinemaResponse> ToCinemaResponse(List<CinemaEntity> cinemas);
+
+        List<MovieResponse> ToMovieResponse(List<MovieEntity> movies, int cinemaId);
     }
 }

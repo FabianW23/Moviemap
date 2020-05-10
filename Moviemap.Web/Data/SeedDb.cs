@@ -27,7 +27,7 @@ namespace Moviemap.Web.Data
             await CheckUserAsync("202020", "Rocio", "Royal", "fabian.m.d@hotmail.com", "304 395 0527", UserType.CinemaAdmin);
             await CheckUserAsync("303030", "Marin", "Marin", "minertop1023@gmail.com", "304 395 0527", UserType.User);
             await CheckUserAsync("505050", "ferre", "Warchi", "ferre55@yopmail.com", "304 395 0527", UserType.User);
-            AddBrand();
+            await AddBrand();
             await CheckCinemaAsync();
             await CheckMovieAsync();
             await CheckRoomAsync();

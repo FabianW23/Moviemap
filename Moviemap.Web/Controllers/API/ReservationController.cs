@@ -56,7 +56,8 @@ namespace Moviemap.Web.Controllers.API
                 .ThenInclude(h => h.Movie)
                 .Include(r => r.Hour)
                 .ThenInclude(h => h.Room)
-                .ThenInclude(h => h.Cinema)
+                .ThenInclude(rm => rm.Cinema)
+                .ThenInclude(c => c.Brand)
                 .Where(u => u.User.Id == request.UserId.ToString())
                 .ToListAsync();
             if (reservations.Count == 0)

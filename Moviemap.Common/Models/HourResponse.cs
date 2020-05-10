@@ -22,7 +22,6 @@ namespace Moviemap.Common.Models
 
         public RoomResponse Room { get; set; }
 
-        public MovieResponse Movie { get; set; }
 
     }
 }
