@@ -54,7 +54,7 @@ namespace Moviemap.Prism.ViewModels
             if (!connection)
             {
                 IsRunning = true;
-                await App.Current.MainPage.DisplayAlert("Languages.Error", "Languages.ConnectionError", "Languages.Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ConnectionError, Languages.Accept);
                 return;
             }
 
@@ -64,7 +64,7 @@ namespace Moviemap.Prism.ViewModels
             IsEnable = true;
             if (!response.IsSuccess)
             {
-                await App.Current.MainPage.DisplayAlert("Languages.Error", response.Message, "Languages.Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
                 IsRunning = false;
                 IsEnable = true;
                 return;

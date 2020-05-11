@@ -24,7 +24,7 @@ namespace Moviemap.Prism
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/CinemasPage");
+            await NavigationService.NavigateAsync("MoviemapMasterDetailPage/NavigationPage/CinemasPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

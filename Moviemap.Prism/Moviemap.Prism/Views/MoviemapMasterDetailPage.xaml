@@ -8,10 +8,59 @@
     <MasterDetailPage.Master>
         <ContentPage Title="Menu">
             <StackLayout Padding="20">
-                <!-- TODO: // Update the Layout and add some real menu items  -->
-                <Button Text="ViewA" Command="{Binding NavigateCommand}" CommandParameter="ViewA" />
+                <Image HeightRequest="150"
+                       Source="IconApp"/>
+
+                <Label Text="Moviemap"
+                       FontSize="Title"
+                       HorizontalOptions="Center"/>
+
+                <Label FontAttributes="Bold"
+                       FontSize="Small"
+                       HorizontalOptions="Center"
+                       Text="{Binding User.FullName}"
+                       TextColor="Black"/>
+
+                <ListView BackgroundColor="Transparent"
+                	      ItemsSource="{Binding Menus}"
+                	      HasUnevenRows="True"
+                	      SeparatorVisibility="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SelectMenuCommand}"/>
+                                    </Grid.GestureRecognizers>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <Image Grid.Column="0"
+                                    	   HeightRequest="50"
+                                           Margin="5"
+                                    	   Source="{Binding Icon}"
+                                    	   WidthRequest="50"/>
+
+                                    <Label Grid.Column="1"
+                                           FontAttributes="Bold"
+                                           FontSize="Medium"
+                                   	       VerticalOptions="Center"
+                                   	       TextColor="Black"
+                                   	       Text="{Binding Title}"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <Label Text="© 2020 - Moviemap"
+                       FontSize="Small"
+                       VerticalOptions="End"
+                       HorizontalOptions="Center"/>
             </StackLayout>
         </ContentPage>
     </MasterDetailPage.Master>
-    
+
 </MasterDetailPage>
