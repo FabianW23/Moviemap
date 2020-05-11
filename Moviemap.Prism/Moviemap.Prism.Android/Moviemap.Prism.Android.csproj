@@ -68,6 +68,7 @@
     <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1422" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementations\Localize.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,6 +95,10 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Moviemap.Common\Moviemap.Common.csproj">
+      <Project>{B3512C9A-446A-4BDF-9E63-D480077D46A0}</Project>
+      <Name>Moviemap.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Moviemap.Prism\Moviemap.Prism.csproj">
       <Project>{A682884C-CB44-4A89-B752-27BB634E0ABE}</Project>
       <Name>Moviemap.Prism</Name>

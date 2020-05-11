@@ -1,5 +1,6 @@
 ﻿using Moviemap.Common.Models;
 using Moviemap.Common.Services;
+using Moviemap.Prism.Helpers;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -20,6 +21,7 @@ namespace Moviemap.Prism.ViewModels
         public CinemasPageViewModel(INavigationService navigationService, IApiService apiService)
             : base(navigationService)
         {
+            Title = Languages.Cinemas;
             _navigationService = navigationService;
             _apiService = apiService;
             LoadCinemasAsync();

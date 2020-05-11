@@ -33,6 +33,7 @@ namespace Moviemap.Prism
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<CinemasPage, CinemasPageViewModel>();
+            containerRegistry.RegisterForNavigation<MoviemapMasterDetailPage, MoviemapMasterDetailPageViewModel>();
         }
     }
 }

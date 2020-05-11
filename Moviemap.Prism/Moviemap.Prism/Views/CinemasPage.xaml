@@ -4,7 +4,8 @@
              xmlns:prism="http://prismlibrary.com"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Moviemap.Prism.Views.CinemasPage">
+             x:Class="Moviemap.Prism.Views.CinemasPage"
+             Title = "{Binding Title}">
 
     <StackLayout>
         <CollectionView ItemsSource="{Binding Cinemas}">
