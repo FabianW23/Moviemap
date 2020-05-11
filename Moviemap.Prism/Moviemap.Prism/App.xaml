@@ -5,7 +5,9 @@
              x:Class="Moviemap.Prism.App">
 	<Application.Resources>
 
-		<!-- Application resource dictionary -->
+        <ResourceDictionary>
+            <x:String x:Key="UrlAPI">https://moviemapweb.azurewebsites.net/</x:String>
+        </ResourceDictionary>
 
-	</Application.Resources>
+    </Application.Resources>
 </prism:PrismApplication>

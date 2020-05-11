@@ -4,6 +4,7 @@ using Moviemap.Prism.ViewModels;
 using Moviemap.Prism.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Moviemap.Common.Services;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Moviemap.Prism
@@ -23,13 +24,15 @@ namespace Moviemap.Prism
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await NavigationService.NavigateAsync("NavigationPage/CinemasPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.Register<IApiService, ApiService>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<CinemasPage, CinemasPageViewModel>();
         }
     }
 }
