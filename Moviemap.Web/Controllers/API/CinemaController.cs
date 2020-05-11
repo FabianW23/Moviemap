@@ -26,7 +26,7 @@ namespace Moviemap.Web.Controllers.API
             _context = context;
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("GetCinemas")]
         public async Task<IActionResult> GetCinemas()
         {
@@ -43,7 +43,5 @@ namespace Moviemap.Web.Controllers.API
                 return Ok(_converterHelper.ToCinemaResponse(cinemas));
             }
         }
-
-        
     }
 }

@@ -17,6 +17,11 @@ namespace Moviemap.Web.Data.Entities
         [Display(Name = "Logo")]
         public string LogoPath { get; set; }
 
+        [Display(Name = "Logo")]
+        public string LogoFullPath => string.IsNullOrEmpty(LogoPath)
+            ? "https://moviemapweb.azurewebsites.net/images/NoImage.jpg"
+            : $"https://moviemapweb.azurewebsites.net{LogoPath.Substring(1)}";
+
         public ICollection<CinemaEntity> Cinemas { get; set; }
     }
 }

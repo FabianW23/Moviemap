@@ -14,6 +14,10 @@ namespace Moviemap.Common.Models
 
         public string LogoPath { get; set; }
 
+        public string LogoFullPath => string.IsNullOrEmpty(LogoPath)
+            ? "https://moviemapweb.azurewebsites.net/images/NoImage.jpg"
+            : $"https://moviemapweb.azurewebsites.net{LogoPath.Substring(1)}";
+
         public int Duration { get; set; }
 
         public List<HourResponse> Hours { get; set; }

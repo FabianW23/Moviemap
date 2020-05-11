@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29721.120
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moviemap.Common", "Moviemap.Common\Moviemap.Common.csproj", "{B3512C9A-446A-4BDF-9E63-D480077D46A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moviemap.Common", "Moviemap.Common\Moviemap.Common.csproj", "{B3512C9A-446A-4BDF-9E63-D480077D46A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moviemap.Web", "Moviemap.Web\Moviemap.Web.csproj", "{58D56A84-5940-4DC9-BE51-92508DA0C372}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moviemap.Web", "Moviemap.Web\Moviemap.Web.csproj", "{58D56A84-5940-4DC9-BE51-92508DA0C372}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moviemap.Prism", "Moviemap.Prism\Moviemap.Prism\Moviemap.Prism.csproj", "{6223D9F2-61C0-4B80-8FDE-1A56C60A817F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moviemap.Prism.Android", "Moviemap.Prism\Moviemap.Prism.Android\Moviemap.Prism.Android.csproj", "{FC4420DF-C03C-42E4-A1DA-349747718FCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,16 @@ Global
 		{58D56A84-5940-4DC9-BE51-92508DA0C372}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58D56A84-5940-4DC9-BE51-92508DA0C372}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58D56A84-5940-4DC9-BE51-92508DA0C372}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6223D9F2-61C0-4B80-8FDE-1A56C60A817F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6223D9F2-61C0-4B80-8FDE-1A56C60A817F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6223D9F2-61C0-4B80-8FDE-1A56C60A817F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6223D9F2-61C0-4B80-8FDE-1A56C60A817F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC4420DF-C03C-42E4-A1DA-349747718FCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC4420DF-C03C-42E4-A1DA-349747718FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC4420DF-C03C-42E4-A1DA-349747718FCF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{FC4420DF-C03C-42E4-A1DA-349747718FCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC4420DF-C03C-42E4-A1DA-349747718FCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC4420DF-C03C-42E4-A1DA-349747718FCF}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
