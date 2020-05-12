@@ -20,9 +20,6 @@ namespace Moviemap.Common.Models
         public string Email { get; set; }
 
         [Required]
-        public string Phone { get; set; }
-
-        [Required]
         [StringLength(20, MinimumLength = 6)]
         public string Password { get; set; }
 
