@@ -2,6 +2,7 @@
 using Moviemap.Common.Models;
 using Moviemap.Common.Services;
 using Moviemap.Prism.Helpers;
+using Moviemap.Prism.Views;
 using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -87,6 +88,8 @@ namespace Moviemap.Prism.ViewModels
             if (!connection)
             {
                 await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ConnectionError, Languages.Accept);
+                IsRunning = false;
+                IsEnabled = true;
                 return;
             }
 
@@ -139,11 +142,11 @@ namespace Moviemap.Prism.ViewModels
 
         private async void RegisterAsync()
         {
-            //await _navigationService.NavigateAsync(nameof(RegisterPage));
+            await _navigationService.NavigateAsync(nameof(RegisterPage));
         }
         private async void ForgotPasswordAsync()
         {
-            //await _navigationService.NavigateAsync(nameof(RememberPasswordPage));
+            await _navigationService.NavigateAsync(nameof(RememberPasswordPage));
         }
     }
 }

@@ -44,10 +44,9 @@
                         IsEnabled="{Binding IsEnabled}"
                         Text="{i18n:Translate LogInMenu}"/>
 
-                <!--<Button Command="{Binding RegisterCommand}" 
+                <Button Command="{Binding RegisterCommand}" 
                         IsEnabled="{Binding IsEnabled}"
-                        Text="{i18n:Translate Register}"
-                        Style="{StaticResource DangerButton}"/>-->
+                        Text="{i18n:Translate Register}"/>
             </StackLayout>
 
         </StackLayout>

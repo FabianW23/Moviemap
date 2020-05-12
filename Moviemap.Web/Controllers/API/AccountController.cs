@@ -105,7 +105,6 @@ namespace Moviemap.Web.Controllers.API
                 Email = request.Email,
                 FirstName = request.FirstName,
                 LastName = request.LastName,
-                PhoneNumber = request.Phone,
                 UserName = request.Email,
                 UserType = UserType.User,
             };
@@ -156,8 +155,7 @@ namespace Moviemap.Web.Controllers.API
 
             userEntity.FirstName = request.FirstName;
             userEntity.LastName = request.LastName;
-            userEntity.PhoneNumber = request.Phone;
-            userEntity.Document = request.Phone;
+            userEntity.Document = request.Document;
 
             IdentityResult respose = await _userHelper.UpdateUserAsync(userEntity);
             if (!respose.Succeeded)
