@@ -297,4 +297,19 @@
   <data name="MyReservations" xml:space="preserve">
     <value>自分の予約</value>
   </data>
+  <data name="Reservation" xml:space="preserve">
+    <value>予約</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>状態</value>
+  </data>
+  <data name="Room" xml:space="preserve">
+    <value>クラス</value>
+  </data>
+  <data name="Chairs" xml:space="preserve">
+    <value>椅子</value>
+  </data>
+  <data name="Cinema" xml:space="preserve">
+    <value>映画館</value>
+  </data>
 </root>

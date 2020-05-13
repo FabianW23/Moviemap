@@ -43,6 +43,7 @@ namespace Moviemap.Prism
             containerRegistry.RegisterForNavigation<ModifyUserPage, ModifyUserPageViewModel>();
             containerRegistry.RegisterForNavigation<ChangePasswordPage, ChangePasswordPageViewModel>();
             containerRegistry.RegisterForNavigation<MyReservationsPage, MyReservationsPageViewModel>();
+            containerRegistry.RegisterForNavigation<ReservationPage, ReservationPageViewModel>();
         }
     }
 }

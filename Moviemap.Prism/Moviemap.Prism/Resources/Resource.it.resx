@@ -297,4 +297,19 @@
   <data name="MyReservations" xml:space="preserve">
     <value>Prenotazioni personali</value>
   </data>
+  <data name="Reservation" xml:space="preserve">
+    <value>Prenotazione</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Stato</value>
+  </data>
+  <data name="Room" xml:space="preserve">
+    <value>Aula</value>
+  </data>
+  <data name="Chairs" xml:space="preserve">
+    <value>SEDIE</value>
+  </data>
+  <data name="Cinema" xml:space="preserve">
+    <value>cinema</value>
+  </data>
 </root>

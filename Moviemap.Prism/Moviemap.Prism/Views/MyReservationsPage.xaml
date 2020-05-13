@@ -3,8 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:i18n="clr-namespace:Moviemap.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Moviemap.Prism.Views.MyReservationsPage">
+             x:Class="Moviemap.Prism.Views.MyReservationsPage"
+             Title="{Binding Tittle}">
     
     <AbsoluteLayout>
         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
@@ -43,12 +45,12 @@
                                    FontSize="Medium"
                                    LineBreakMode="TailTruncation" />
 
-                                <Label Text="{Binding Hour.StartDateLocal, StringFormat='{0:yyyy/MM/dd}'}"
+                                <Label Text="{Binding Hour.StartDateLocal, StringFormat='{0:yyyy/MM/dd HH:mm tt}'}"
                                    LineBreakMode="TailTruncation"
                                    FontAttributes="Italic" 
                                    VerticalOptions="End" />
 
-                                <Label Text="{Binding Hour.EndDateLocal, StringFormat='{0:yyyy/MM/dd}'}"
+                                <Label Text="{i18n:Translate Status}"
                                    LineBreakMode="TailTruncation"
                                    FontAttributes="Italic" 
                                    VerticalOptions="End" />

@@ -131,5 +131,15 @@ namespace Moviemap.Prism.Helpers
         public static string Cinemas => Resource.Cinemas;
 
         public static string MyReservations => Resource.MyReservations;
+
+        public static string Reservation => Resource.Reservation;
+
+        public static string Status => Resource.Status;
+
+        public static string Chairs => Resource.Chairs;
+
+        public static string Room => Resource.Room;
+
+        public static string Cinema => Resource.Cinema;
     }
 }

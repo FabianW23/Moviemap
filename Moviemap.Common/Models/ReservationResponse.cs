@@ -10,7 +10,7 @@ namespace Moviemap.Common.Models
 
         public string QrCode { get; set; }
 
-        public String Status { get; set; }
+        public string Status { get; set; }
 
         public HourResponse Hour { get; set; }
 

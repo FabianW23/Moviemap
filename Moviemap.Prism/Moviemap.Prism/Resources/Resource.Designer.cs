@@ -97,11 +97,29 @@ namespace Moviemap.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chairs.
+        /// </summary>
+        public static string Chairs {
+            get {
+                return ResourceManager.GetString("Chairs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change password.
         /// </summary>
         public static string ChangePassword {
             get {
                 return ResourceManager.GetString("ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cinema.
+        /// </summary>
+        public static string Cinema {
+            get {
+                return ResourceManager.GetString("Cinema", resourceCulture);
             }
         }
         
@@ -556,6 +574,24 @@ namespace Moviemap.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reservation.
+        /// </summary>
+        public static string Reservation {
+            get {
+                return ResourceManager.GetString("Reservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Room.
+        /// </summary>
+        public static string Room {
+            get {
+                return ResourceManager.GetString("Room", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to save.
         /// </summary>
         public static string Save {
@@ -588,6 +624,15 @@ namespace Moviemap.Prism.Resources {
         public static string StartDatePalceHolder {
             get {
                 return ResourceManager.GetString("StartDatePalceHolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string Status {
+            get {
+                return ResourceManager.GetString("Status", resourceCulture);
             }
         }
         
