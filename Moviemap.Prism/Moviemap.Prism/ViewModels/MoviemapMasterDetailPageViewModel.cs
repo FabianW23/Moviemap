@@ -85,6 +85,12 @@ namespace Moviemap.Prism.ViewModels
                 },
                 new Menu
                 {
+                    Icon = "ReservationIcon",
+                    PageName = "MyReservationsPage",
+                    Title = Languages.MyReservations
+                },
+                new Menu
+                {
                     Icon = "AccountIcon",
                     PageName = "ModifyUserPage",
                     Title = Languages.ModifyUserMenu

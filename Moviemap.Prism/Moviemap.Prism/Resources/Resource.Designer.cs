@@ -430,6 +430,15 @@ namespace Moviemap.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to My reservations.
+        /// </summary>
+        public static string MyReservations {
+            get {
+                return ResourceManager.GetString("MyReservations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New password.
         /// </summary>
         public static string NewPassword {

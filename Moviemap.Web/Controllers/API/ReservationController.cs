@@ -69,7 +69,7 @@ namespace Moviemap.Web.Controllers.API
             }
             else
             {
-                return Ok(_converterHelper.ToReservationResponse(reservations));
+                return Ok(_converterHelper.ToReservationsResponse(reservations));
             }
         }
     }

@@ -41,6 +41,8 @@ namespace Moviemap.Web.Controllers
             }
 
             ReservationEntity reservationEntity = await _context.Reservations
+                .Include(r => r.ReservationChairs)
+                .Include(r => r.Hour)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (reservationEntity == null)
             {

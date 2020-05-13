@@ -20,6 +20,8 @@ namespace Moviemap.Common.Models
 
         public bool IsAvalible { get; set; }
 
+        public MovieResponse Movie { get; set; }
+
         public RoomResponse Room { get; set; }
 
 

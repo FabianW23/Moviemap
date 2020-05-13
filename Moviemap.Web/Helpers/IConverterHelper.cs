@@ -28,7 +28,7 @@ namespace Moviemap.Web.Helpers
 
         UserResponse ToUserResponse(UserEntity model);
 
-        List<ReservationResponse> ToReservationResponse(List<ReservationEntity> reservations);
+        List<ReservationResponse> ToReservationsResponse(List<ReservationEntity> reservations);
 
         Task<CinemaEntity> ToCinemaEntity(CinemaViewModel model, bool isNew, string email);
 

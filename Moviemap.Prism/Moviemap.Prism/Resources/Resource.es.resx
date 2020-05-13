@@ -294,4 +294,7 @@
   <data name="Cinemas" xml:space="preserve">
     <value>Cines</value>
   </data>
+  <data name="MyReservations" xml:space="preserve">
+    <value>Mis reservaciones</value>
+  </data>
 </root>

@@ -94,18 +94,18 @@ namespace Moviemap.Web.Helpers
             };
         }
 
-        public List<ReservationResponse> ToReservationResponse(List<ReservationEntity> reservations)
+        public List<ReservationResponse> ToReservationsResponse(List<ReservationEntity> reservations)
         {
             List<ReservationResponse> list = new List<ReservationResponse>();
             foreach (ReservationEntity reservationEntity in reservations)
             {
-                list.Add(ToTripResponse(reservationEntity));
+                list.Add(ToReservationResponse(reservationEntity));
             }
 
             return list;
         }
 
-        public ReservationResponse ToTripResponse(ReservationEntity reservationEntity)
+        public ReservationResponse ToReservationResponse(ReservationEntity reservationEntity)
         {
             return new ReservationResponse
             {
@@ -140,11 +140,24 @@ namespace Moviemap.Web.Helpers
                 StartDate = model.StartDate,
                 EndDate = model.EndDate,
                 TicketPrice = model.TicketPrice,
+                Movie = ToMovieResponse(model.Movie),
                 Room = ToRoomResponse(model.Room)
             };
         }
 
-        public MovieResponse ToMovieResponse(MovieEntity model, int cinemaI)
+        public MovieResponse ToMovieResponse(MovieEntity model)
+        {
+            return new MovieResponse
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Description = model.Description,
+                Duration = model.Duration,
+                LogoPath = model.LogoPath
+            };
+        }
+
+        public MovieResponse ToMovieResponse(MovieEntity model, int cinemaId)
         {
             return new MovieResponse
             {
@@ -160,7 +173,7 @@ namespace Moviemap.Web.Helpers
                     EndDate = h.EndDate,
                     TicketPrice = h.TicketPrice,
                     Room = ToRoomResponse(h.Room)
-                }).Where(h => h.Room.Cinema.Id == cinemaI)
+                }).Where(h => h.Room.Cinema.Id == cinemaId)
                 .ToList()
             };
         }

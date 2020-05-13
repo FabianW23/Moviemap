@@ -13,7 +13,12 @@ namespace Moviemap.Web.Data.Entities
         [Display(Name = "Qr Code")]
         public string QrCode { get; set; }
 
-        public String Status { get; set; }
+        [Display(Name = "Total Amount")]
+        public decimal Total => Hour == null ? 0 : Hour.TicketPrice * ReservationChairs.Count;
+
+        public string Status { get; set; }
+
+        
 
         public HourEntity Hour { get; set; }
 

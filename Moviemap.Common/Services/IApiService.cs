@@ -10,6 +10,8 @@ namespace Moviemap.Common.Services
     {
         Task<Response> GetListAsync<T>(string urlBase, string servicePrefix, string controller);
 
+        Task<Response> GetListAsync<T>(string urlBase, string servicePrefix, string controller, string tokenType, string accessToken, ReservationRequest request);
+
         Task<bool> CheckConnectionAsync(string url);
 
         Task<Response> GetTokenAsync(string urlBase, string servicePrefix, string controller, TokenRequest request);

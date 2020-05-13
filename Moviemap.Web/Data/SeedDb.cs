@@ -78,22 +78,23 @@ namespace Moviemap.Web.Data
         {
             if (!_context.Movies.Any())
             {
-                AddMovie("BLACK WIDOW", "Despues de los sucesos de Capitán América: Civil War, Natasha Romanoff se encuentra sola y obligada a enfrentar su pasado mientras es buscada por la ley.", 120);
-                AddMovie("GHOSTBUSTERS: EL LEGADO", "Del director Jason Reitman y el productor Ivan Reitman, llega el próximo capítulo del universo original de Los Cazafantasmas. En Ghostbusters: El Legado, una madre soltera y sus dos hijos llegan a un pequeño pueblo y comienzan a descubrir su conexión con los cazafantasmas originales y el legado secreto que dejó su abuelo. La película está escrita por Jason Reitman y Gil Kenan.", 150);
-                AddMovie("EL JARDÍN SECRETO", "Cuando la pequeña Mary Lennox pierde a sus padres, se ve obligada a dejar India, el único hogar que conoce, para llegar a Inglaterra a la aislada mansión de su tío (Colin Firth). En su nuevo hogar Mary conoce a su primo, quien nunca ha salido de su habitación, y deberá lidiar con la poco amable señora Medloc (Julie Walters), al tiempo que devela los misterios de su nueva familia. Pronto, Mary descubrirá el secreto que esconde la mansión: un jardín mágico en donde suceden cosas extraordinarias. Sin saberlo, mejorará las vidas de todos las que la rodean en esta nueva adaptación de la famosa novela.", 180);
-                AddMovie("MUJER MARAVILLA 1984", "Avancemos rápidamente a la década de 1980 cuando la próxima aventura en la pantalla grande de Mujer Maravilla la encuentra frente a dos enemigos completamente nuevos: Max Lord y Cheetah.", 150);
-                AddMovie("TENET", "Una película de Christopher Nolan. TENET, próximamente solo en cines.", 140);
+                AddMovie("BLACK WIDOW", "Despues de los sucesos de Capitán América: Civil War, Natasha Romanoff se encuentra sola y obligada a enfrentar su pasado mientras es buscada por la ley.", 120, "BlackWidowPosterOficial");
+                AddMovie("GHOSTBUSTERS: EL LEGADO", "Del director Jason Reitman y el productor Ivan Reitman, llega el próximo capítulo del universo original de Los Cazafantasmas. En Ghostbusters: El Legado, una madre soltera y sus dos hijos llegan a un pequeño pueblo y comienzan a descubrir su conexión con los cazafantasmas originales y el legado secreto que dejó su abuelo. La película está escrita por Jason Reitman y Gil Kenan.", 150, "GhostbustersElLegado");
+                AddMovie("EL JARDÍN SECRETO", "Cuando la pequeña Mary Lennox pierde a sus padres, se ve obligada a dejar India, el único hogar que conoce, para llegar a Inglaterra a la aislada mansión de su tío (Colin Firth). En su nuevo hogar Mary conoce a su primo, quien nunca ha salido de su habitación, y deberá lidiar con la poco amable señora Medloc (Julie Walters), al tiempo que devela los misterios de su nueva familia. Pronto, Mary descubrirá el secreto que esconde la mansión: un jardín mágico en donde suceden cosas extraordinarias. Sin saberlo, mejorará las vidas de todos las que la rodean en esta nueva adaptación de la famosa novela.", 180, "ElJardinSecreto");
+                AddMovie("MUJER MARAVILLA 1984", "Avancemos rápidamente a la década de 1980 cuando la próxima aventura en la pantalla grande de Mujer Maravilla la encuentra frente a dos enemigos completamente nuevos: Max Lord y Cheetah.", 150, "MujerMaravilla1984");
+                AddMovie("TENET", "Una película de Christopher Nolan. TENET, próximamente solo en cines.", 140, "Tenet");
                 await _context.SaveChangesAsync();
             }
         }
 
-        private void AddMovie(string name, string description, int duration)
+        private void AddMovie(string name, string description, int duration, string poster)
         {
             _context.Movies.Add(new MovieEntity
             {
                 Name = name,
                 Description = description,
-                Duration = duration
+                Duration = duration,
+                LogoPath = $"~/images/Movies/{poster}.jpg"
             });
         }
 
