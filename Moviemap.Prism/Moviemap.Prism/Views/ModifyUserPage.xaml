@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+           	 xmlns:i18n="clr-namespace:Moviemap.Prism.Helpers"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Moviemap.Prism.Views.ModifyUserPage"
+             Title="{Binding Title}">
+
+
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All"
+                     Padding="5">
+            <ScrollView>
+                <StackLayout>
+
+                    <inputLayout:SfTextInputLayout HorizontalOptions="StartAndExpand"
+                                                   Hint="{i18n:Translate Document}"
+                                                   HelperText="{i18n:Translate DocumentPlaceHolder}">
+                        <Entry Text="{Binding User.Document}"
+                               Keyboard="Numeric"/>
+                    </inputLayout:SfTextInputLayout>
+
+                    <inputLayout:SfTextInputLayout HorizontalOptions="StartAndExpand"
+                                                   Hint="{i18n:Translate FirstName}"
+                                                   HelperText="{i18n:Translate FirstNamePlaceHolder}">
+                        <Entry Text="{Binding User.FirstName}"/>
+                    </inputLayout:SfTextInputLayout>
+
+                    <inputLayout:SfTextInputLayout HorizontalOptions="StartAndExpand"
+                                                   Hint="{i18n:Translate LastName}"
+                                                   HelperText="{i18n:Translate LastNamePlaceHolder}">
+                        <Entry Text="{Binding User.LastName}"/>
+                    </inputLayout:SfTextInputLayout>
+
+                </StackLayout>
+            </ScrollView>
+            <StackLayout Orientation="Horizontal"
+                         VerticalOptions="EndAndExpand">
+                <Button Command="{Binding SaveCommand}"
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{i18n:Translate Save}"/>
+
+                <Button Command="{Binding ChangePasswordCommand}"
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{i18n:Translate ChangePassword}"/>
+            </StackLayout>
+        </StackLayout>
+        <!--<busyindicator:SfBusyIndicator AnimationType="DoubleCircle" 
+                                       AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                	                   AbsoluteLayout.LayoutFlags="All"
+                	                   HorizontalOptions="Center"
+                	                   TextColor="{StaticResource ColorPrimary}"
+                	                   IsVisible="{Binding IsRunning}"
+                	                   VerticalOptions="Center"
+                	                   ViewBoxWidth="120"
+                	                   ViewBoxHeight="120"/>-->
+    </AbsoluteLayout>
+</ContentPage>
