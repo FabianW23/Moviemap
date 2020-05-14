@@ -17,6 +17,7 @@ namespace Moviemap.Prism.ViewModels
         private List<ReservationItemViewModel> _Trips;
         private bool _isRunning;
         private bool _isEnable;
+        private string _statusC;
 
         public MyReservationsPageViewModel(INavigationService navigationService, IApiService apiService)
             : base(navigationService)
@@ -25,6 +26,12 @@ namespace Moviemap.Prism.ViewModels
             _navigationService = navigationService;
             _apiService = apiService;
             LoadMyReservationsAsync();
+        }
+
+        public string StatusC
+        {
+            get => _statusC;
+            set => SetProperty(ref _statusC, value);
         }
 
         public bool IsEnable
@@ -88,6 +95,7 @@ namespace Moviemap.Prism.ViewModels
                     Status = r.Status,
                     ReservationChairs = r.ReservationChairs,
                 }).ToList();
+                //string.Format(Languages.StatusC, r.Status);
             }
             else
             {

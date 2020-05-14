@@ -50,10 +50,15 @@
                                    FontAttributes="Italic" 
                                    VerticalOptions="End" />
 
-                                <Label Text="{i18n:Translate Status}"
-                                   LineBreakMode="TailTruncation"
-                                   FontAttributes="Italic" 
-                                   VerticalOptions="End" />
+                                <Label >
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{i18n:Translate Status}"/>
+                                            <Span Text=" "/>
+                                            <Span Text="{Binding Status}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
                             </StackLayout>
 
                             <Image Grid.Column="2" 

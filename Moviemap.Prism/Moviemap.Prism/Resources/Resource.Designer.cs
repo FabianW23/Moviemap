@@ -637,6 +637,15 @@ namespace Moviemap.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Status {0}.
+        /// </summary>
+        public static string StatusC {
+            get {
+                return ResourceManager.GetString("StatusC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User updated successfully.
         /// </summary>
         public static string UserUpdated {

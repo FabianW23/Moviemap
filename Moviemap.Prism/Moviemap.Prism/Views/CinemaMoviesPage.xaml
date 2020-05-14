@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Moviemap.Prism.Views.CinemaMoviesPage"
+             Title="{Binding Title}">
+
+    <StackLayout>
+        <CarouselView IndicatorView="indicatorView"
+                  ItemsSource="{Binding Movies}"
+                  PeekAreaInsets="50"
+                  >
+        <CarouselView.ItemsLayout>
+            <LinearItemsLayout Orientation="Horizontal"
+                               SnapPointsType="Mandatory"
+                               SnapPointsAlignment="Start"
+                               ItemSpacing="30"/>            
+        </CarouselView.ItemsLayout>
+           
+        <CarouselView.ItemTemplate>
+            <DataTemplate>
+                <StackLayout>
+                    <Frame HasShadow="True"
+                       BorderColor="DarkGray"
+                       CornerRadius="5"
+                       Margin="5"
+                       HeightRequest="450"
+                       WidthRequest="300"
+                       HorizontalOptions="Center"
+                       VerticalOptions="CenterAndExpand">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SelectMovieCommand}"/>
+                            </Frame.GestureRecognizers>
+                            <StackLayout>
+                            <Label Text="{Binding Name}"
+                               FontAttributes="Bold"
+                               FontSize="Large"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                            <ffimageloading:CachedImage Aspect="Fill"
+                                                        Source="{Binding LogoFullPath}" 
+                                                        CacheDuration= "50"
+                                                        Margin="5"
+                                                        RetryCount= "3"
+                                                        RetryDelay= "600"
+                                                        HeightRequest="400"
+                                                        WidthRequest="300"/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </DataTemplate>
+        </CarouselView.ItemTemplate>
+    </CarouselView>
+        <StackLayout>
+            <IndicatorView x:Name="indicatorView"
+                IndicatorColor="LightGray"
+                IndicatorSize="15"
+                SelectedIndicatorColor="DarkGray"
+                VerticalOptions="Start"
+                HorizontalOptions="Center" />
+            <Label Text=" "/>
+        </StackLayout>
+    </StackLayout>
+    
+    
+</ContentPage>

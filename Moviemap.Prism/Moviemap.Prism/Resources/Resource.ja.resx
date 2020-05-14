@@ -312,4 +312,7 @@
   <data name="Cinema" xml:space="preserve">
     <value>映画館</value>
   </data>
+  <data name="StatusC" xml:space="preserve">
+    <value>状態 {0}</value>
+  </data>
 </root>

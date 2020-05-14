@@ -141,5 +141,7 @@ namespace Moviemap.Prism.Helpers
         public static string Room => Resource.Room;
 
         public static string Cinema => Resource.Cinema;
+
+        public static string StatusC => Resource.StatusC;
     }
 }

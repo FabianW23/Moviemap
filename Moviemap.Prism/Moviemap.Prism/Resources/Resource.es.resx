@@ -312,4 +312,7 @@
   <data name="Cinema" xml:space="preserve">
     <value>Cine</value>
   </data>
+  <data name="StatusC" xml:space="preserve">
+    <value>Estado {0}</value>
+  </data>
 </root>

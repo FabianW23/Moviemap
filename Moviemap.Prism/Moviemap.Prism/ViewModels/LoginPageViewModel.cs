@@ -61,6 +61,7 @@ namespace Moviemap.Prism.ViewModels
 
         private async void LoginAsync()
         {
+
             if (string.IsNullOrEmpty(Email))
             {
                 await App.Current.MainPage.DisplayAlert(

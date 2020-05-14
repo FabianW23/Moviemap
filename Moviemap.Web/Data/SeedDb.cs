@@ -100,8 +100,11 @@ namespace Moviemap.Web.Data
 
         private async Task AddBrand()
         {
-            _context.Brands.Add(new BrandEntity { Name = "Procinal", LogoPath = $"~/images/Brands/procinal.jpg" });
-            await _context.SaveChangesAsync();
+            if (!_context.Brands.Any())
+            {
+                _context.Brands.Add(new BrandEntity { Name = "Procinal", LogoPath = $"~/images/Brands/procinal.jpg" });
+                await _context.SaveChangesAsync();
+            }
         }
 
         private async Task CheckCinemaAsync()
