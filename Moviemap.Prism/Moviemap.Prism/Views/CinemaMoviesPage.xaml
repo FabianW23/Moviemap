@@ -39,7 +39,7 @@
                                FontSize="Large"
                                HorizontalOptions="Center"
                                VerticalOptions="Center" />
-                            <ffimageloading:CachedImage Aspect="Fill"
+                            <ffimageloading:CachedImage Aspect="AspectFit"
                                                         Source="{Binding LogoFullPath}" 
                                                         CacheDuration= "50"
                                                         Margin="5"

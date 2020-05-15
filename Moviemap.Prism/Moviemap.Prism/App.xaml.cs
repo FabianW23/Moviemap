@@ -48,6 +48,7 @@ namespace Moviemap.Prism
             containerRegistry.RegisterForNavigation<CinemaMoviesPage, CinemaMoviesPageViewModel>();
             containerRegistry.RegisterForNavigation<CinemaMoviesPage, CinemaMoviesPageViewModel>();
             containerRegistry.RegisterForNavigation<MoviePage, MoviePageViewModel>();
+            containerRegistry.RegisterForNavigation<ChooseChairspage, ChooseChairspageViewModel>();
         }
     }
 }

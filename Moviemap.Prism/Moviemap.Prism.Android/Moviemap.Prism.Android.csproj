@@ -55,10 +55,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Syncfusion.Xamarin.Buttons">
+      <Version>18.1.0.52</Version>
+    </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Core">
       <Version>18.1.0.52</Version>
     </PackageReference>
-    <PackageReference Include="Syncfusion.Xamarin.SfCarousel">
+    <PackageReference Include="Syncfusion.Xamarin.SfPicker">
       <Version>18.1.0.52</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.FFImageLoading.Forms">

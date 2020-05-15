@@ -2,8 +2,54 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:syncfusion="clr-namespace:Syncfusion.SfPicker.XForms;assembly=Syncfusion.SfPicker.XForms"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Moviemap.Prism.Views.MoviePage"
              Title="{Binding Title}">
-  
+
+    <ScrollView>
+        <StackLayout Padding="8">
+            <ffimageloading:CachedImage Aspect="AspectFit"
+                                    Source="{Binding Movie.LogoFullPath}" 
+                                    CacheDuration= "50"
+                                    RetryCount= "3"
+                                    RetryDelay= "600"
+                                    WidthRequest="200"
+                                    HeightRequest="200"/>
+            
+            <Label Text="Synopsis"
+               HorizontalOptions="Start"
+               LineBreakMode="TailTruncation"/>
+            
+            <Label Text="{Binding Movie.Description}"
+               LineBreakMode="WordWrap"/>
+
+            <StackLayout Orientation="Horizontal">
+                <syncfusion:SfPicker HeaderText="Select a Date"
+                                 ItemsSource="{Binding MDates}"
+                                 SelectedItem="{Binding SelectedDate}"
+                                 HorizontalOptions="Start"
+                                 HeightRequest="180"
+                                 WidthRequest="200"/>
+                <Button Command="{Binding ChangeDateCommand}" 
+                        Text="Change Date"/>
+            </StackLayout>
+            
+
+            <ScrollView Orientation="Vertical" Margin="0">
+                <buttons:SfChipGroup
+                            VerticalOptions="Center"
+                            ItemsSource="{Binding MHours}"
+                            SelectedChipBackgroundColor="Aqua"
+                            SelectedItem="{Binding SelectedHour}"
+                            Type="Choice">
+                </buttons:SfChipGroup>
+            </ScrollView>
+
+            <Button Command="{Binding ReservationCommand}" 
+                    Text="Do reservation"/>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
