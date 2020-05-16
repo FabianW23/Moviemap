@@ -8,5 +8,10 @@ namespace Moviemap.Prism.Views
         {
             InitializeComponent();
         }
+
+        private void SfPicker_SelectionChanged(object sender, Syncfusion.SfPicker.XForms.SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

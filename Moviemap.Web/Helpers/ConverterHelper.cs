@@ -2,6 +2,7 @@
 using Moviemap.Web.Data;
 using Moviemap.Web.Data.Entities;
 using Moviemap.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -184,20 +185,53 @@ namespace Moviemap.Web.Helpers
             {
                 Id = model.Id,
                 Name = model.Name,
-                Cinema = ToCinemaResponse(model.Cinema)
+                Cinema = ToCinemaResponse(model.Cinema),
+                Chairs = ToChairResponseList(model.Chairs),
             };
+        }
+
+        private List<ChairResponse> ToChairResponseList(ICollection<ChairEntity> model)
+        {
+            if (model != null)
+            {
+                List<ChairResponse> chairs = new List<ChairResponse>();
+                foreach (ChairEntity chair in model)
+                {
+                    chairs.Add(new ChairResponse
+                    {
+                        Id = chair.Id,
+                        ColumnLocation = chair.ColumnLocation,
+                        RowLocation = chair.RowLocation,
+                        ChairType = chair.ChairType,
+                        Name = chair.Name
+                    });
+                }
+                return chairs;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public CinemaResponse ToCinemaResponse(CinemaEntity model)
         {
-            return new CinemaResponse
+            if(model != null)
             {
-                Id = model.Id,
-                Name = model.Name,
-                Latitude = model.Latitude,
-                Longitude = model.Longitude,
-                Brand = ToBrandResponse(model.Brand)
-            };
+                return new CinemaResponse
+                {
+                    Id = model.Id,
+                    Name = model.Name,
+                    Latitude = model.Latitude,
+                    Longitude = model.Longitude,
+                    Brand = ToBrandResponse(model.Brand)
+                };
+            }
+            else
+            {
+                return null;
+            }
+                
         }
 
         public BrandResponse ToBrandResponse(BrandEntity model)
@@ -227,7 +261,8 @@ namespace Moviemap.Web.Helpers
             {
                 Id = isNew ? 0 : model.Id,
                 Name = model.Name,
-                Cinema = await _context.Cinemas.FindAsync(model.CinemaId)
+                Cinema = await _context.Cinemas.FindAsync(model.CinemaId),
+                
             };
         }
 

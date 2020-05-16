@@ -37,5 +37,7 @@ namespace Moviemap.Web.Helpers
         List<CinemaResponse> ToCinemaResponse(List<CinemaEntity> cinemas);
 
         List<MovieResponse> ToMovieResponse(List<MovieEntity> movies, int cinemaId);
+
+        RoomResponse ToRoomResponse(RoomEntity roomEntity);
     }
 }

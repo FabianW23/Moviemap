@@ -76,6 +76,7 @@ namespace Moviemap.Web
             services.AddScoped<IConverterHelper, ConverterHelper>();
             services.AddScoped<IBlobHelper, BlobHelper>();
             services.AddScoped<IEmailHelper, EmailHelper>();
+            services.AddScoped<IChairsHelper, ChairsHelper>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

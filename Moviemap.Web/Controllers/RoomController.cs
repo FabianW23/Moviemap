@@ -15,12 +15,14 @@ namespace Moviemap.Web.Controllers
         private readonly DataContext _context;
         private readonly ICombosHelper _combosHelper;
         private readonly IConverterHelper _converterHelper;
+        private readonly IChairsHelper _chairsHelper;
 
-        public RoomController(DataContext context, ICombosHelper combosHelper, IConverterHelper converterHelper)
+        public RoomController(DataContext context, ICombosHelper combosHelper, IConverterHelper converterHelper, IChairsHelper chairsHelper)
         {
             _context = context;
             _combosHelper = combosHelper;
             _converterHelper = converterHelper;
+            _chairsHelper = chairsHelper;
         }
 
         [Authorize(Roles = "CinemaAdmin,Admin")]
@@ -74,6 +76,7 @@ namespace Moviemap.Web.Controllers
             {
                 HourEntity hourEntity = await _converterHelper.ToHourEntity(hourViewModel, true);
                 _context.Add(hourEntity);
+                
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -98,6 +101,9 @@ namespace Moviemap.Web.Controllers
             {
                 RoomEntity roomEntity = await _converterHelper.ToRoomEntity(roomViewModel, true);
                 _context.Add(roomEntity);
+                await _context.SaveChangesAsync();
+                var room = _context.Rooms.LastOrDefault();
+                _chairsHelper.AddChairsToRoom(room);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

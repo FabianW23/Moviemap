@@ -13,11 +13,13 @@ namespace Moviemap.Web.Data
     {
         private readonly DataContext _context;
         private readonly IUserHelper _userHelper;
+        private readonly IChairsHelper _chairsHelper;
 
-        public SeedDb(DataContext dataContext, IUserHelper userHelper)
+        public SeedDb(DataContext dataContext, IUserHelper userHelper, IChairsHelper chairsHelper)
         {
             _context = dataContext;
             _userHelper = userHelper;
+            _chairsHelper = chairsHelper;
         }
         public async Task SeedAsync()
         {
@@ -160,20 +162,36 @@ namespace Moviemap.Web.Data
             if (!_context.Rooms.Any())
             {
                 AddRoomAsync("Procinal Puerta de norte", "Sala 1");
+                await _context.SaveChangesAsync();
+                var room = _context.Rooms.LastOrDefault();
+                _chairsHelper.AddChairsToRoom(room);
                 AddRoomAsync("Procinal Puerta de norte", "Sala 2");
+
+                await _context.SaveChangesAsync();
+                room = _context.Rooms.LastOrDefault();
+                _chairsHelper.AddChairsToRoom(room);
                 AddRoomAsync("Procinal Mayorca", "Sala 1");
+
+                await _context.SaveChangesAsync();
+                room = _context.Rooms.LastOrDefault();
+                _chairsHelper.AddChairsToRoom(room);
                 AddRoomAsync("Procinal Mayorca", "Sala 2");
+
+                await _context.SaveChangesAsync();
+                room = _context.Rooms.LastOrDefault();
+                _chairsHelper.AddChairsToRoom(room);
                 await _context.SaveChangesAsync();
             }
         }
 
-        private void AddRoomAsync(string cinemaName, string roomName)
+        private async void AddRoomAsync(string cinemaName, string roomName)
         {
             _context.Rooms.Add(new RoomEntity 
             { 
                 Name = roomName, 
                 Cinema = _context.Cinemas.FirstOrDefault(c => c.Name == cinemaName)
             });
+
         }
 
         
@@ -194,43 +212,6 @@ namespace Moviemap.Web.Data
         {
             if (!_context.Chairs.Any())
             {
-                AddChairAsync("A1", 1, 0, 0);
-                AddChairAsync("A2", 1, 1, 0);
-                AddChairAsync("A3", 1, 2, 0);
-                AddChairAsync("A4", 1, 3, 0);
-                AddChairAsync("A5", 1, 4, 0);
-                AddChairAsync("A6", 1, 5, 0);
-                AddChairAsync("A7", 1, 6, 0);
-                AddChairAsync("A8", 1, 7, 0);
-                AddChairAsync("A9", 1, 8, 0);
-                AddChairAsync("B1", 1, 0, 1);
-                AddChairAsync("B2", 1, 1, 1);
-                AddChairAsync("B3", 1, 2, 1);
-                AddChairAsync("B4", 1, 3, 1);
-                AddChairAsync("B5", 1, 4, 1);
-                AddChairAsync("B6", 1, 5, 1);
-                AddChairAsync("B7", 1, 6, 1);
-                AddChairAsync("B8", 1, 7, 1);
-                AddChairAsync("B9", 1, 8, 1);
-                AddChairAsync("C1", 1, 0, 2);
-                AddChairAsync("C2", 1, 1, 2);
-                AddChairAsync("C3", 1, 2, 2);
-                AddChairAsync("C4", 1, 3, 2);
-                AddChairAsync("C5", 1, 4, 2);
-                AddChairAsync("C6", 1, 5, 2);
-                AddChairAsync("C7", 1, 6, 2);
-                AddChairAsync("C8", 1, 7, 2);
-                AddChairAsync("C9", 1, 8, 2);
-                AddChairAsync("D1", 1, 0, 3);
-                AddChairAsync("D2", 1, 1, 3);
-                AddChairAsync("D3", 1, 2, 3);
-                AddChairAsync("D4", 1, 3, 3);
-                AddChairAsync("D5", 1, 4, 3);
-                AddChairAsync("D6", 1, 5, 3);
-                AddChairAsync("D7", 1, 6, 3);
-                AddChairAsync("D8", 1, 7, 3);
-                AddChairAsync("D9", 1, 8, 3);
-                await _context.SaveChangesAsync();
             }
         }
 
@@ -238,13 +219,14 @@ namespace Moviemap.Web.Data
         {
             if (!_context.Reservations.Any())
             {
-                AddReservation(await _userHelper.GetUserByEmailAsync("ferre55@yopmail.com"), 1);
-                AddReservation(await _userHelper.GetUserByEmailAsync("ferre55@yopmail.com"), 3);
+                AddReservation(await _userHelper.GetUserByEmailAsync("ferre55@yopmail.com"), 1, 1, 2, 3);
+                AddReservation(await _userHelper.GetUserByEmailAsync("minertop1023@gmail.com"), 1, 6, 7, 8);
+                AddReservation(await _userHelper.GetUserByEmailAsync("ferre55@yopmail.com"), 3, 1, 2, 3);
                 await _context.SaveChangesAsync();
             }
         }
 
-        private void AddReservation(UserEntity user, int hourId)
+        private void AddReservation(UserEntity user, int hourId, int chairId1, int chairId2, int chairId3)
         {
             _context.Reservations.Add(new ReservationEntity
             {
@@ -255,15 +237,15 @@ namespace Moviemap.Web.Data
                     {
                     new ReservationChairsEntity
                     {
-                        Chair = _context.Chairs.FirstOrDefault(c => c.Id == 10)
+                        Chair = _context.Chairs.FirstOrDefault(c => c.Id == chairId1)
                     },
                     new ReservationChairsEntity
                     {
-                        Chair = _context.Chairs.FirstOrDefault(c => c.Id == 11)
+                        Chair = _context.Chairs.FirstOrDefault(c => c.Id == chairId2)
                     },
                     new ReservationChairsEntity
                     {
-                        Chair = _context.Chairs.FirstOrDefault(c => c.Id == 12)
+                        Chair = _context.Chairs.FirstOrDefault(c => c.Id == chairId3)
                     }
                 }
             });
