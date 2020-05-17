@@ -3,6 +3,7 @@
     public enum ChairType
     {
         Available,
-        NotAvailable
+        NotAvailable,
+        Selected
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Moviemap.Common.Emuns;
 using Moviemap.Common.Models;
 using Moviemap.Web.Data;
 using Moviemap.Web.Data.Entities;
@@ -71,6 +72,46 @@ namespace Moviemap.Web.Controllers.API
             {
                 return Ok(_converterHelper.ToReservationsResponse(reservations));
             }
+        }
+
+        [HttpPost]
+        [Route("DoReservation")]
+        public async Task<IActionResult> DoReservation([FromBody] DoReservationRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            CultureInfo cultureInfo = new CultureInfo(request.CultureInfo);
+            Resource.Culture = cultureInfo;
+            UserEntity user = await _userHelper.GetUserAsync(request.UserId.ToString());
+            if (user == null)
+            {
+                return BadRequest(Resource.UserDoesntExists);
+            }
+            List<ReservationChairsEntity> reservationChairs = new List<ReservationChairsEntity>();
+            foreach(ChairResponse chair in request.Chairs)
+            {
+                reservationChairs.Add(new ReservationChairsEntity 
+                {
+                    Chair = _context.Chairs.Find(chair.Id)
+                });
+            }
+
+            _context.Reservations.Add(new ReservationEntity
+            {
+                Status = ReservationStatus.Active.ToString(),
+                User = user,
+                Hour = _context.Hours.FirstOrDefault(h => h.Id == request.HourId),
+                ReservationChairs = reservationChairs
+            });
+            return Ok(new Response
+            {
+                IsSuccess = true,
+                Message = Resource.ReservationAdded
+            });
+
         }
     }
 }

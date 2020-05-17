@@ -59,11 +59,11 @@ namespace Moviemap.Prism.ViewModels
             {
                 base.OnNavigatedTo(parameters);
                 Cinema = parameters.GetValue<CinemaResponse>("cinema");
-                LoadCinemaMiviesAsync();
+                LoadCinemaMoviesAsync();
             }
         }
 
-        private async void LoadCinemaMiviesAsync()
+        private async void LoadCinemaMoviesAsync()
         {
             IsRunning = true;
             IsEnable = false;

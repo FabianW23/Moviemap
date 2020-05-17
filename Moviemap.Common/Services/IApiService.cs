@@ -10,6 +10,8 @@ namespace Moviemap.Common.Services
     {
         Task<Response> GetListAsync<T>(string urlBase, string servicePrefix, string controller);
 
+        Task<Response> GetRoomAsync<T>(string urlBase, string servicePrefix, string controller, RoomRequest request);
+
         Task<Response> GetCinemaMoviesAsync<T>(string urlBase, string servicePrefix, string controller, CinemaMoviesRequest request);
 
         Task<Response> GetListAsync<T>(string urlBase, string servicePrefix, string controller, string tokenType, string accessToken, ReservationRequest request);
@@ -28,5 +30,6 @@ namespace Moviemap.Common.Services
 
         Task<Response> ChangePasswordAsync(string urlBase, string servicePrefix, string controller, ChangePasswordRequest changePasswordRequest, string tokenType, string accessToken);
 
+        Task<Response> DoReservationAsync(string urlBase, string servicePrefix, string controller, DoReservationRequest doReservationRequest, string tokenType, string accessToken);
     }
 }

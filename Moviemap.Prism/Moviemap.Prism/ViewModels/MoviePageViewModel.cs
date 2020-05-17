@@ -78,7 +78,11 @@ namespace Moviemap.Prism.ViewModels
         private async void RegisterAsync()
         {
             HourResponse algo = Movie.Hours.Single(h => h.StartDate == SelectedHour);
-            await _navigationService.NavigateAsync("ChooseChairspage");
+            NavigationParameters parameters = new NavigationParameters
+            {
+                { "hour", algo }
+            };
+            await _navigationService.NavigateAsync("ChooseChairspage", parameters);
         }
 
         private void ChangeDateAsync()
@@ -98,8 +102,8 @@ namespace Moviemap.Prism.ViewModels
         {
             List<DateTime> list = new List<DateTime>();
             list = Movie.Hours.Select(h => h.StartDate.Date).Distinct().ToList();
-            
             MDates = new ObservableCollection<DateTime>(list.Select(d => d.Date));
+            SelectedDate = MDates.First();
         }
 
     }

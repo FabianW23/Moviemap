@@ -2,7 +2,256 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Moviemap.Prism.Views.ChooseChairspage">
-  
+
+    <StackLayout>
+        <Label Text="SCreen"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--Colum/Row-->
+            <Image Source="{Binding Chair00}" Grid.Column="0" Grid.Row="0">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair00}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair10}" Grid.Column="1" Grid.Row="0">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair10}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair20}" Grid.Column="2" Grid.Row="0">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair20}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair30}" Grid.Column="3" Grid.Row="0">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair30}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair40}" Grid.Column="4" Grid.Row="0">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair40}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair50}" Grid.Column="5" Grid.Row="0">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair50}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair60}" Grid.Column="6" Grid.Row="0">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair60}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair70}" Grid.Column="8" Grid.Row="0">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair70}"/>
+                </Image.GestureRecognizers>
+            </Image>
+
+            <Image Source="{Binding Chair01}" Grid.Column="0" Grid.Row="1">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair01}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair11}" Grid.Column="1" Grid.Row="1">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair11}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair21}" Grid.Column="2" Grid.Row="1">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair21}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair31}" Grid.Column="3" Grid.Row="1">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair31}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair41}" Grid.Column="4" Grid.Row="1">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair41}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair51}" Grid.Column="5" Grid.Row="1">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair51}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair61}" Grid.Column="6" Grid.Row="1">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair61}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair71}" Grid.Column="8" Grid.Row="1">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair71}"/>
+                </Image.GestureRecognizers>
+            </Image>
+
+            <Image Source="{Binding Chair02}" Grid.Column="0" Grid.Row="2">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair02}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair12}" Grid.Column="1" Grid.Row="2">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair12}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair22}" Grid.Column="2" Grid.Row="2">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair22}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair32}" Grid.Column="3" Grid.Row="2">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair32}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair42}" Grid.Column="4" Grid.Row="2">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair42}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair52}" Grid.Column="5" Grid.Row="2">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair52}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair62}" Grid.Column="6" Grid.Row="2">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair62}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair72}" Grid.Column="8" Grid.Row="2">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair72}"/>
+                </Image.GestureRecognizers>
+            </Image>
+
+            <Image Source="{Binding Chair03}" Grid.Column="0" Grid.Row="3">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair03}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair13}" Grid.Column="1" Grid.Row="3">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair13}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair23}" Grid.Column="2" Grid.Row="3">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair23}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair33}" Grid.Column="3" Grid.Row="3">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair33}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair43}" Grid.Column="4" Grid.Row="3">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair43}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair53}" Grid.Column="5" Grid.Row="3">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair53}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair63}" Grid.Column="6" Grid.Row="3">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair63}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair73}" Grid.Column="8" Grid.Row="3">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair73}"/>
+                </Image.GestureRecognizers>
+            </Image>
+
+            <Image Source="{Binding Chair04}" Grid.Column="0" Grid.Row="4">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair04}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair14}" Grid.Column="1" Grid.Row="4">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair14}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair24}" Grid.Column="2" Grid.Row="4">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair24}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair34}" Grid.Column="3" Grid.Row="4">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair34}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair44}" Grid.Column="4" Grid.Row="4">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair44}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair54}" Grid.Column="5" Grid.Row="4">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair54}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair64}" Grid.Column="6" Grid.Row="4">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair64}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair74}" Grid.Column="7" Grid.Row="4">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair74}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Image Source="{Binding Chair84}" Grid.Column="8" Grid.Row="4">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedChair84}"/>
+                </Image.GestureRecognizers>
+            </Image>
+        </Grid>
+        <Label Text="Selected Chairs"/>
+        <ScrollView Orientation="Vertical" Margin="0">
+            <buttons:SfChipGroup
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            ItemsSource="{Binding ChairsChips}"
+                            ChipBackgroundColor="Aqua"
+                            SelectedChipBackgroundColor="Aqua"
+                            SelectedChipTextColor="Black"
+                            Type="Choice">
+            </buttons:SfChipGroup>
+        </ScrollView>
+        <Button Command="{Binding ConfirmReservationCommand}" 
+                    Text="Confirm Reservation"/>
+    </StackLayout>
+   
 </ContentPage>

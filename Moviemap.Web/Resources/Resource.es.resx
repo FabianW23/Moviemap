@@ -156,4 +156,7 @@
   <data name="DateError" xml:space="preserve">
     <value>La Fecha de Inicio debe ser minor que la Fecha de Fin</value>
   </data>
+  <data name="ReservationAdded" xml:space="preserve">
+    <value>Reserva agregada exitosamente !</value>
+  </data>
 </root>

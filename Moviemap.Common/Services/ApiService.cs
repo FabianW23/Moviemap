@@ -40,6 +40,34 @@ namespace Moviemap.Common.Services
             }
         }
 
+        public async Task<Response> DoReservationAsync(string urlBase, string servicePrefix, string controller, DoReservationRequest doReservationRequest, string tokenType, string accessToken)
+        {
+            try
+            {
+                string request = JsonConvert.SerializeObject(doReservationRequest);
+                StringContent content = new StringContent(request, Encoding.UTF8, "application/json");
+                HttpClient client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
+                string url = $"{servicePrefix}{controller}";
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                string answer = await response.Content.ReadAsStringAsync();
+                Response obj = JsonConvert.DeserializeObject<Response>(answer);
+                return obj;
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message,
+                };
+            }
+        }
+
         public async Task<Response> GetListAsync<T>(
             string urlBase,
             string servicePrefix,
@@ -351,6 +379,47 @@ namespace Moviemap.Common.Services
                 {
                     IsSuccess = true,
                     Result = list
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        public async Task<Response> GetRoomAsync<T>(string urlBase, string servicePrefix, string controller, RoomRequest roomRequest)
+        {
+            try
+            {
+                string request = JsonConvert.SerializeObject(roomRequest);
+                StringContent content = new StringContent(request, Encoding.UTF8, "application/json");
+                HttpClient client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                string url = $"{servicePrefix}{controller}";
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                string result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                var room = JsonConvert.DeserializeObject<RoomResponse>(result);
+                return new Response
+                {
+                    IsSuccess = true,
+                    Result = room
                 };
             }
             catch (Exception ex)

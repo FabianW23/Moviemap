@@ -151,6 +151,15 @@ namespace Moviemap.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reservation added successfully!.
+        /// </summary>
+        public static string ReservationAdded {
+            get {
+                return ResourceManager.GetString("ReservationAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User already exists..
         /// </summary>
         public static string UserAlreadyExists {
