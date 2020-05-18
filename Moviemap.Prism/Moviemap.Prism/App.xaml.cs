@@ -31,6 +31,7 @@ namespace Moviemap.Prism
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.Register<IGeolocatorService, GeolocatorService>();
             containerRegistry.Register<IApiService, ApiService>();
             containerRegistry.Register<IRegexHelper, RegexHelper>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
@@ -49,6 +50,7 @@ namespace Moviemap.Prism
             containerRegistry.RegisterForNavigation<CinemaMoviesPage, CinemaMoviesPageViewModel>();
             containerRegistry.RegisterForNavigation<MoviePage, MoviePageViewModel>();
             containerRegistry.RegisterForNavigation<ChooseChairspage, ChooseChairspageViewModel>();
+            containerRegistry.RegisterForNavigation<MapPage, MapPageViewModel>();
         }
     }
 }

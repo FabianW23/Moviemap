@@ -97,6 +97,12 @@ namespace Moviemap.Prism.ViewModels
                 },
                 new Menu
                 {
+                    Icon = "AccountIcon",
+                    PageName = "MapPage",
+                    Title = Languages.ModifyUserMenu
+                },
+                new Menu
+                {
                     Icon = "LoginIcon",
                     PageName = "LoginPage",
                     Title = Settings.IsLogin ? Languages.LogOut : Languages.LogInMenu
