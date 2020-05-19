@@ -74,6 +74,7 @@ namespace Moviemap.Web.Controllers.API
             }
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         [Route("DoReservation")]
         public async Task<IActionResult> DoReservation([FromBody] DoReservationRequest request)
@@ -106,6 +107,7 @@ namespace Moviemap.Web.Controllers.API
                 Hour = _context.Hours.FirstOrDefault(h => h.Id == request.HourId),
                 ReservationChairs = reservationChairs
             });
+            await _context.SaveChangesAsync();
             return Ok(new Response
             {
                 IsSuccess = true,

@@ -9,13 +9,5 @@
     <StackLayout>
         <maps:Map x:Name="MyMap"
                   MapType="Street"/>
-        <StackLayout Padding="5">
-            <Button BackgroundColor="Green"
-                    CornerRadius="20"
-                    HeightRequest="40"
-                    Margin="10,0"
-                    Text="Start Trip"
-                    TextColor="White"/>
-        </StackLayout>
     </StackLayout>
 </ContentPage>

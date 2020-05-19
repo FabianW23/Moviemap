@@ -5,16 +5,19 @@ using Moviemap.Common.Services;
 using Plugin.Permissions;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
+using Moviemap.Common.Models;
 
 namespace Moviemap.Prism.Views
 {
     public partial class MapPage : ContentPage
     {
         private readonly IGeolocatorService _geolocatorService;
+        private static MapPage _instance;
 
         public MapPage(IGeolocatorService geolocatorService)
         {
             InitializeComponent();
+            _instance = this;
             _geolocatorService = geolocatorService;
 
         }
@@ -23,6 +26,32 @@ namespace Moviemap.Prism.Views
             base.OnAppearing();
             MoveMapToCurrentPositionAsync();
         }
+
+        public static MapPage GetInstance()
+        {
+            return _instance;
+        }
+
+        public void DrawPins(List<CinemaResponse> cinemas)
+        {
+            foreach (CinemaResponse cinema in cinemas)
+            {
+                Position position = new Position((double)cinema.Latitude, (double)cinema.Longitude);
+                AddPin(position, cinema.Name, cinema.Name, PinType.Generic);
+            }
+        }
+
+        public void AddPin(Position position, string address, string label, PinType pinType)
+        {
+            MyMap.Pins.Add(new Pin
+            {
+                Address = address,
+                Label = label,
+                Position = position,
+                Type = pinType
+            });
+        }
+
 
         private async void MoveMapToCurrentPositionAsync()
         {

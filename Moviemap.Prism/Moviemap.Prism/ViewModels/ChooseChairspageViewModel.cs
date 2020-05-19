@@ -575,7 +575,10 @@ namespace Moviemap.Prism.ViewModels
                     IsEnable = true;
                     return;
                 }
-                
+                await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
+                IsRunning = false;
+                IsEnable = true;
+                return;
             }
             else
             {
