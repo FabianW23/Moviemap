@@ -14,12 +14,12 @@ namespace Moviemap.Prism.ViewModels
     public class MoviePageViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
-        private ObservableCollection<DateTime> _dates;
-        private ObservableCollection<DateTime> _hours;
+        private ObservableCollection<MyDate> _dates;
+        private ObservableCollection<MyHour> _hours;
         private DelegateCommand _registerCommand;
         private DelegateCommand _changeDateCommand;
-        private DateTime _selectedHour;
-        private DateTime _selectedDate;
+        private MyHour _selectedHour;
+        private MyDate _selectedDate;
         private MovieResponse _movie;
         private readonly IApiService _apiService;
 
@@ -36,13 +36,29 @@ namespace Moviemap.Prism.ViewModels
 
         public DelegateCommand ChangeDateCommand => _changeDateCommand ?? (_changeDateCommand = new DelegateCommand(ChangeDateAsync));
 
-        public DateTime SelectedDate
+        public MyDate SelectedDate
         {
             get => _selectedDate;
-            set => SetProperty(ref _selectedDate, value);
+            set
+            { 
+                SetProperty(ref _selectedDate, value);
+                DoAny();
+            }
         }
 
-        public DateTime SelectedHour
+        private void DoAny()
+        {
+            if(SelectedDate.Date == null || SelectedDate.Date == DateTime.MinValue)
+            {
+                return;
+            }
+            else
+            {
+                LoadHours(SelectedDate.Date);
+            }
+        }
+
+        public MyHour SelectedHour
         {
             get => _selectedHour;
             set => SetProperty(ref _selectedHour, value);
@@ -54,13 +70,13 @@ namespace Moviemap.Prism.ViewModels
             set => SetProperty(ref _movie, value);
         }
 
-        public ObservableCollection<DateTime> MDates
+        public ObservableCollection<MyDate> MDates
         {
             get => _dates;
             set => SetProperty(ref _dates, value);
         }
 
-        public ObservableCollection<DateTime> MHours
+        public ObservableCollection<MyHour> MHours
         {
             get => _hours;
             set => SetProperty(ref _hours, value);
@@ -72,12 +88,12 @@ namespace Moviemap.Prism.ViewModels
             Movie = parameters.GetValue<MovieResponse>("movie");
             Title = Movie.Name;
             LoadDate();
-            LoadHours(new DateTime(2020, 4, 29));
+            LoadHours(SelectedDate.Date);
         }
 
         private async void RegisterAsync()
         {
-            HourResponse algo = Movie.Hours.Single(h => h.StartDate == SelectedHour);
+            HourResponse algo = Movie.Hours.Single(h => h.StartDate == SelectedHour.HourOfDate);
             NavigationParameters parameters = new NavigationParameters
             {
                 { "hour", algo }
@@ -88,21 +104,26 @@ namespace Moviemap.Prism.ViewModels
         private void ChangeDateAsync()
         {
             LoadDate();
-            LoadHours(SelectedDate);
+            LoadHours(SelectedDate.Date);
         }
 
         private void LoadHours(DateTime date)
         {
             List<DateTime> list = new List<DateTime>();
             list = Movie.Hours.Select(h => h.StartDate).Where(h => h.Date == date).ToList();
-            MHours = new ObservableCollection<DateTime>(list);
+            MHours = new ObservableCollection<MyHour>(list.Select(d => new MyHour
+            {
+                HourOfDate = d
+            }).ToList());
         }
 
         private void LoadDate()
         {
             List<DateTime> list = new List<DateTime>();
             list = Movie.Hours.Select(h => h.StartDate.Date).Distinct().ToList();
-            MDates = new ObservableCollection<DateTime>(list.Select(d => d.Date));
+            MDates = new ObservableCollection<MyDate>(list.Select(d => new MyDate { 
+                Date = d.Date
+            }).ToList());
             SelectedDate = MDates.First();
         }
 

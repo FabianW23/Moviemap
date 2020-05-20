@@ -8,7 +8,7 @@ namespace Moviemap.Common.Models
     {
         public int Id { get; set; }
 
-        public string QrCode { get; set; }
+        public string QrCode => $"https://moviemapweb.azurewebsites.net/Reservation/Details/{Id}";
 
         public string Status { get; set; }
 

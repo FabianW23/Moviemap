@@ -30,10 +30,10 @@
                 <syncfusion:SfPicker HeaderText="Select a Date"
                                  ItemsSource="{Binding MDates}"
                                  SelectedItem="{Binding SelectedDate}"
-                                 SelectionChanged="SfPicker_SelectionChanged"
                                  HorizontalOptions="Start"
                                  HeightRequest="180"
                                  WidthRequest="200"/>
+
                 <Button Command="{Binding ChangeDateCommand}" 
                         Text="Change Date"/>
             </StackLayout>

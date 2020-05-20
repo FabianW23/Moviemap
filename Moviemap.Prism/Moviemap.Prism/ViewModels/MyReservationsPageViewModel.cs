@@ -91,7 +91,6 @@ namespace Moviemap.Prism.ViewModels
                 {
                     Id = r.Id,
                     Hour = r.Hour,
-                    QrCode = r.QrCode,
                     Status = r.Status,
                     ReservationChairs = r.ReservationChairs,
                 }).ToList();
