@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:syncfusion="clr-namespace:Syncfusion.SfBarcode.XForms;assembly=Syncfusion.SfBarcode.XForms"
              xmlns:i18n="clr-namespace:Moviemap.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Moviemap.Prism.Views.ReservationPage"
@@ -10,9 +11,15 @@
 
     <StackLayout Padding="5">
 
+        <syncfusion:SfBarcode Text="{Binding Reservation.QrCode}"
+                                                  Symbology="QRCode"
+                                                  ShowText="False">
+            <syncfusion:SfBarcode.SymbologySettings>
+                <syncfusion:QRBarcodeSettings XDimension="9"/>
+            </syncfusion:SfBarcode.SymbologySettings>
+        </syncfusion:SfBarcode>
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -24,34 +31,9 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="1.5*" />
                         </Grid.ColumnDefinitions>
-
-                        <Label Grid.Row="0"
-                               Grid.Column="0"
-                               Text="{i18n:Translate Status}" 
-                               HorizontalOptions="Center"
-                               FontAttributes="Bold"
-                               FontSize="Medium"
-                               LineBreakMode="TailTruncation" />
-                        <Label Grid.Row="0"
-                               Grid.Column="1"
-                               Text="{Binding Reservation.Status}" 
-                               FontAttributes="Bold"
-                               FontSize="Medium"
-                               LineBreakMode="TailTruncation" />
-
-                        <ffimageloading:CachedImage Grid.Row="1"
-                                                    Grid.ColumnSpan="2"
-                                                    Aspect="AspectFit"
-                                                    Source="QrcodeReservation1.png" 
-                                                    CacheDuration= "50"
-                                                    Margin="5"
-                                                    RetryCount= "3"
-                                                    RetryDelay= "600"
-                                                    WidthRequest="200"
-                                                    HeightRequest="200"/>
                         
                         <ffimageloading:CachedImage Grid.RowSpan="2"
-                                                    Grid.Row="2"
+                                                    Grid.Row="0"
                                                     Grid.Column="0"
                                                     Aspect="AspectFit"
                                                     Source="{Binding Reservation.Hour.Movie.LogoFullPath}" 
@@ -60,7 +42,9 @@
                                                     RetryCount= "3"
                                                     RetryDelay= "600"
                                                     WidthRequest="100"/>
-                        <Label Grid.Row="2"
+                        
+                        
+                        <Label Grid.Row="0"
                                Grid.Column="1"
                                Text="{Binding Reservation.Hour.Movie.Name}" 
                                HorizontalOptions="Center"
@@ -68,7 +52,7 @@
                                FontAttributes="Bold"
                                FontSize="Medium"
                                LineBreakMode="TailTruncation" />
-                        <Label Grid.Row="3"
+                        <Label Grid.Row="1"
                                Grid.Column="1"
                                Text="{Binding Reservation.Hour.StartDateLocal, StringFormat='{0:yyyy/MM/dd HH:mm tt}'}" 
                                HorizontalOptions="Center"
@@ -76,43 +60,57 @@
                                FontAttributes="Bold"
                                FontSize="Medium"
                                LineBreakMode="TailTruncation" />
+                        
+                        <Label Grid.Row="2"
+                               Grid.Column="0"
+                               Text="{i18n:Translate Status}" 
+                               HorizontalOptions="Center"
+                               FontAttributes="Bold"
+                               FontSize="Medium"
+                               LineBreakMode="TailTruncation" />
+                        <Label Grid.Row="2"
+                               Grid.Column="1"
+                               Text="{Binding Reservation.Status}" 
+                               FontAttributes="Bold"
+                               FontSize="Medium"
+                               LineBreakMode="TailTruncation" />
 
-                        <Label Grid.Row="4"
+                        <Label Grid.Row="3"
                                Grid.Column="0"
                                Text="{i18n:Translate Room}" 
                                HorizontalOptions="Center"
                                FontAttributes="Bold"
                                FontSize="Medium"
                                LineBreakMode="TailTruncation" />
-                        <Label Grid.Row="4"
+                        <Label Grid.Row="3"
                                Grid.Column="1"
                                Text="{Binding Reservation.Hour.Room.Name}" 
                                FontAttributes="Bold"
                                FontSize="Medium"
                                LineBreakMode="TailTruncation" />
 
-                        <Label Grid.Row="5"
+                        <Label Grid.Row="4"
                                Grid.Column="0"
                                Text="{i18n:Translate Chairs}" 
                                HorizontalOptions="Center"
                                FontAttributes="Bold"
                                FontSize="Medium"
                                LineBreakMode="TailTruncation" />
-                        <Label Grid.Row="5"
+                        <Label Grid.Row="4"
                                Grid.Column="1"
                                Text="{Binding Chairs}" 
                                FontAttributes="Bold"
                                FontSize="Medium"
                                LineBreakMode="TailTruncation" />
 
-                        <Label Grid.Row="6"
+                        <Label Grid.Row="5"
                                Grid.Column="0"
                                Text="{i18n:Translate Cinema}"
                                HorizontalOptions="Center"
                                FontAttributes="Bold"
                                FontSize="Medium"
                                LineBreakMode="TailTruncation" />
-                        <Label Grid.Row="6"
+                        <Label Grid.Row="5"
                                Grid.Column="1"
                                LineBreakMode="WordWrap"
                                Text="{Binding Reservation.Hour.Room.Cinema.Name}" 
