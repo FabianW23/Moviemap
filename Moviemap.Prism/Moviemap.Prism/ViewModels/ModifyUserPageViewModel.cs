@@ -40,7 +40,7 @@ namespace Moviemap.Prism.ViewModels
             if (!Settings.IsLogin)
             {
                 await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.LogInRequired, Languages.Accept);
-                await _navigationService.NavigateAsync(nameof(LoginPage));
+                await _navigationService.NavigateAsync("/MoviemapMasterDetailPage/NavigationPage/LoginPage");
             }
         }
 

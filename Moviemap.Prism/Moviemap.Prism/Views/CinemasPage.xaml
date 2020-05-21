@@ -2,51 +2,70 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Moviemap.Prism.Views.CinemasPage"
+             BackgroundColor="{StaticResource ColorBackgroud}"
              Title = "{Binding Title}">
 
-    <StackLayout>
-        <CollectionView ItemsSource="{Binding Cinemas}">
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical"/>
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding SelectCinemaCommand}"/>
-                        </Grid.GestureRecognizers>
-                        <Grid.ColumnDefinitions Orientation="Vertical">
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
+    <AbsoluteLayout>
 
-                        <ffimageloading:CachedImage Grid.Column="0"
-                                                    Aspect="AspectFit"
-                                                    Source="{Binding Brand.LogoFullPath}" 
-                                                    CacheDuration= "50"
-                                                    Margin="5"
-                                                    RetryCount= "3"
-                                                    RetryDelay= "600"
-                                                    WidthRequest="100"/>
+        <ScrollView>
+            <CollectionView ItemsSource="{Binding Cinemas}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     VerticalItemSpacing="4"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="8"
+                               HasShadow="True">
+                            <Grid>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectCinemaCommand}"/>
+                                </Grid.GestureRecognizers>
+                                <Grid.ColumnDefinitions Orientation="Vertical">
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
 
-                        <StackLayout Grid.Column="1"
-                                     VerticalOptions="Center">
-                            <Label Text="{Binding Name}" 
-                                   FontAttributes="Bold"
-                                   FontSize="Medium"
-                                   LineBreakMode="TailTruncation" />
+                                <ffimageloading:CachedImage Grid.Column="0"
+                                                Aspect="AspectFit"
+                                                Source="{Binding Brand.LogoFullPath}" 
+                                                CacheDuration= "50"
+                                                Margin="5"
+                                                RetryCount= "3"
+                                                RetryDelay= "600"
+                                                WidthRequest="100"/>
 
-                        </StackLayout>
+                                <StackLayout Grid.Column="1"
+                                             VerticalOptions="Center">
+                                    <Label Text="{Binding Name}" 
+                                            FontAttributes="Bold"
+                                            FontSize="Medium"
+                                            LineBreakMode="WordWrap" />
 
-                        <Image Grid.Column="2" 
-                               Source="ic_more_vert"/>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </StackLayout>
+                                </StackLayout>
+
+                                <Image Grid.Column="2" 
+                                       Source="ArrowForward"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+
+        <busyindicator:SfBusyIndicator AnimationType="DoubleCircle" 
+                                       AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                	                   AbsoluteLayout.LayoutFlags="All"
+                	                   HorizontalOptions="Center"
+                	                   TextColor="{StaticResource ColorPrimary}"
+                	                   IsVisible="{Binding IsRunning}"
+                	                   VerticalOptions="Center"
+                	                   ViewBoxWidth="120"
+                	                   ViewBoxHeight="120"/>
+    </AbsoluteLayout>
 </ContentPage>

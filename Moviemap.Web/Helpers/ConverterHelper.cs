@@ -1,4 +1,5 @@
-﻿using Moviemap.Common.Models;
+﻿using Moviemap.Common.Emuns;
+using Moviemap.Common.Models;
 using Moviemap.Web.Data;
 using Moviemap.Web.Data.Entities;
 using Moviemap.Web.Models;
@@ -108,6 +109,11 @@ namespace Moviemap.Web.Helpers
 
         public ReservationResponse ToReservationResponse(ReservationEntity reservationEntity)
         {
+            if (reservationEntity.Hour.StartDate < DateTime.Now)
+            {
+                reservationEntity.Status = ReservationStatus.TimeOut;
+                _context.Reservations.Update(reservationEntity);
+            }
             return new ReservationResponse
             {
                 Id = reservationEntity.Id,
@@ -138,8 +144,8 @@ namespace Moviemap.Web.Helpers
             return new HourResponse
             {
                 Id = model.Id,
-                StartDate = model.StartDate,
-                EndDate = model.EndDate,
+                StartDate = model.StartDateLocal,
+                EndDate = model.EndDateLocal,
                 TicketPrice = model.TicketPrice,
                 Movie = ToMovieResponse(model.Movie),
                 Room = ToRoomResponse(model.Room)

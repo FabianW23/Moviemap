@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Moviemap.Common.Emuns;
 using Moviemap.Web.Data;
 using Moviemap.Web.Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,6 +32,13 @@ namespace Moviemap.Web.Controllers
                 .Include(r => r.Hour)
                 .ThenInclude(h => h.Room)
                 .ToListAsync();
+            foreach (ReservationEntity reservation1 in reservation)
+            {
+                if(reservation1.Hour.StartDate < DateTime.Now)
+                {
+                    reservation1.Status = ReservationStatus.TimeOut;
+                }
+            }
             return View(reservation);
         }
 
@@ -48,7 +57,10 @@ namespace Moviemap.Web.Controllers
             {
                 return NotFound();
             }
-
+            if (reservationEntity.Hour.StartDate < DateTime.Now)
+            {
+                reservationEntity.Status = ReservationStatus.TimeOut;
+            }
             return View(reservationEntity);
         }
     }

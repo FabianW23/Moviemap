@@ -99,6 +99,7 @@ namespace Moviemap.Prism.ViewModels
             else
             {
                 await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.LogInRequired, Languages.Accept);
+                await _navigationService.NavigateAsync("/MoviemapMasterDetailPage/NavigationPage/LoginPage");
             }
         }
     }

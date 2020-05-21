@@ -24,6 +24,7 @@ namespace Moviemap.Prism.ViewModels
         public MapPageViewModel(INavigationService navigationService, IApiService apiService)
             : base(navigationService)
         {
+            Title = Languages.Map;
             _navigationService = navigationService;
             _apiService = apiService;
             LoadCinemasAsync();

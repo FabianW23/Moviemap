@@ -250,6 +250,15 @@ namespace Moviemap.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do a reservation.
+        /// </summary>
+        public static string DoAReservation {
+            get {
+                return ResourceManager.GetString("DoAReservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Document.
         /// </summary>
         public static string Document {
@@ -439,6 +448,15 @@ namespace Moviemap.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Map.
+        /// </summary>
+        public static string Map {
+            get {
+                return ResourceManager.GetString("Map", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modify User.
         /// </summary>
         public static string ModifyUserMenu {
@@ -601,6 +619,15 @@ namespace Moviemap.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select a date.
+        /// </summary>
+        public static string SelectADate {
+            get {
+                return ResourceManager.GetString("SelectADate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start date.
         /// </summary>
         public static string StartDate {
@@ -642,6 +669,15 @@ namespace Moviemap.Prism.Resources {
         public static string StatusC {
             get {
                 return ResourceManager.GetString("StatusC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Synopsis.
+        /// </summary>
+        public static string Synopsis {
+            get {
+                return ResourceManager.GetString("Synopsis", resourceCulture);
             }
         }
         

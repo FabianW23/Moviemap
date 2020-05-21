@@ -61,15 +61,6 @@ namespace Moviemap.Web.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Any.
-        /// </summary>
-        public static string Any {
-            get {
-                return ResourceManager.GetString("Any", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Confirm Email.
         /// </summary>
         public static string ConfirmEmail {
@@ -88,7 +79,7 @@ namespace Moviemap.Web.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To allow the user, please click on this link:.
+        ///   Looks up a localized string similar to To allow the user, please click on this link.
         /// </summary>
         public static string ConfirmEmailSubject {
             get {
@@ -142,7 +133,7 @@ namespace Moviemap.Web.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To reset the password click in this link:.
+        ///   Looks up a localized string similar to To reset the password click in this link.
         /// </summary>
         public static string RecoverPasswordSubject {
             get {
@@ -174,6 +165,15 @@ namespace Moviemap.Web.Resources {
         public static string UserDoesntExists {
             get {
                 return ResourceManager.GetString("UserDoesntExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The user have a reservation for this hour.
+        /// </summary>
+        public static string UserHaveAReservationForThisHour {
+            get {
+                return ResourceManager.GetString("UserHaveAReservationForThisHour", resourceCulture);
             }
         }
         

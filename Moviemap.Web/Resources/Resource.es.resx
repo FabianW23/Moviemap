@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Any" xml:space="preserve">
-    <value>Any</value>
-  </data>
   <data name="UserAlreadyExists" xml:space="preserve">
     <value>El usuario ya existe.</value>
   </data>
@@ -158,5 +155,8 @@
   </data>
   <data name="ReservationAdded" xml:space="preserve">
     <value>Reserva agregada exitosamente !</value>
+  </data>
+  <data name="UserHaveAReservationForThisHour" xml:space="preserve">
+    <value>¡El usuario tiene una reserva para esta hora!</value>
   </data>
 </root>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Moviemap.Common.Emuns;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,7 +11,7 @@ namespace Moviemap.Common.Models
 
         public string QrCode => $"https://moviemapweb.azurewebsites.net/Reservation/Details/{Id}";
 
-        public string Status { get; set; }
+        public ReservationStatus Status { get; set; }
 
         public HourResponse Hour { get; set; }
 

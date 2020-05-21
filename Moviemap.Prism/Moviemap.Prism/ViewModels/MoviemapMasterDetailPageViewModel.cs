@@ -97,9 +97,9 @@ namespace Moviemap.Prism.ViewModels
                 },
                 new Menu
                 {
-                    Icon = "AccountIcon",
+                    Icon = "MapIcon",
                     PageName = "MapPage",
-                    Title = Languages.ModifyUserMenu
+                    Title = Languages.Map
                 },
                 new Menu
                 {

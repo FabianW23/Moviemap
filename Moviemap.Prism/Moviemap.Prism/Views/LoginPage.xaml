@@ -2,20 +2,24 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
              xmlns:i18n="clr-namespace:Moviemap.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Moviemap.Prism.Views.LoginPage"
+             BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
     
     <AbsoluteLayout>
-        <StackLayout >
-            <!--<Image HeightRequest="150"
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All"
+                     Padding="5" >
+            <Image HeightRequest="150"
                    Margin="0,20,0,0"
-                   Source="IconApp"/>-->
+                   Source="IconApp"/>
 
             <StackLayout Margin="20" 
-                         VerticalOptions="CenterAndExpand">
+                         VerticalOptions="StartAndExpand">
                 <inputLayout:SfTextInputLayout HorizontalOptions="StartAndExpand"
                                                Hint="{i18n:Translate Email}"
                                                EnablePasswordVisibilityToggle="False"
@@ -32,25 +36,28 @@
 
                 <Label FontAttributes="Bold"
                        HorizontalOptions="Center" 
-                       Text="{i18n:Translate ForgotPassword}">
+                       Text="{i18n:Translate ForgotPassword}"
+                       TextColor="{StaticResource ColorAccent}">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
                     </Label.GestureRecognizers>
                 </Label>
             </StackLayout>
 
-            <StackLayout VerticalOptions="EndAndExpand">
+            <StackLayout Orientation="Horizontal"
+                         VerticalOptions="EndAndExpand">
                 <Button Command="{Binding LoginCommand}" 
                         IsEnabled="{Binding IsEnabled}"
                         Text="{i18n:Translate LogInMenu}"/>
 
                 <Button Command="{Binding RegisterCommand}" 
                         IsEnabled="{Binding IsEnabled}"
-                        Text="{i18n:Translate Register}"/>
+                        Text="{i18n:Translate Register}"
+                        Style="{StaticResource DangerButton}"/>
             </StackLayout>
 
         </StackLayout>
-        <!--<busyindicator:SfBusyIndicator AnimationType="DoubleCircle" 
+        <busyindicator:SfBusyIndicator AnimationType="DoubleCircle" 
                                        AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
                 	                   AbsoluteLayout.LayoutFlags="All"
                 	                   HorizontalOptions="Center"
@@ -58,6 +65,6 @@
                 	                   IsVisible="{Binding IsRunning}"
                 	                   VerticalOptions="Center"
                 	                   ViewBoxWidth="120"
-                	                   ViewBoxHeight="120"/>-->
+                	                   ViewBoxHeight="120"/>
     </AbsoluteLayout>
 </ContentPage>

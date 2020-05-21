@@ -31,6 +31,7 @@ namespace Moviemap.Prism.ViewModels
             _apiService = apiService;
             Title = Languages.LogInMenu;
             IsEnabled = true;
+            IsRunning = false;
         }
 
         public DelegateCommand LoginCommand => _loginCommand ?? (_loginCommand = new DelegateCommand(LoginAsync));

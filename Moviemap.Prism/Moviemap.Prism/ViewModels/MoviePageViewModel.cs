@@ -1,5 +1,7 @@
-﻿using Moviemap.Common.Models;
+﻿using Moviemap.Common.Helpers;
+using Moviemap.Common.Models;
 using Moviemap.Common.Services;
+using Moviemap.Prism.Helpers;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -17,7 +19,6 @@ namespace Moviemap.Prism.ViewModels
         private ObservableCollection<MyDate> _dates;
         private ObservableCollection<MyHour> _hours;
         private DelegateCommand _registerCommand;
-        private DelegateCommand _changeDateCommand;
         private MyHour _selectedHour;
         private MyDate _selectedDate;
         private MovieResponse _movie;
@@ -27,14 +28,12 @@ namespace Moviemap.Prism.ViewModels
         public MoviePageViewModel(INavigationService navigationService, IApiService apiService)
             : base(navigationService)
         {
-            Title = "Black";
+            Title = "";
             _navigationService = navigationService;
             _apiService = apiService;
         }
 
         public DelegateCommand ReservationCommand => _registerCommand ?? (_registerCommand = new DelegateCommand(RegisterAsync));
-
-        public DelegateCommand ChangeDateCommand => _changeDateCommand ?? (_changeDateCommand = new DelegateCommand(ChangeDateAsync));
 
         public MyDate SelectedDate
         {
@@ -93,18 +92,21 @@ namespace Moviemap.Prism.ViewModels
 
         private async void RegisterAsync()
         {
-            HourResponse algo = Movie.Hours.Single(h => h.StartDate == SelectedHour.HourOfDate);
-            NavigationParameters parameters = new NavigationParameters
+            if (Settings.IsLogin)
+            {
+                HourResponse algo = Movie.Hours.Single(h => h.StartDate == SelectedHour.HourOfDate);
+                NavigationParameters parameters = new NavigationParameters
             {
                 { "hour", algo }
             };
-            await _navigationService.NavigateAsync("ChooseChairspage", parameters);
-        }
-
-        private void ChangeDateAsync()
-        {
-            LoadDate();
-            LoadHours(SelectedDate.Date);
+                await _navigationService.NavigateAsync("ChooseChairspage", parameters);
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.LogInRequired, Languages.Accept);
+                await _navigationService.NavigateAsync("/MoviemapMasterDetailPage/NavigationPage/LoginPage");
+            }
+            
         }
 
         private void LoadHours(DateTime date)
@@ -126,6 +128,5 @@ namespace Moviemap.Prism.ViewModels
             }).ToList());
             SelectedDate = MDates.First();
         }
-
     }
 }

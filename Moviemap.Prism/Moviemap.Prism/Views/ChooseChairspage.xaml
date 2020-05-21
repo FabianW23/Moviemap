@@ -2,12 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Moviemap.Prism.Views.ChooseChairspage">
 
-    <StackLayout>
-        <Label Text="SCreen"/>
+    <StackLayout Padding="5">
+        <ffimageloading:CachedImage Aspect="AspectFit"
+                                    Source="ScreenIcon" 
+                                    CacheDuration= "50"
+                                    RetryCount= "3"
+                                    WidthRequest="150"
+                                    HeightRequest="150"/>
+
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

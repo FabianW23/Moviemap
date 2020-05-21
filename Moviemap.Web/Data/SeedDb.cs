@@ -230,7 +230,7 @@ namespace Moviemap.Web.Data
         {
             _context.Reservations.Add(new ReservationEntity
             {
-                Status = ReservationStatus.Active.ToString(),
+                Status = ReservationStatus.Active,
                 User = user,
                 Hour = _context.Hours.FirstOrDefault(h => h.Id == hourId),
                 ReservationChairs = new List<ReservationChairsEntity>

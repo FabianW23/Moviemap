@@ -4,7 +4,8 @@
              xmlns:prism="http://prismlibrary.com"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"  
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Moviemap.Prism.Views.MapPage">
+             x:Class="Moviemap.Prism.Views.MapPage"
+             Title="{Binding Title}">
 
     <StackLayout>
         <maps:Map x:Name="MyMap"

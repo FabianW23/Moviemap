@@ -5,52 +5,52 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:syncfusion="clr-namespace:Syncfusion.SfPicker.XForms;assembly=Syncfusion.SfPicker.XForms"
              xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:i18n="clr-namespace:Moviemap.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Moviemap.Prism.Views.MoviePage"
              Title="{Binding Title}">
 
     <ScrollView>
         <StackLayout Padding="8">
-            <ffimageloading:CachedImage Aspect="AspectFit"
-                                    Source="{Binding Movie.LogoFullPath}" 
-                                    CacheDuration= "50"
-                                    RetryCount= "3"
-                                    RetryDelay= "600"
-                                    WidthRequest="200"
-                                    HeightRequest="200"/>
             
-            <Label Text="Synopsis"
-               HorizontalOptions="Start"
-               LineBreakMode="TailTruncation"/>
+
+            <WebView Source="https://www.youtube.com/embed/ybji16u608U"
+                     HeightRequest="200"
+                     WidthRequest="360"/>
+
+
+            <Label Text="{i18n:Translate Synopsis}"
+                   FontSize="Subtitle"
+                   HorizontalOptions="Start"
+                   LineBreakMode="TailTruncation"/>
             
             <Label Text="{Binding Movie.Description}"
-               LineBreakMode="WordWrap"/>
+                   LineBreakMode="WordWrap"/>
 
-            <StackLayout Orientation="Horizontal">
-                <syncfusion:SfPicker HeaderText="Select a Date"
+            <syncfusion:SfPicker HeaderText="{i18n:Translate SelectADate}"
+                                 HeaderBackgroundColor="{StaticResource ColorPrimary}"
+                                 SelectedItemTextColor="{StaticResource ColorFont}"
                                  ItemsSource="{Binding MDates}"
                                  SelectedItem="{Binding SelectedDate}"
-                                 HorizontalOptions="Start"
+                                 HorizontalOptions="Center"
                                  HeightRequest="180"
                                  WidthRequest="200"/>
 
-                <Button Command="{Binding ChangeDateCommand}" 
-                        Text="Change Date"/>
-            </StackLayout>
-            
 
             <ScrollView Orientation="Vertical" Margin="0">
-                <buttons:SfChipGroup
-                            VerticalOptions="Center"
-                            ItemsSource="{Binding MHours}"
-                            SelectedChipBackgroundColor="Aqua"
-                            SelectedItem="{Binding SelectedHour}"
-                            Type="Choice">
+                <buttons:SfChipGroup  VerticalOptions="Center"
+                                      HorizontalOptions="Center"
+                                      ItemsSource="{Binding MHours}"
+                                      SelectedChipBackgroundColor="{StaticResource ColorPrimary}"
+                                      SelectedChipTextColor="{StaticResource ColorFontInverse}"
+                                      SelectedItem="{Binding SelectedHour}"
+                                      Type="Choice">
                 </buttons:SfChipGroup>
             </ScrollView>
 
-            <Button Command="{Binding ReservationCommand}" 
-                    Text="Do reservation"/>
+            <Button VerticalOptions="EndAndExpand"
+                    Command="{Binding ReservationCommand}" 
+                    Text="{i18n:Translate DoAReservation}"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

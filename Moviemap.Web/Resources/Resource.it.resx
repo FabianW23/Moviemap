@@ -117,23 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Any" xml:space="preserve">
-    <value>any</value>
-  </data>
   <data name="UserAlreadyExists" xml:space="preserve">
     <value>Utente già esistente.</value>
   </data>
   <data name="ConfirmEmail" xml:space="preserve">
     <value>Conferma posta elettronica</value>
-  </data>
-  <data name="ConfirmEmailSubject" xml:space="preserve">
-    <value>Per consentire all&amp;#39;utente, fare clic su questo link :!</value>
-  </data>
-  <data name="ConfirmEmailMessage" xml:space="preserve">
-    <value>È stata inviata un&amp;#39;e-mail di conferma. Conferma il tuo account e accedi all&amp;#39;App.!</value>
-  </data>
-  <data name="UserDoesntExists" xml:space="preserve">
-    <value>L&amp;#39;utente non esiste.!</value>
   </data>
   <data name="RecoverPassword" xml:space="preserve">
     <value>Recupero Password</value>
@@ -141,22 +129,34 @@
   <data name="RecoverPasswordSubject" xml:space="preserve">
     <value>Per reimpostare la password clicca in questo link :!</value>
   </data>
-  <data name="RecoverPasswordMessage" xml:space="preserve">
-    <value>È stata inviata un&amp;#39;e-mail con le istruzioni per modificare la password.!</value>
-  </data>
   <data name="IncorrectCurrentPassword" xml:space="preserve">
     <value>Password corrente errata</value>
   </data>
   <data name="PasswordChangedSuccess" xml:space="preserve">
     <value>La tua password è stata modificata correttamente</value>
   </data>
-  <data name="UserWithOutTrips" xml:space="preserve">
-    <value>L&amp;#39;utente non ha viaggi!</value>
-  </data>
   <data name="DateError" xml:space="preserve">
     <value>La data di inizio deve essere inferiore alla data di fine!</value>
   </data>
   <data name="ReservationAdded" xml:space="preserve">
     <value>Prenotazione aggiunta con successo !</value>
+  </data>
+  <data name="ConfirmEmailSubject" xml:space="preserve">
+    <value>Per consentire all utente, fare clic su questo link!</value>
+  </data>
+  <data name="ConfirmEmailMessage" xml:space="preserve">
+    <value>È stata inviata un e-mail di conferma. Conferma il tuo account e accedi all App</value>
+  </data>
+  <data name="UserDoesntExists" xml:space="preserve">
+    <value>Utente non esiste</value>
+  </data>
+  <data name="RecoverPasswordMessage" xml:space="preserve">
+    <value>È stata inviata e-mail con le istruzioni per modificare la password.</value>
+  </data>
+  <data name="UserWithOutTrips" xml:space="preserve">
+    <value>Utente non ha viaggi</value>
+  </data>
+  <data name="UserHaveAReservationForThisHour" xml:space="preserve">
+    <value>utente ha una prenotazione per questa ora!</value>
   </data>
 </root>

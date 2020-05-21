@@ -91,6 +91,11 @@ namespace Moviemap.Web.Controllers.API
             {
                 return BadRequest(Resource.UserDoesntExists);
             }
+            var reservation = _context.Reservations.Include(r => r.User).Where(r => r.User.Id == user.Id);
+            if(reservation != null)
+            {
+                return BadRequest(Resource.UserHaveAReservationForThisHour);
+            }
             List<ReservationChairsEntity> reservationChairs = new List<ReservationChairsEntity>();
             foreach(ChairResponse chair in request.Chairs)
             {
@@ -102,7 +107,7 @@ namespace Moviemap.Web.Controllers.API
 
             _context.Reservations.Add(new ReservationEntity
             {
-                Status = ReservationStatus.Active.ToString(),
+                Status = ReservationStatus.Active,
                 User = user,
                 Hour = _context.Hours.FirstOrDefault(h => h.Id == request.HourId),
                 ReservationChairs = reservationChairs

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Moviemap.Common.Emuns;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace Moviemap.Web.Data.Entities
         [Display(Name = "Qr Code")]
         public string QrCode { get; set; }
 
-        public string Status { get; set; }
+        public ReservationStatus Status { get; set; }
 
         [Display(Name = "Total Amount")]
         public decimal Total => Hour == null ? 0 : Hour.TicketPrice * ReservationChairs.Count;

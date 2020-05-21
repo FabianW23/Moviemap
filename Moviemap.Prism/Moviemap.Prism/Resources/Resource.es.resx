@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="LogInMenu" xml:space="preserve">
-    <value>Inicio de sesión:</value>
+    <value>Inicio de sesión</value>
   </data>
   <data name="ModifyUserMenu" xml:space="preserve">
     <value>Modificar usuario</value>
@@ -220,7 +220,7 @@
     <value>Usuario actualizado con éxito</value>
   </data>
   <data name="ConfirmNewPassword" xml:space="preserve">
-    <value>Confirmar nueva contraseña:</value>
+    <value>Confirmar nueva contraseña</value>
   </data>
   <data name="ConfirmNewPasswordError" xml:space="preserve">
     <value>Debes ingresar una nueva contraseña</value>
@@ -314,5 +314,17 @@
   </data>
   <data name="StatusC" xml:space="preserve">
     <value>Estado {0}</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Mapa</value>
+  </data>
+  <data name="Synopsis" xml:space="preserve">
+    <value>Sinopsis</value>
+  </data>
+  <data name="DoAReservation" xml:space="preserve">
+    <value>Haz una reserva!</value>
+  </data>
+  <data name="SelectADate" xml:space="preserve">
+    <value>Selecciona una fecha</value>
   </data>
 </root>

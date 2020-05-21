@@ -315,4 +315,16 @@
   <data name="StatusC" xml:space="preserve">
     <value>Stato {0}</value>
   </data>
+  <data name="Map" xml:space="preserve">
+    <value>Mappa</value>
+  </data>
+  <data name="Synopsis" xml:space="preserve">
+    <value>Trama</value>
+  </data>
+  <data name="DoAReservation" xml:space="preserve">
+    <value>Prenota!</value>
+  </data>
+  <data name="SelectADate" xml:space="preserve">
+    <value>Selezionare una data</value>
+  </data>
 </root>

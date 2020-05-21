@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Any" xml:space="preserve">
-    <value>Any</value>
-  </data>
   <data name="UserAlreadyExists" xml:space="preserve">
     <value>User already exists.</value>
   </data>
@@ -127,7 +124,7 @@
     <value>Confirm Email</value>
   </data>
   <data name="ConfirmEmailSubject" xml:space="preserve">
-    <value>To allow the user, please click on this link:</value>
+    <value>To allow the user, please click on this link</value>
   </data>
   <data name="ConfirmEmailMessage" xml:space="preserve">
     <value>A Confirmation email was sent. Please confirm your account and log into the App.</value>
@@ -139,7 +136,7 @@
     <value> Recover Password</value>
   </data>
   <data name="RecoverPasswordSubject" xml:space="preserve">
-    <value>To reset the password click in this link:</value>
+    <value>To reset the password click in this link</value>
   </data>
   <data name="RecoverPasswordMessage" xml:space="preserve">
     <value>An email with instructions to change the password was sent.</value>
@@ -158,5 +155,8 @@
   </data>
   <data name="ReservationAdded" xml:space="preserve">
     <value>Reservation added successfully!</value>
+  </data>
+  <data name="UserHaveAReservationForThisHour" xml:space="preserve">
+    <value>The user have a reservation for this hour</value>
   </data>
 </root>

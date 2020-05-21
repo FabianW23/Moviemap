@@ -6,6 +6,7 @@ using Plugin.Permissions;
 using Prism;
 using Prism.Ioc;
 using Xamarin.Forms;
+using Syncfusion.SfBusyIndicator.XForms.Droid;
 
 namespace Moviemap.Prism.Droid
 {
@@ -22,6 +23,7 @@ namespace Moviemap.Prism.Droid
             Forms.SetFlags("IndicatorView_Experimental");
             CrossCurrentActivity.Current.Init(this, bundle);
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            new SfBusyIndicatorRenderer();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
             LoadApplication(new App(new AndroidInitializer()));
         }
