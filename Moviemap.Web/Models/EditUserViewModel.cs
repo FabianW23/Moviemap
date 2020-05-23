@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -28,5 +29,16 @@ namespace Moviemap.Web.Models
         [Display(Name = "Phone Number")]
         [MaxLength(50, ErrorMessage = "The {0} field can not have more than {1} characters.")]
         public string PhoneNumber { get; set; }
+
+        [Display(Name = "Picture")]
+        public IFormFile PictureFile { get; set; }
+
+        [Display(Name = "Picture")]
+        public string PicturePath { get; set; }
+
+        [Display(Name = "Picture")]
+        public string PictureFullPath => string.IsNullOrEmpty(PicturePath)
+            ? "https://SoccerWeb4.azurewebsites.net//images/noimage.png"
+            : $"https://zulusoccer.blob.core.windows.net/users/{PicturePath}";
     }
 }

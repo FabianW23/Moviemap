@@ -25,6 +25,14 @@ namespace Moviemap.Web.Data.Entities
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         public string LastName { get; set; }
 
+        [Display(Name = "Picture")]
+        public string PicturePath { get; set; }
+
+        [Display(Name = "Picture")]
+        public string PictureFullPath => string.IsNullOrEmpty(PicturePath)
+            ? "https://moviemapweb.azurewebsites.net/images/NoImage.jpg"
+            : $"https://moviemapweb.azurewebsites.net{PicturePath.Substring(1)}";
+
         [Display(Name = "User")]
         public string FullName => $"{FirstName} {LastName}";
 

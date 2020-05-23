@@ -21,15 +21,18 @@ namespace Moviemap.Web.Controllers
         private readonly IUserHelper _userHelper;
         private readonly IConfiguration _configuration;
         private readonly IEmailHelper _mailHelper;
+        private readonly IImageHelper _imageHelper;
 
         public AccountController(
             IUserHelper userHelper,
             IConfiguration configuration,
-            IEmailHelper mailHelper)
+            IEmailHelper mailHelper,
+            IImageHelper imageHelper)
         {
             _userHelper = userHelper;
             _configuration = configuration;
             _mailHelper = mailHelper;
+            _imageHelper = imageHelper;
         }
 
         public IActionResult Register()
@@ -45,6 +48,12 @@ namespace Moviemap.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                string path = model.PicturePath;
+
+                if (model.PictureFile != null)
+                {
+                    path = await _imageHelper.UploadImageAsync(model.PictureFile, "users");
+                }
                 UserEntity user = await _userHelper.AddUserAsync(model, UserType.User);
                 if (user == null)
                 {
@@ -144,6 +153,7 @@ namespace Moviemap.Web.Controllers
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 PhoneNumber = user.PhoneNumber,
+                PicturePath = user.PicturePath,
             };
 
             return View(model);
@@ -155,11 +165,18 @@ namespace Moviemap.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                string path = model.PicturePath;
+
+                if (model.PictureFile != null)
+                {
+                    path = await _imageHelper.UploadImageAsync(model.PictureFile, "Users");
+                }
                 UserEntity user = await _userHelper.GetUserByEmailAsync(User.Identity.Name);
                 user.Document = model.Document;
                 user.FirstName = model.FirstName;
                 user.LastName = model.LastName;
                 user.PhoneNumber = model.PhoneNumber;
+                user.PicturePath = path;
                 await _userHelper.UpdateUserAsync(user);
                 return RedirectToAction("Index", "Home");
             }

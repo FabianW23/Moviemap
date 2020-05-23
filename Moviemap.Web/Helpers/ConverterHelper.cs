@@ -295,6 +295,7 @@ namespace Moviemap.Web.Helpers
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 Document = user.Document,
+                PicturePath = user.PicturePath,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 UserType = user.UserType

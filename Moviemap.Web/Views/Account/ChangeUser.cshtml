@@ -9,9 +9,10 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="ChangeUser">
+        <form asp-action="ChangeUser" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="PicturePath" />
 
             <partial name="_User" />
 
@@ -20,6 +21,14 @@
                 <a asp-action="ChangePasswordMVC" class="btn btn-warning">Change Password</a>
             </div>
         </form>
+    </div>
+    <div class="col-md-4">
+        <div class="col-md-4">
+            @if (!string.IsNullOrEmpty(Model.PicturePath))
+            {
+                <img src="@Url.Content(Model.PicturePath)" alt="Image" style="width:200px;height:420px;max-width: 100%; height: auto; position: relative;" />
+            }
+        </div>
     </div>
 </div>
 
