@@ -26,6 +26,7 @@ namespace Moviemap.Prism.ViewModels
         private DelegateCommand _confirmReservationCommand;
         private List<ChairResponse> SelectedChairs;
         private RoomResponse _room;
+        private HourResponse _hour;
 
         private DelegateCommand _SelectChairCommand00;
         private DelegateCommand _SelectChairCommand10;
@@ -236,6 +237,12 @@ namespace Moviemap.Prism.ViewModels
         {
             get => _isRunning;
             set => SetProperty(ref _isRunning, value);
+        }
+
+        public HourResponse Hour
+        {
+            get => _hour;
+            set => SetProperty(ref _hour, value);
         }
 
         public RoomResponse Room
@@ -500,8 +507,8 @@ namespace Moviemap.Prism.ViewModels
             if (parameters.Count != 0)
             {
                 base.OnNavigatedTo(parameters);
-                var hour = parameters.GetValue<HourResponse>("hour");
-                LoadRoomAsync(hour);
+                Hour = parameters.GetValue<HourResponse>("hour");
+                LoadRoomAsync(Hour);
             }
         }
 
@@ -559,7 +566,7 @@ namespace Moviemap.Prism.ViewModels
                 DoReservationRequest request = new DoReservationRequest
                 {
                     UserId = Guid.Parse(user.Id),
-                    HourId = Room.Id,
+                    HourId = Hour.Id,
                     Chairs = SelectedChairs,
                     CultureInfo = Languages.Culture
                 };
@@ -575,7 +582,7 @@ namespace Moviemap.Prism.ViewModels
                     IsEnable = true;
                     return;
                 }
-                await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
+                await App.Current.MainPage.DisplayAlert("Succes", response.Message, Languages.Accept);
                 IsRunning = false;
                 IsEnable = true;
                 return;
@@ -591,18 +598,18 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair00Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 0 && c.RowLocation == 0);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair00 = "Blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 ChargeChairsChips();
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair00 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 ChargeChairsChips();
                 return;
@@ -612,18 +619,18 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair10Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 1 && c.RowLocation == 0);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair10 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 ChargeChairsChips();
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair10 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 ChargeChairsChips();
                 return;
@@ -633,17 +640,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair20Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 2 && c.RowLocation == 0);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair20 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair20 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 ChargeChairsChips();
                 return;
@@ -653,18 +660,18 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair30Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 3 && c.RowLocation == 0);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair30 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 ChargeChairsChips();
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair30 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 ChargeChairsChips();
                 return;
@@ -674,18 +681,18 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair40Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 4 && c.RowLocation == 0);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair40 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 ChargeChairsChips();
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair40 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 ChargeChairsChips();
                 return;
@@ -695,18 +702,18 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair50Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 5 && c.RowLocation == 0);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair50 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 ChargeChairsChips();
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair50 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 ChargeChairsChips();
                 return;
@@ -716,18 +723,18 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair60Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 6 && c.RowLocation == 0);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair60 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 ChargeChairsChips();
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair60 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 ChargeChairsChips();
                 return;
@@ -737,18 +744,18 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair70Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 7 && c.RowLocation == 0);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair70 = "Blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 ChargeChairsChips();
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair70 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 ChargeChairsChips();
                 return;
@@ -759,17 +766,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair01Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 0 && c.RowLocation == 1);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair01 = "Blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair01 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -778,17 +785,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair11Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 1 && c.RowLocation == 1);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair11 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair11 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -797,17 +804,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair21Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 2 && c.RowLocation == 1);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair21 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair21 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -816,17 +823,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair31Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 3 && c.RowLocation == 1);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair31 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair31 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -835,17 +842,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair41Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 4 && c.RowLocation == 1);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair41 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair41 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -854,17 +861,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair51Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 5 && c.RowLocation == 1);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair51 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair51 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -873,17 +880,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair61Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 6 && c.RowLocation == 1);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair61 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair61 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -892,17 +899,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair71Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 7 && c.RowLocation == 1);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair71 = "Blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair71 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -912,17 +919,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair02Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 0 && c.RowLocation == 2);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair02 = "Blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair02 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -931,17 +938,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair12Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 1 && c.RowLocation == 2);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair12 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair12 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -950,17 +957,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair22Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 2 && c.RowLocation == 2);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair22 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair22 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -969,17 +976,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair32Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 3 && c.RowLocation == 2);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair32 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair32 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -988,17 +995,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair42Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 4 && c.RowLocation == 2);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair42 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair42 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -1007,17 +1014,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair52Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 5 && c.RowLocation == 2);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair52 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair52 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -1026,17 +1033,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair62Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 6 && c.RowLocation == 2);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair62 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair62 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -1045,17 +1052,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair72Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 7 && c.RowLocation == 2);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair72 = "Blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair72 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -1065,17 +1072,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair03Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 0 && c.RowLocation == 3);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair03 = "Blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair03 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -1084,17 +1091,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair13Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 1 && c.RowLocation == 3);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair13 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair13 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -1103,17 +1110,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair23Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 2 && c.RowLocation == 3);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair23 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair23 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -1122,17 +1129,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair33Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 3 && c.RowLocation == 3);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair33 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair33 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -1141,17 +1148,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair43Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 4 && c.RowLocation == 3);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair43 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair43 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -1160,17 +1167,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair53Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 5 && c.RowLocation == 3);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair53 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair53 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -1179,17 +1186,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair63Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 6 && c.RowLocation == 3);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair63 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair63 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -1198,17 +1205,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair73Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 7 && c.RowLocation == 3);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair73 = "Blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair73 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -1218,17 +1225,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair04Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 0 && c.RowLocation == 4);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair04 = "Blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair04 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -1237,17 +1244,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair14Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 1 && c.RowLocation == 4);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair14 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair14 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -1256,17 +1263,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair24Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 2 && c.RowLocation == 4);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair24 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair24 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -1275,17 +1282,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair34Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 3 && c.RowLocation == 4);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair34 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair34 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -1294,17 +1301,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair44Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 4 && c.RowLocation == 4);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair44 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair44 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -1313,17 +1320,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair54Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 5 && c.RowLocation == 4);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair54 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair54 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -1332,17 +1339,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair64Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 6 && c.RowLocation == 4);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair64 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair64 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -1351,17 +1358,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair74Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 7 && c.RowLocation == 4);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair74 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair74 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -1370,17 +1377,17 @@ namespace Moviemap.Prism.ViewModels
         private async void SelectedChair84Async()
         {
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 8 && c.RowLocation == 4);
-            if (chair.ChairType == ChairType.Selected.ToString())
+            if (chair.ChairType == ChairType.Selected)
             {
                 Chair84 = "blue";
                 SelectedChairs.Remove(chair);
-                chair.ChairType = ChairType.Available.ToString();
+                chair.ChairType = ChairType.Available;
                 return;
             }
-            if (chair.ChairType == ChairType.Available.ToString() && await ChairsCount())
+            if (chair.ChairType == ChairType.Available && await ChairsCount())
             {
                 Chair84 = "Green";
-                chair.ChairType = ChairType.Selected.ToString();
+                chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
                 return;
             }
@@ -1407,7 +1414,7 @@ namespace Moviemap.Prism.ViewModels
             var chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 0 && c.RowLocation == 0);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair00 = "blue";
                 }
@@ -1419,7 +1426,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 1 && c.RowLocation == 0);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair10 = "blue";
                 }
@@ -1431,7 +1438,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 2 && c.RowLocation == 0);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair20 = "blue";
                 }
@@ -1443,7 +1450,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 3 && c.RowLocation == 0);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair30 = "blue";
                 }
@@ -1455,7 +1462,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 4 && c.RowLocation == 0);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair40 = "blue";
                 }
@@ -1467,7 +1474,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 5 && c.RowLocation == 0);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair50 = "blue";
                 }
@@ -1479,7 +1486,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 6 && c.RowLocation == 0);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair60 = "blue";
                 }
@@ -1491,7 +1498,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 7 && c.RowLocation == 0);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair70 = "blue";
                 }
@@ -1506,7 +1513,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 0 && c.RowLocation == 1);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair01 = "blue";
                 }
@@ -1518,7 +1525,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 1 && c.RowLocation == 1);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair11 = "blue";
                 }
@@ -1530,7 +1537,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 2 && c.RowLocation == 1);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair21 = "blue";
                 }
@@ -1542,7 +1549,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 3 && c.RowLocation == 1);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair31 = "blue";
                 }
@@ -1554,7 +1561,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 4 && c.RowLocation == 1);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair41 = "blue";
                 }
@@ -1566,7 +1573,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 5 && c.RowLocation == 1);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair51 = "blue";
                 }
@@ -1578,7 +1585,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 6 && c.RowLocation == 1);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair61 = "blue";
                 }
@@ -1590,7 +1597,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 7 && c.RowLocation == 1);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair71 = "blue";
                 }
@@ -1605,7 +1612,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 0 && c.RowLocation == 2);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair02 = "blue";
                 }
@@ -1617,7 +1624,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 1 && c.RowLocation == 2);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair12 = "blue";
                 }
@@ -1629,7 +1636,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 2 && c.RowLocation == 2);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair22 = "blue";
                 }
@@ -1641,7 +1648,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 3 && c.RowLocation == 2);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair32 = "blue";
                 }
@@ -1653,7 +1660,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 4 && c.RowLocation == 2);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair42 = "blue";
                 }
@@ -1665,7 +1672,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 5 && c.RowLocation == 2);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair52 = "blue";
                 }
@@ -1677,7 +1684,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 6 && c.RowLocation == 2);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair62 = "blue";
                 }
@@ -1689,7 +1696,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 7 && c.RowLocation == 2);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair72 = "blue";
                 }
@@ -1704,7 +1711,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 0 && c.RowLocation == 3);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair03 = "blue";
                 }
@@ -1716,7 +1723,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 1 && c.RowLocation == 3);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair13 = "blue";
                 }
@@ -1728,7 +1735,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 2 && c.RowLocation == 3);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair23 = "blue";
                 }
@@ -1740,7 +1747,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 3 && c.RowLocation == 3);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair33 = "blue";
                 }
@@ -1752,7 +1759,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 4 && c.RowLocation == 3);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair43 = "blue";
                 }
@@ -1764,7 +1771,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 5 && c.RowLocation == 3);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair53 = "blue";
                 }
@@ -1776,7 +1783,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 6 && c.RowLocation == 3);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair63 = "blue";
                 }
@@ -1788,7 +1795,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 7 && c.RowLocation == 3);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair73 = "blue";
                 }
@@ -1803,7 +1810,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 0 && c.RowLocation == 4);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair04 = "blue";
                 }
@@ -1815,7 +1822,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 1 && c.RowLocation == 4);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair14 = "blue";
                 }
@@ -1827,7 +1834,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 2 && c.RowLocation == 4);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair24 = "blue";
                 }
@@ -1839,7 +1846,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 3 && c.RowLocation == 4);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair34 = "blue";
                 }
@@ -1851,7 +1858,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 4 && c.RowLocation == 4);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair44 = "blue";
                 }
@@ -1863,7 +1870,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 5 && c.RowLocation == 4);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair54 = "blue";
                 }
@@ -1875,7 +1882,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 6 && c.RowLocation == 4);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair64 = "blue";
                 }
@@ -1887,7 +1894,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 7 && c.RowLocation == 4);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair74 = "blue";
                 }
@@ -1899,7 +1906,7 @@ namespace Moviemap.Prism.ViewModels
             chair = Room.Chairs.FirstOrDefault(c => c.ColumnLocation == 8 && c.RowLocation == 4);
             if (chair != null)
             {
-                if (chair.ChairType == ChairType.Available.ToString())
+                if (chair.ChairType == ChairType.Available)
                 {
                     Chair84 = "blue";
                 }

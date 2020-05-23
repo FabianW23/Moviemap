@@ -5,6 +5,7 @@ using Moviemap.Web.Data;
 using Moviemap.Web.Data.Entities;
 using Moviemap.Web.Helpers;
 using Moviemap.Web.Models;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -61,6 +62,8 @@ namespace Moviemap.Web.Controllers
             RoomEntity roomEntity = await _context.Rooms.FindAsync(id);
             HourViewModel hourViewModel = new HourViewModel
             {
+                StartDate = DateTime.Now.Date,
+                EndDate = DateTime.Now.Date,
                 RoomId = roomEntity.Id,
                 Movies = _combosHelper.GetComboMovies()
             };

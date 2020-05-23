@@ -37,7 +37,7 @@ namespace Moviemap.Prism.Views
             foreach (CinemaResponse cinema in cinemas)
             {
                 Position position = new Position((double)cinema.Latitude, (double)cinema.Longitude);
-                AddPin(position, cinema.Name, cinema.Name, PinType.Generic);
+                AddPin(position, cinema.Brand.Name, cinema.Name, PinType.Generic);
             }
         }
 

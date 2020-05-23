@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Moviemap.Common.Emuns;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,7 +15,7 @@ namespace Moviemap.Common.Models
 
         public int RowLocation { get; set; }
 
-        public string ChairType { get; set; }
+        public ChairType ChairType { get; set; }
 
     }
 }

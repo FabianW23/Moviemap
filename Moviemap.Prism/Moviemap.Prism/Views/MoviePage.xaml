@@ -12,12 +12,10 @@
 
     <ScrollView>
         <StackLayout Padding="8">
-            
 
-            <WebView Source="https://www.youtube.com/embed/ybji16u608U"
+            <WebView Source="{Binding Movie.TrailerUrl}"
                      HeightRequest="200"
                      WidthRequest="360"/>
-
 
             <Label Text="{i18n:Translate Synopsis}"
                    FontSize="Subtitle"
@@ -36,8 +34,8 @@
                                  HeightRequest="180"
                                  WidthRequest="200"/>
 
-
-            <ScrollView Orientation="Vertical" Margin="0">
+            <ScrollView Orientation="Vertical"
+                        Margin="0">
                 <buttons:SfChipGroup  VerticalOptions="Center"
                                       HorizontalOptions="Center"
                                       ItemsSource="{Binding MHours}"

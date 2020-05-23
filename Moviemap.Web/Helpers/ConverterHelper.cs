@@ -80,6 +80,7 @@ namespace Moviemap.Web.Helpers
                 LogoPath = path,
                 Name = model.Name,
                 Description = model.Description,
+                TrailerUrl = model.TrailerUrl,
                 Duration = model.Duration
             };
         }
@@ -92,6 +93,7 @@ namespace Moviemap.Web.Helpers
                 LogoPath = movieEntity.LogoPath,
                 Name = movieEntity.Name,
                 Description = movieEntity.Description,
+                TrailerUrl = movieEntity.TrailerUrl,
                 Duration = movieEntity.Duration
             };
         }
@@ -159,6 +161,7 @@ namespace Moviemap.Web.Helpers
                 Id = model.Id,
                 Name = model.Name,
                 Description = model.Description,
+                TrailerUrl = model.TrailerUrl,
                 Duration = model.Duration,
                 LogoPath = model.LogoPath
             };
@@ -171,6 +174,7 @@ namespace Moviemap.Web.Helpers
                 Id = model.Id,
                 Name = model.Name,
                 Description = model.Description,
+                TrailerUrl = model.TrailerUrl,
                 Duration = model.Duration,
                 LogoPath = model.LogoPath,
                 Hours = model.Hours.Select(h => new HourResponse
@@ -180,7 +184,7 @@ namespace Moviemap.Web.Helpers
                     EndDate = h.EndDate,
                     TicketPrice = h.TicketPrice,
                     Room = ToRoomResponse(h.Room)
-                }).Where(h => h.Room.Cinema.Id == cinemaId)
+                }).Where(h => h.Room.Cinema.Id == cinemaId && h.IsAvalible == false)
                 .ToList()
             };
         }

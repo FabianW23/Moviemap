@@ -31,6 +31,7 @@ namespace Moviemap.Web.Controllers
                 .ThenInclude(h => h.Movie)
                 .Include(r => r.Hour)
                 .ThenInclude(h => h.Room)
+                .Where(r => r.Hour.Room.Cinema.User.Email == User.Identity.Name)
                 .ToListAsync();
             foreach (ReservationEntity reservation1 in reservation)
             {

@@ -55,6 +55,15 @@ namespace Moviemap.Common.Services
                 string url = $"{servicePrefix}{controller}";
                 HttpResponseMessage response = await client.PostAsync(url, content);
                 string answer = await response.Content.ReadAsStringAsync();
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = answer
+                    };
+                }
+
                 Response obj = JsonConvert.DeserializeObject<Response>(answer);
                 return obj;
             }

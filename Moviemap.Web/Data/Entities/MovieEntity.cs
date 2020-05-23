@@ -17,6 +17,10 @@ namespace Moviemap.Web.Data.Entities
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         public string Description { get; set; }
 
+        [Display(Name = "Trailer URL")]
+        [Required(ErrorMessage = "The field {0} is mandatory.")]
+        public string TrailerUrl { get; set; }
+
         [Display(Name = "Logo")]
         public string LogoPath { get; set; }
 

@@ -91,8 +91,11 @@ namespace Moviemap.Web.Controllers.API
             {
                 return BadRequest(Resource.UserDoesntExists);
             }
-            var reservation = _context.Reservations.Include(r => r.User).Where(r => r.User.Id == user.Id);
-            if(reservation != null)
+            List<ReservationEntity> reservation = await _context.Reservations
+                .Include(r => r.User)
+                .Where(r => r.User.Id == user.Id && r.Hour.Id == request.HourId)
+                .ToListAsync();
+            if(reservation.Count != 0)
             {
                 return BadRequest(Resource.UserHaveAReservationForThisHour);
             }

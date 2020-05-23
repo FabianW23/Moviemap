@@ -24,6 +24,11 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="TrailerUrl" class="control-label"></label>
+                <input asp-for="TrailerUrl" class="form-control" />
+                <span asp-validation-for="TrailerUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Duration" class="control-label"></label>
                 <input asp-for="Duration" class="form-control" />
                 <span asp-validation-for="Duration" class="text-danger"></span>
@@ -39,11 +44,14 @@
             </div>
         </form>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-10">
         @if (!string.IsNullOrEmpty(Model.LogoPath))
         {
-            <img src="@Url.Content(Model.LogoPath)" alt="Image" style="width:200px;height:100px;max-width: 100%; height: auto;" />
+            <img src="@Url.Content(Model.LogoPath)" alt="Image" style="width:200px;height:420px;max-width: 100%; height: auto; position: relative;" />
         }
+        <iframe width="420" height="315" style="position: absolute;right: 300px;"
+                src="@Url.Content(Model.TrailerUrl)">
+        </iframe>
     </div>
 </div>
 

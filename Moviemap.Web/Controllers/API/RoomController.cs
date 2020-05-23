@@ -47,7 +47,7 @@ namespace Moviemap.Web.Controllers.API
                 {
                     if (chair.Name == entity.Name)
                     {
-                        entity.ChairType = ChairType.NotAvailable.ToString();
+                        entity.ChairType = ChairType.NotAvailable;
                     }
                     
                 }

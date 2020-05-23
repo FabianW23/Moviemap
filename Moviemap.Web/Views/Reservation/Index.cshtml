@@ -17,9 +17,6 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.QrCode)
-                            </th>
-                            <th>
                                 Movie
                             </th>
                             <th>
@@ -41,9 +38,6 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.QrCode)
-                                </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Hour.Movie.Name)
                                 </td>

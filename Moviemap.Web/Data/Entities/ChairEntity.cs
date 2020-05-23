@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Moviemap.Common.Emuns;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace Moviemap.Web.Data.Entities
         public int RowLocation { get; set; }
 
         [Required(ErrorMessage = "The field {0} is mandatory.")]
-        public string ChairType { get; set; }
+        public ChairType ChairType { get; set; }
 
         public RoomEntity Room { get; set; }
 

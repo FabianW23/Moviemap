@@ -12,6 +12,8 @@ namespace Moviemap.Common.Models
 
         public string Description { get; set; }
 
+        public string TrailerUrl { get; set; }
+
         public string LogoPath { get; set; }
 
         public string LogoFullPath => string.IsNullOrEmpty(LogoPath)

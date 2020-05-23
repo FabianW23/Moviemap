@@ -100,6 +100,7 @@ namespace Moviemap.Prism.ViewModels
                 Description = m.Description,
                 LogoPath = m.LogoPath,
                 Duration = m.Duration,
+                TrailerUrl = m.TrailerUrl,
                 Name = m.Name,
                 Hours = m.Hours
             }).ToList();
