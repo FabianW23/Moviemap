@@ -19,6 +19,7 @@ namespace Moviemap.Prism.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
         private UserResponse _user;
+        private string _picture;
         public MoviemapMasterDetailPageViewModel(INavigationService navigationService, IApiService apiService)
             : base(navigationService)
         {
@@ -40,6 +41,12 @@ namespace Moviemap.Prism.ViewModels
             set => SetProperty(ref _user, value);
         }
 
+        public string Picture
+        {
+            get => _picture;
+            set => SetProperty(ref _picture, value);
+        }
+
         public ObservableCollection<MenuItemViewModel> Menus { get; set; }
 
         private void LoadUser()
@@ -47,6 +54,11 @@ namespace Moviemap.Prism.ViewModels
             if (Settings.IsLogin)
             {
                 User = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
+                Picture = User.PictureFullPath;
+            }
+            else
+            {
+                Picture = "IconApp";
             }
         }
 

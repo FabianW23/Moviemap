@@ -2,6 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
              xmlns:i18n="clr-namespace:Moviemap.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
@@ -12,6 +15,21 @@
         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
                      AbsoluteLayout.LayoutFlags="All"
                      Padding="5">
+
+            <ffimageloading:CachedImage Aspect="AspectFit"
+                                                Source="{Binding Image}" 
+                                                CacheDuration= "50"
+                                                HeightRequest="150"
+                                                Margin="5"
+                                                RetryCount= "3"
+                                                RetryDelay= "600">
+                <ffimageloading:CachedImage.Transformations>
+                    <fftransformations:CircleTransformation />
+                </ffimageloading:CachedImage.Transformations>
+                <ffimageloading:CachedImage.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
+                </ffimageloading:CachedImage.GestureRecognizers>
+            </ffimageloading:CachedImage>
             <ScrollView>
                 <StackLayout>
 
@@ -40,12 +58,12 @@
                         <Entry Text="{Binding User.Email}"/>
                     </inputLayout:SfTextInputLayout>
 
-                    <!--<inputLayout:SfTextInputLayout HorizontalOptions="StartAndExpand"
+                    <inputLayout:SfTextInputLayout HorizontalOptions="StartAndExpand"
                                                    Hint="{i18n:Translate Phone}"
                                                    HelperText="{i18n:Translate PhonePlaceHolder}">
-                        <Entry Text="{Binding User.Phone}"
+                        <Entry Text="{Binding User.PhoneNumber}"
                                Keyboard="Telephone"/>
-                    </inputLayout:SfTextInputLayout>-->
+                    </inputLayout:SfTextInputLayout>
 
                     <inputLayout:SfTextInputLayout HorizontalOptions="StartAndExpand"
                                                    Hint="{i18n:Translate Password}"
@@ -68,7 +86,7 @@
                     Text="{i18n:Translate Register}"
                     VerticalOptions="EndAndExpand"/>
         </StackLayout>
-        <!--<busyindicator:SfBusyIndicator AnimationType="DoubleCircle" 
+        <busyindicator:SfBusyIndicator AnimationType="DoubleCircle" 
                                        AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
                 	                   AbsoluteLayout.LayoutFlags="All"
                 	                   HorizontalOptions="Center"
@@ -76,6 +94,6 @@
                 	                   IsVisible="{Binding IsRunning}"
                 	                   VerticalOptions="Center"
                 	                   ViewBoxWidth="120"
-                	                   ViewBoxHeight="120"/>-->
+                	                   ViewBoxHeight="120"/>
     </AbsoluteLayout>
 </ContentPage>

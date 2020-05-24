@@ -17,6 +17,9 @@ namespace Moviemap.Common.Models
         public string LastName { get; set; }
 
         [Required]
+        public string PhoneNumber { get; set; }
+
+        [Required]
         public string Email { get; set; }
 
         [Required]
@@ -27,5 +30,7 @@ namespace Moviemap.Common.Models
 
         [Required]
         public string CultureInfo { get; set; }
+
+        public byte[] PictureArray { get; set; }
     }
 }

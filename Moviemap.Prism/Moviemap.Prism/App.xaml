@@ -7,6 +7,7 @@
 
         <ResourceDictionary>
             <x:String x:Key="UrlAPI">https://moviemapweb.azurewebsites.net/</x:String>
+            <x:String x:Key="UrlNoImage">https://SoccerWeb0.azurewebsites.net/images/noimage.png</x:String>
         </ResourceDictionary>
 
         <!-- Colors -->

@@ -7,6 +7,7 @@ using Prism;
 using Prism.Ioc;
 using Xamarin.Forms;
 using Syncfusion.SfBusyIndicator.XForms.Droid;
+using Android.Runtime;
 
 namespace Moviemap.Prism.Droid
 {
@@ -28,11 +29,12 @@ namespace Moviemap.Prism.Droid
             LoadApplication(new App(new AndroidInitializer()));
         }
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
 
     }
 

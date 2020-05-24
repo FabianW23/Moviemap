@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
            	 xmlns:i18n="clr-namespace:Moviemap.Prism.Helpers"
@@ -16,7 +18,23 @@
                      AbsoluteLayout.LayoutFlags="All"
                      Padding="5">
             <ScrollView>
+                
                 <StackLayout>
+
+                    <ffimageloading:CachedImage Aspect="AspectFit"
+                                                Source="{Binding Image}" 
+                                                CacheDuration= "50"
+                                                HeightRequest="150"
+                                                Margin="5"
+                                                RetryCount= "3"
+                                                RetryDelay= "600">
+                        <ffimageloading:CachedImage.Transformations>
+                            <fftransformations:CircleTransformation />
+                        </ffimageloading:CachedImage.Transformations>
+                        <ffimageloading:CachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
+                        </ffimageloading:CachedImage.GestureRecognizers>
+                    </ffimageloading:CachedImage>
 
                     <inputLayout:SfTextInputLayout HorizontalOptions="StartAndExpand"
                                                    Hint="{i18n:Translate Document}"
@@ -35,6 +53,13 @@
                                                    Hint="{i18n:Translate LastName}"
                                                    HelperText="{i18n:Translate LastNamePlaceHolder}">
                         <Entry Text="{Binding User.LastName}"/>
+                    </inputLayout:SfTextInputLayout>
+
+                    <inputLayout:SfTextInputLayout HorizontalOptions="StartAndExpand"
+                                                   Hint="{i18n:Translate Phone}"
+                                                   HelperText="{i18n:Translate PhonePlaceHolder}">
+                        <Entry Text="{Binding User.PhoneNumber}"
+                               Keyboard="Telephone"/>
                     </inputLayout:SfTextInputLayout>
 
                 </StackLayout>

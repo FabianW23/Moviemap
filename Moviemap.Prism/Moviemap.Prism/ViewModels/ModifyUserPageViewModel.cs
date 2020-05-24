@@ -4,6 +4,8 @@ using Moviemap.Common.Services;
 using Moviemap.Prism.Helpers;
 using Moviemap.Prism.Views;
 using Newtonsoft.Json;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -11,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Moviemap.Prism.ViewModels
 {
@@ -18,21 +21,27 @@ namespace Moviemap.Prism.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
+        private readonly IFilesHelper _filesHelper;
         private bool _isRunning;
         private bool _isEnabled;
+        private ImageSource _image;
+        private MediaFile _file;
         private UserResponse _user;
         private DelegateCommand _saveCommand;
         private DelegateCommand _changePasswordCommand;
+        private DelegateCommand _changeImageCommand;
 
-        public ModifyUserPageViewModel(INavigationService navigationService, IApiService apiService)
+        public ModifyUserPageViewModel(INavigationService navigationService, IApiService apiService, IFilesHelper filesHelper)
            : base(navigationService)
         {
             _navigationService = navigationService;
             _apiService = apiService;
+            _filesHelper = filesHelper;
             Title = Languages.ModifyUserMenu;
             IsEnabled = true;
             validateLogIn();
             User = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
+            Image = User.PictureFullPath;
         }
 
         private async void validateLogIn()
@@ -47,10 +56,18 @@ namespace Moviemap.Prism.ViewModels
         public DelegateCommand SaveCommand => _saveCommand ?? (_saveCommand = new DelegateCommand(SaveAsync));
 
         public DelegateCommand ChangePasswordCommand => _changePasswordCommand ?? (_changePasswordCommand = new DelegateCommand(ChangePasswordAsync));
+       
+        public DelegateCommand ChangeImageCommand => _changeImageCommand ?? (_changeImageCommand = new DelegateCommand(ChangeImageAsync));
 
         private async void ChangePasswordAsync()
         {
             await _navigationService.NavigateAsync(nameof(ChangePasswordPage));
+        }
+
+        public ImageSource Image
+        {
+            get => _image;
+            set => SetProperty(ref _image, value);
         }
 
         public UserResponse User
@@ -71,6 +88,49 @@ namespace Moviemap.Prism.ViewModels
             set => SetProperty(ref _isEnabled, value);
         }
 
+        private async void ChangeImageAsync()
+        {
+            await CrossMedia.Current.Initialize();
+
+            string source = await Application.Current.MainPage.DisplayActionSheet(
+                Languages.PictureSource,
+                Languages.Cancel,
+                null,
+                Languages.FromGallery,
+                Languages.FromCamera);
+
+            if (source == Languages.Cancel)
+            {
+                _file = null;
+                return;
+            }
+
+            if (source == Languages.FromCamera)
+            {
+                _file = await CrossMedia.Current.TakePhotoAsync(
+                    new StoreCameraMediaOptions
+                    {
+                        Directory = "Sample",
+                        Name = "test.jpg",
+                        PhotoSize = PhotoSize.Small,
+                    }
+                );
+            }
+            else
+            {
+                _file = await CrossMedia.Current.PickPhotoAsync();
+            }
+
+            if (_file != null)
+            {
+                Image = ImageSource.FromStream(() =>
+                {
+                    System.IO.Stream stream = _file.GetStream();
+                    return stream;
+                });
+            }
+        }
+
         private async void SaveAsync()
         {
             var isValid = await ValidateDataAsync();
@@ -80,12 +140,20 @@ namespace Moviemap.Prism.ViewModels
             }
             IsRunning = true;
 
+            byte[] imageArray = null;
+            if (_file != null)
+            {
+                imageArray = _filesHelper.ReadFully(_file.GetStream());
+            }
+
             UserRequest userRequest = new UserRequest
             {
                 Document = User.Document,
                 Email = User.Email,
                 FirstName = User.FirstName,
                 LastName = User.LastName,
+                PhoneNumber = User.PhoneNumber,
+                PictureArray = imageArray,
                 Password = "123456",
                 CultureInfo = Languages.Culture
             };

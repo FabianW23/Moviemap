@@ -327,4 +327,22 @@
   <data name="SelectADate" xml:space="preserve">
     <value>Datum auswählen</value>
   </data>
+  <data name="PictureSource" xml:space="preserve">
+    <value>Wo willst du das Bild machen ?!</value>
+  </data>
+  <data name="FromCamera" xml:space="preserve">
+    <value>Von Kamera</value>
+  </data>
+  <data name="FromGallery" xml:space="preserve">
+    <value>Aus Katalog</value>
+  </data>
+  <data name="PhoneError" xml:space="preserve">
+    <value>Sie müssen eine Telefonnummer eingeben</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="PhonePlaceHolder" xml:space="preserve">
+    <value>Sie müssen eine Telefonnummer eingeben</value>
+  </data>
 </root>

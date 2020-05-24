@@ -219,6 +219,12 @@
   <data name="UserUpdated" xml:space="preserve">
     <value>User updated successfully</value>
   </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="PhonePlaceHolder" xml:space="preserve">
+    <value>You must enter a phone.</value>
+  </data>
   <data name="ConfirmNewPassword" xml:space="preserve">
     <value>Confirm new password</value>
   </data>
@@ -326,5 +332,17 @@
   </data>
   <data name="SelectADate" xml:space="preserve">
     <value>Select a date</value>
+  </data>
+  <data name="PictureSource" xml:space="preserve">
+    <value>Where do you want to take the picture ?</value>
+  </data>
+  <data name="FromCamera" xml:space="preserve">
+    <value>From Camera</value>
+  </data>
+  <data name="FromGallery" xml:space="preserve">
+    <value>From Gallery</value>
+  </data>
+  <data name="PhoneError" xml:space="preserve">
+    <value>You must enter a phone number</value>
   </data>
 </root>

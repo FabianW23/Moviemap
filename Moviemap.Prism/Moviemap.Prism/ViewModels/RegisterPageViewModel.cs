@@ -2,6 +2,8 @@
 using Moviemap.Common.Models;
 using Moviemap.Common.Services;
 using Moviemap.Prism.Helpers;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -9,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Moviemap.Prism.ViewModels
 {
@@ -17,25 +20,40 @@ namespace Moviemap.Prism.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IRegexHelper _regexHelper;
         private readonly IApiService _apiService;
+        private readonly IFilesHelper _filesHelper;
+        private ImageSource _image;
         private UserRequest _user;
         private bool _isRunning;
         private bool _isEnabled;
+        private MediaFile _file;
+        private DelegateCommand _changeImageCommand;
         private DelegateCommand _registerCommand;
 
         public RegisterPageViewModel(
             INavigationService navigationService,
             IRegexHelper regexHelper,
-            IApiService apiService) : base(navigationService)
+            IApiService apiService,
+            IFilesHelper filesHelper) : base(navigationService)
         {
             _navigationService = navigationService;
             _regexHelper = regexHelper;
             _apiService = apiService;
+            _filesHelper = filesHelper;
             Title = Languages.Register;
+            Image = App.Current.Resources["UrlNoImage"].ToString();
             IsEnabled = true;
             User = new UserRequest();
         }
 
         public DelegateCommand RegisterCommand => _registerCommand ?? (_registerCommand = new DelegateCommand(RegisterAsync));
+
+        public DelegateCommand ChangeImageCommand => _changeImageCommand ?? (_changeImageCommand = new DelegateCommand(ChangeImageAsync));
+
+        public ImageSource Image
+        {
+            get => _image;
+            set => SetProperty(ref _image, value);
+        }
 
         public UserRequest User
         {
@@ -53,6 +71,49 @@ namespace Moviemap.Prism.ViewModels
         {
             get => _isEnabled;
             set => SetProperty(ref _isEnabled, value);
+        }
+
+        private async void ChangeImageAsync()
+        {
+            await CrossMedia.Current.Initialize();
+
+            string source = await Application.Current.MainPage.DisplayActionSheet(
+                Languages.PictureSource,
+                Languages.Cancel,
+                null,
+                Languages.FromGallery,
+                Languages.FromCamera);
+
+            if (source == Languages.Cancel)
+            {
+                _file = null;
+                return;
+            }
+
+            if (source == Languages.FromCamera)
+            {
+                _file = await CrossMedia.Current.TakePhotoAsync(
+                    new StoreCameraMediaOptions
+                    {
+                        Directory = "Sample",
+                        Name = "test.jpg",
+                        PhotoSize = PhotoSize.Small,
+                    }
+                );
+            }
+            else
+            {
+                _file = await CrossMedia.Current.PickPhotoAsync();
+            }
+
+            if (_file != null)
+            {
+                Image = ImageSource.FromStream(() =>
+                {
+                    System.IO.Stream stream = _file.GetStream();
+                    return stream;
+                });
+            }
         }
 
         private async void RegisterAsync()
@@ -75,6 +136,13 @@ namespace Moviemap.Prism.ViewModels
                 return;
             }
 
+            byte[] imageArray = null;
+            if (_file != null)
+            {
+                imageArray = _filesHelper.ReadFully(_file.GetStream());
+            }
+
+            User.PictureArray = imageArray;
             User.CultureInfo = Languages.Culture;
 
             Response response = await _apiService.RegisterUserAsync(url, "/api", "/Account", User);
@@ -117,11 +185,11 @@ namespace Moviemap.Prism.ViewModels
                 return false;
             }
 
-            /*if (string.IsNullOrEmpty(User.Phone))
+            if (string.IsNullOrEmpty(User.PhoneNumber))
             {
                 await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.PhoneError, Languages.Accept);
                 return false;
-            }*/
+            }
 
             if (string.IsNullOrEmpty(User.Password) || User.Password?.Length < 6)
             {

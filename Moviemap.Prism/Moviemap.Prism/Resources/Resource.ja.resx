@@ -327,4 +327,22 @@
   <data name="SelectADate" xml:space="preserve">
     <value>日付の選択</value>
   </data>
+  <data name="PictureSource" xml:space="preserve">
+    <value>どこで撮りたい？！</value>
+  </data>
+  <data name="FromCamera" xml:space="preserve">
+    <value>カメラから</value>
+  </data>
+  <data name="FromGallery" xml:space="preserve">
+    <value>ギャラリーから</value>
+  </data>
+  <data name="PhoneError" xml:space="preserve">
+    <value>有効な電話番号を入力してください</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>電話</value>
+  </data>
+  <data name="PhonePlaceHolder" xml:space="preserve">
+    <value>電話を入力する必要があります。</value>
+  </data>
 </root>

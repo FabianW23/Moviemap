@@ -21,17 +21,20 @@ namespace Moviemap.Web.Controllers.API
         private readonly IUserHelper _userHelper;
         private readonly IEmailHelper _mailHelper;
         private readonly IConverterHelper _converterHelper;
+        private readonly IImageHelper _imageHelper;
 
         public AccountController(
             DataContext dataContext,
             IUserHelper userHelper,
             IEmailHelper mailHelper,
-            IConverterHelper converterHelper)
+            IConverterHelper converterHelper,
+            IImageHelper imageHelper)
         {
             _dataContext = dataContext;
             _userHelper = userHelper;
             _mailHelper = mailHelper;
             _converterHelper = converterHelper;
+            _imageHelper = imageHelper;
         }
 
         [HttpPost]
@@ -99,6 +102,12 @@ namespace Moviemap.Web.Controllers.API
                 });
             }
 
+            string picturePath = string.Empty;
+            if (request.PictureArray != null && request.PictureArray.Length > 0)
+            {
+                picturePath = _imageHelper.UploadImage(request.PictureArray, "Users");
+            }
+
             user = new UserEntity
             {
                 Document = request.Document,
@@ -106,6 +115,8 @@ namespace Moviemap.Web.Controllers.API
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 UserName = request.Email,
+                PhoneNumber = request.PhoneNumber,
+                PicturePath = picturePath,
                 UserType = UserType.User,
             };
 
@@ -153,9 +164,17 @@ namespace Moviemap.Web.Controllers.API
                 return BadRequest(Resource.UserDoesntExists);
             }
 
+            string picturePath = string.Empty;
+            if (request.PictureArray != null && request.PictureArray.Length > 0)
+            {
+                picturePath = _imageHelper.UploadImage(request.PictureArray, "Users");
+            }
+
             userEntity.FirstName = request.FirstName;
             userEntity.LastName = request.LastName;
             userEntity.Document = request.Document;
+            userEntity.PhoneNumber = request.PhoneNumber;
+            userEntity.PicturePath = picturePath;
 
             IdentityResult respose = await _userHelper.UpdateUserAsync(userEntity);
             if (!respose.Succeeded)

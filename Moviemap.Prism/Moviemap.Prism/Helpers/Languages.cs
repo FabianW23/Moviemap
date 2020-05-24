@@ -120,6 +120,12 @@ namespace Moviemap.Prism.Helpers
 
         public static string EmailError => Resource.EmailError;
 
+        public static string Phone => Resource.Phone;
+
+        public static string PhonePlaceHolder => Resource.PhonePlaceHolder;
+
+        public static string PhoneError => Resource.PhoneError;
+
         public static string Password => Resource.Password;
 
         public static string PasswordError => Resource.PasswordError;
@@ -151,5 +157,12 @@ namespace Moviemap.Prism.Helpers
         public static string DoAReservation => Resource.DoAReservation;
 
         public static string SelectADate => Resource.SelectADate;
+
+        public static string PictureSource => Resource.PictureSource;
+
+        public static string FromCamera => Resource.FromCamera;
+
+        public static string FromGallery => Resource.FromGallery;
+
     }
 }
