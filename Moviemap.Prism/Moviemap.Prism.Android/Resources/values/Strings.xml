@@ -2,4 +2,7 @@
 <resources>
 	<string name="hello">Hello World, Click Me!</string>
 	<string name="app_name">Moviemap.Prism.Droid</string>
+  <string name="facebook_app_name">Moviemap</string>
+  <string name="facebook_app_id">658702158313759</string>
+  <string name="fb_login_protocol_scheme">fb658702158313759</string>
 </resources>

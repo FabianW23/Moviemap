@@ -45,12 +45,14 @@
 
                     <inputLayout:SfTextInputLayout HorizontalOptions="StartAndExpand"
                                                    Hint="{i18n:Translate FirstName}"
+                                                   IsEnabled="{Binding IsMoviemappUser}"
                                                    HelperText="{i18n:Translate FirstNamePlaceHolder}">
                         <Entry Text="{Binding User.FirstName}"/>
                     </inputLayout:SfTextInputLayout>
 
                     <inputLayout:SfTextInputLayout HorizontalOptions="StartAndExpand"
                                                    Hint="{i18n:Translate LastName}"
+                                                   IsEnabled="{Binding IsMoviemappUser}"
                                                    HelperText="{i18n:Translate LastNamePlaceHolder}">
                         <Entry Text="{Binding User.LastName}"/>
                     </inputLayout:SfTextInputLayout>

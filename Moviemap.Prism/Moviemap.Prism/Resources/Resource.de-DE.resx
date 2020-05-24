@@ -345,4 +345,10 @@
   <data name="PhonePlaceHolder" xml:space="preserve">
     <value>Sie müssen eine Telefonnummer eingeben</value>
   </data>
+  <data name="LoginFacebook" xml:space="preserve">
+    <value>Mit Facebook anmelden</value>
+  </data>
+  <data name="ChangePhotoNoSoccerUser" xml:space="preserve">
+    <value>Benutzer, die von sozialen Netzwerken erstellt wurden, müssen das Foto oder Passwort im sozialen Netzwerk ändern.!</value>
+  </data>
 </root>

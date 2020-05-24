@@ -11,6 +11,12 @@ using Moviemap.Web.Data;
 using Moviemap.Web.Data.Entities;
 using Moviemap.Web.Helpers;
 using Moviemap.Web.Resources;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.Extensions.Configuration;
 
 namespace Moviemap.Web.Controllers.API
 {
@@ -22,19 +28,22 @@ namespace Moviemap.Web.Controllers.API
         private readonly IEmailHelper _mailHelper;
         private readonly IConverterHelper _converterHelper;
         private readonly IImageHelper _imageHelper;
+        private readonly IConfiguration _configuration;
 
         public AccountController(
             DataContext dataContext,
             IUserHelper userHelper,
             IEmailHelper mailHelper,
             IConverterHelper converterHelper,
-            IImageHelper imageHelper)
+            IImageHelper imageHelper,
+            IConfiguration configuration)
         {
             _dataContext = dataContext;
             _userHelper = userHelper;
             _mailHelper = mailHelper;
             _converterHelper = converterHelper;
             _imageHelper = imageHelper;
+            _configuration = configuration;
         }
 
         [HttpPost]
@@ -75,6 +84,56 @@ namespace Moviemap.Web.Controllers.API
                 Message = Resource.RecoverPasswordMessage
             });
         }
+
+        [HttpPost]
+        [Route("LoginFacebook")]
+        public async Task<IActionResult> LoginFacebook([FromBody] FacebookProfile model)
+        {
+            if (ModelState.IsValid)
+            {
+                UserEntity user = await _userHelper.GetUserAsync(model.Email);
+                if (user == null)
+                {
+                    await _userHelper.AddUserAsync(model);
+                }
+                else
+                {
+                    user.PicturePath = model.Picture.Data.Url;
+                    user.FirstName = model.FirstName;
+                    user.LastName = model.LastName;
+                    await _userHelper.UpdateUserAsync(user);
+                }
+
+                object results = GetToken(model.Email);
+                return Created(string.Empty, results);
+            }
+
+            return BadRequest();
+        }
+
+        private object GetToken(string email)
+        {
+            Claim[] claims = new[]
+            {
+        new Claim(JwtRegisteredClaimNames.Sub, email),
+        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+    };
+
+            SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Tokens:Key"]));
+            SigningCredentials credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            JwtSecurityToken token = new JwtSecurityToken(
+                _configuration["Tokens:Issuer"],
+                _configuration["Tokens:Audience"],
+                claims,
+                expires: DateTime.UtcNow.AddDays(15),
+                signingCredentials: credentials);
+            return new
+            {
+                token = new JwtSecurityTokenHandler().WriteToken(token),
+                expiration = token.ValidTo
+            };
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> PostUser([FromBody] UserRequest request)

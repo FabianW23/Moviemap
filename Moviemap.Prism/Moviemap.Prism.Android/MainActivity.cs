@@ -8,6 +8,8 @@ using Prism.Ioc;
 using Xamarin.Forms;
 using Syncfusion.SfBusyIndicator.XForms.Droid;
 using Android.Runtime;
+using Plugin.FacebookClient;
+using Android.Content;
 
 namespace Moviemap.Prism.Droid
 {
@@ -20,13 +22,19 @@ namespace Moviemap.Prism.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
-            
+            FacebookClientManager.Initialize(this);
             Forms.SetFlags("IndicatorView_Experimental");
             CrossCurrentActivity.Current.Init(this, bundle);
             global::Xamarin.Forms.Forms.Init(this, bundle);
             new SfBusyIndicatorRenderer();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
             LoadApplication(new App(new AndroidInitializer()));
+        }
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            FacebookClientManager.OnActivityResult(requestCode, resultCode, data);
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)

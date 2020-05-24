@@ -26,7 +26,7 @@ namespace Moviemap.Web.Data
             await _context.Database.EnsureCreatedAsync();
             await CheckRolesAsync();
             await CheckUserAsync("101010", "Fabian", "Morales", "fabian64.m.d@gmail.com", "304 395 0527", UserType.Admin);
-            await CheckUserAsync("202020", "Rocio", "Royal", "fabian.m.d@hotmail.com", "304 395 0527", UserType.CinemaAdmin);
+            await CheckUserAsync("202020", "Rocio", "Royal", "Procinal@yopmail.com", "304 395 0527", UserType.CinemaAdmin);
             await CheckUserAsync("202020", "Admin", "CinePolis", "Cinepolis@yopmail.com", "304 395 0527", UserType.CinemaAdmin);
             await CheckUserAsync("202020", "Admin", "CineCo", "CineCo@yopmail.com", "304 395 0527", UserType.CinemaAdmin);
             await CheckUserAsync("202020", "Admin", "CineMark", "CineMark@yopmail.com", "304 395 0527", UserType.CinemaAdmin);
@@ -65,7 +65,9 @@ namespace Moviemap.Web.Data
                     PhoneNumber = phone,
                     Document = document,
                     UserType = userType,
-                    UserName = email
+                    UserName = email,
+                    LoginType = LoginType.Moviemap
+
                 };
 
                 await _userHelper.AddUserAsync(user, "123456");
@@ -119,8 +121,8 @@ namespace Moviemap.Web.Data
         {
             if (!_context.Movies.Any())
             {
-                await AddCinema("Procinal Puerta de norte", await _userHelper.GetUserByEmailAsync("fabian.m.d@hotmail.com"), 6.339291372808369, -75.54296314716339, "Procinal");
-                await AddCinema("Procinal Mayorca", await _userHelper.GetUserByEmailAsync("fabian.m.d@hotmail.com"), 6.16057689, -75.60421944, "Procinal");
+                await AddCinema("Procinal Puerta de norte", await _userHelper.GetUserByEmailAsync("Procinal@yopmail.com"), 6.339291372808369, -75.54296314716339, "Procinal");
+                await AddCinema("Procinal Mayorca", await _userHelper.GetUserByEmailAsync("Procinal@yopmail.com"), 6.16057689, -75.60421944, "Procinal");
                 await AddCinema("CineMark El tesoro", await _userHelper.GetUserByEmailAsync("CineMark@yopmail.com"), 6.1967106, -75.558407, "CineMark");
                 await AddCinema("CinePolis City PLaza", await _userHelper.GetUserByEmailAsync("Cinepolis@yopmail.com"), 6.164436272194635, -75.57390339847838, "CinePolis");
                 await AddCinema("CineColombia Los Molinos", await _userHelper.GetUserByEmailAsync("CineCo@yopmail.com"), 6.231951196655828, -75.60426580959603, "CineColombia");

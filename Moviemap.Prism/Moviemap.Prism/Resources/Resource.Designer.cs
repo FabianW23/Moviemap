@@ -115,6 +115,15 @@ namespace Moviemap.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Users created by social networks, must change the photo or password on the social network..
+        /// </summary>
+        public static string ChangePhotoNoSoccerUser {
+            get {
+                return ResourceManager.GetString("ChangePhotoNoSoccerUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cinema.
         /// </summary>
         public static string Cinema {
@@ -435,6 +444,15 @@ namespace Moviemap.Prism.Resources {
         public static string LoginError {
             get {
                 return ResourceManager.GetString("LoginError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login with Facebook.
+        /// </summary>
+        public static string LoginFacebook {
+            get {
+                return ResourceManager.GetString("LoginFacebook", resourceCulture);
             }
         }
         

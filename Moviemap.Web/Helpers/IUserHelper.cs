@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Moviemap.Common.Emuns;
+using Moviemap.Common.Models;
 using Moviemap.Web.Data.Entities;
 using Moviemap.Web.Models;
 using System;
@@ -12,6 +13,8 @@ namespace Moviemap.Web.Helpers
     public interface IUserHelper
     {
         Task<UserEntity> AddUserAsync(AddUserViewModel model, UserType userType);
+
+        Task<UserEntity> AddUserAsync(FacebookProfile model);
 
         Task<IdentityResult> AddUserAsync(UserEntity user, string password);
 

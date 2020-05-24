@@ -26,6 +26,10 @@ namespace Moviemap.Prism.Helpers
 
         public static string LoginError => Resource.LoginError;
 
+        public static string LoginFacebook => Resource.LoginFacebook;
+
+        public static string ChangePhotoNoSoccerUser => Resource.ChangePhotoNoSoccerUser;
+
         public static string ConnectionError => Resource.ConnectionError;
 
         public static string LogOut => Resource.LogOut;

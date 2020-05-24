@@ -23,10 +23,12 @@ namespace Moviemap.Common.Models
 
         public UserType UserType { get; set; }
 
+        public LoginType LoginType { get; set; }
+
         public string FullName => $"{FirstName} {LastName}";
 
         public string PictureFullPath => string.IsNullOrEmpty(PicturePath)
             ? "https://moviemapweb.azurewebsites.net/images/NoImage.jpg"
-            : $"https://moviemapweb.azurewebsites.net{PicturePath.Substring(1)}";
+            : LoginType == LoginType.Moviemap ? $"https://moviemapweb.azurewebsites.net{PicturePath.Substring(1)}" : PicturePath;
     }
 }

@@ -1,4 +1,5 @@
-﻿using Moviemap.Common.Helpers;
+﻿using Moviemap.Common.Emuns;
+using Moviemap.Common.Helpers;
 using Moviemap.Common.Models;
 using Moviemap.Common.Services;
 using Moviemap.Prism.Helpers;
@@ -24,6 +25,7 @@ namespace Moviemap.Prism.ViewModels
         private readonly IFilesHelper _filesHelper;
         private bool _isRunning;
         private bool _isEnabled;
+        private bool _isMoviemappUser;
         private ImageSource _image;
         private MediaFile _file;
         private UserResponse _user;
@@ -41,6 +43,7 @@ namespace Moviemap.Prism.ViewModels
             IsEnabled = true;
             validateLogIn();
             User = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
+            IsMoviemappUser = User.LoginType == LoginType.Moviemap;
             Image = User.PictureFullPath;
         }
 
@@ -61,7 +64,18 @@ namespace Moviemap.Prism.ViewModels
 
         private async void ChangePasswordAsync()
         {
+            if (!IsMoviemappUser)
+            {
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ChangePhotoNoSoccerUser, Languages.Accept);
+                return;
+            }
             await _navigationService.NavigateAsync(nameof(ChangePasswordPage));
+        }
+
+        public bool IsMoviemappUser
+        {
+            get => _isMoviemappUser;
+            set => SetProperty(ref _isMoviemappUser, value);
         }
 
         public ImageSource Image
@@ -90,6 +104,12 @@ namespace Moviemap.Prism.ViewModels
 
         private async void ChangeImageAsync()
         {
+            if (!IsMoviemappUser)
+            {
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ChangePhotoNoSoccerUser, Languages.Accept);
+                return;
+            }
+
             await CrossMedia.Current.Initialize();
 
             string source = await Application.Current.MainPage.DisplayActionSheet(

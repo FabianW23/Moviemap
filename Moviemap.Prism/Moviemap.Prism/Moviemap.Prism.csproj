@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Plugin.FacebookClient" Version="2.2.1" />
     <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
     <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.1.0.53" />
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.1.0.53" />

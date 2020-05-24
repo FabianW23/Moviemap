@@ -298,7 +298,8 @@ namespace Moviemap.Web.Helpers
                 PicturePath = user.PicturePath,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                UserType = user.UserType
+                UserType = user.UserType,
+                LoginType = user.LoginType
             };
         }
 
