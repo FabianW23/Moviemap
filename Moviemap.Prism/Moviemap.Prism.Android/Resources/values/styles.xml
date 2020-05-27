@@ -27,4 +27,10 @@
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
     <item name="colorAccent">#F20505</item>
   </style>
+
+  <style name="Theme.Splash" parent="android:Theme">
+    <item name="android:windowBackground">@drawable/Moviemap_splash</item>
+    <item name="android:windowNoTitle">true</item>
+  </style>
+
 </resources>

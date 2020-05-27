@@ -55,7 +55,7 @@ namespace Moviemap.Web.Controllers.API
             RoomResponse room = _converterHelper.ToRoomResponse(roomChairs);
             if (room == null)
             {
-                return BadRequest(Resource.UserWithOutTrips);
+                return BadRequest(Resource.WithOutDatasAvaliables);
             }
             else
             {

@@ -7,14 +7,25 @@
 <h2>Details</h2>
 
 <div>
-    <h4>ReservationEntity</h4>
     <hr />
+    <div>
+        @if (!string.IsNullOrEmpty(Model.Hour.Movie.LogoPath))
+        {
+            <img src="@Url.Content(Model.Hour.Movie.LogoPath)" alt="Image" style="width:200px;height:420px;max-width: 100%; height: auto; position: relative;" />
+        }
+    </div>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.QrCode)
+            @Html.DisplayNameFor(model => model.Hour.StartDate)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.QrCode)
+            @Html.DisplayFor(model => model.Hour.StartDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.FullName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.FullName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Status)
@@ -23,10 +34,25 @@
             @Html.DisplayFor(model => model.Status)
         </dd>
         <dt>
+            Chairs
+        </dt>
+        <dd>
+            @foreach (var chair in Model.ReservationChairs)
+            {
+                @Html.DisplayFor(modelItem => chair.Chair.Name)
+            }
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Total)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Total)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hour.Room.Cinema.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hour.Room.Cinema.Name)
         </dd>
     </dl>
 </div>

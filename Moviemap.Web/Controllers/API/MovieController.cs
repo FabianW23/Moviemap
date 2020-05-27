@@ -37,12 +37,12 @@ namespace Moviemap.Web.Controllers.API
                 .ToListAsync();
             if (movies.Count == 0)
             {
-                return BadRequest(Resource.UserWithOutTrips);
+                return BadRequest(Resource.WithOutDatasAvaliables);
             }
             List<MovieResponse> movieResponse = _converterHelper.ToMovieResponse(movies, request.CinemaId);
             if (movieResponse.Count == 0)
             {
-                return BadRequest(Resource.UserWithOutTrips);
+                return BadRequest(Resource.WithOutDatasAvaliables);
             }
             else
             {

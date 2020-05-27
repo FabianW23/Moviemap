@@ -49,7 +49,7 @@
                                    FontSize="Medium"
                                    LineBreakMode="TailTruncation" />
 
-                                    <Label Text="{Binding Hour.StartDateLocal, StringFormat='{0:yyyy/MM/dd HH:mm tt}'}"
+                                    <Label Text="{Binding Hour.StartDate, StringFormat='{0:yyyy/MM/dd HH:mm tt}'}"
                                    LineBreakMode="TailTruncation"
                                    FontAttributes="Italic" 
                                    VerticalOptions="End" />

@@ -22,6 +22,8 @@ namespace Moviemap.Prism.Helpers
 
         public static string Error => Resource.Error;
 
+        public static string Successful => Resource.Successful;
+
         public static string Accept => Resource.Accept;
 
         public static string LoginError => Resource.LoginError;
@@ -168,5 +170,10 @@ namespace Moviemap.Prism.Helpers
 
         public static string FromGallery => Resource.FromGallery;
 
+        public static string TotalValue => Resource.TotalValue;
+
+        public static string SelectedChairs => Resource.SelectedChairs;
+
+        public static string ConfirmReservation => Resource.ConfirmReservation;
     }
 }

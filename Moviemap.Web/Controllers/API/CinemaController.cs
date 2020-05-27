@@ -36,7 +36,7 @@ namespace Moviemap.Web.Controllers.API
                 .ToListAsync();
             if (cinemas.Count == 0)
             {
-                return BadRequest(Resource.UserWithOutTrips);
+                return BadRequest(Resource.WithOutCinemasAvaliables);
             }
             else
             {

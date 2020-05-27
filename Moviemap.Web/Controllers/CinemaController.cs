@@ -28,7 +28,10 @@ namespace Moviemap.Web.Controllers
         [Authorize(Roles = "CinemaAdmin,Admin")]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Cinemas.Include(c => c.User).ToListAsync());
+            return View(await _context.Cinemas
+                .Include(c => c.User)
+                .Where(c => c.User.Email == User.Identity.Name)
+                .ToListAsync());
         }
 
         [Authorize(Roles = "CinemaAdmin,Admin")]

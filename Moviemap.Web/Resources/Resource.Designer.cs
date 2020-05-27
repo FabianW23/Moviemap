@@ -178,11 +178,29 @@ namespace Moviemap.Web.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User doesn&apos;t have trips.
+        ///   Looks up a localized string similar to User doesn&apos;t have reservations.
         /// </summary>
-        public static string UserWithOutTrips {
+        public static string UserWithOutReservations {
             get {
-                return ResourceManager.GetString("UserWithOutTrips", resourceCulture);
+                return ResourceManager.GetString("UserWithOutReservations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Without cinemas avaliables.
+        /// </summary>
+        public static string WithOutCinemasAvaliables {
+            get {
+                return ResourceManager.GetString("WithOutCinemasAvaliables", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Without datas avaliables.
+        /// </summary>
+        public static string WithOutDatasAvaliables {
+            get {
+                return ResourceManager.GetString("WithOutDatasAvaliables", resourceCulture);
             }
         }
     }

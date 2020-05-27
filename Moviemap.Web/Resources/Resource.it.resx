@@ -153,10 +153,13 @@
   <data name="RecoverPasswordMessage" xml:space="preserve">
     <value>È stata inviata e-mail con le istruzioni per modificare la password.</value>
   </data>
-  <data name="UserWithOutTrips" xml:space="preserve">
-    <value>Utente non ha viaggi</value>
-  </data>
   <data name="UserHaveAReservationForThisHour" xml:space="preserve">
     <value>utente ha una prenotazione per questa ora!</value>
+  </data>
+  <data name="UserWithOutReservations" xml:space="preserve">
+    <value>Utente non ha prenotazioni!</value>
+  </data>
+  <data name="WithOutCinemasAvaliables" xml:space="preserve">
+    <value>Senza cinema disponibili!</value>
   </data>
 </root>

@@ -147,9 +147,6 @@
   <data name="PasswordChangedSuccess" xml:space="preserve">
     <value>Su contraseña ha sido modificada con éxito.</value>
   </data>
-  <data name="UserWithOutTrips" xml:space="preserve">
-    <value>¡El usuario no tiene viajes!</value>
-  </data>
   <data name="DateError" xml:space="preserve">
     <value>La Fecha de Inicio debe ser minor que la Fecha de Fin</value>
   </data>
@@ -158,5 +155,11 @@
   </data>
   <data name="UserHaveAReservationForThisHour" xml:space="preserve">
     <value>¡El usuario tiene una reserva para esta hora!</value>
+  </data>
+  <data name="UserWithOutReservations" xml:space="preserve">
+    <value>¡El usuario no tiene reservas!</value>
+  </data>
+  <data name="WithOutCinemasAvaliables" xml:space="preserve">
+    <value>¡Sin cines disponibles!</value>
   </data>
 </root>

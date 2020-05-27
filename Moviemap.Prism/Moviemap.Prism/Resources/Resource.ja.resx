@@ -351,4 +351,16 @@
   <data name="ChangePhotoNoSoccerUser" xml:space="preserve">
     <value>ソーシャルネットワークで作成されたユーザーは、ソーシャルネットワークの写真またはパスワードを変更する必要があります。</value>
   </data>
+  <data name="Successful" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="SelectedChairs" xml:space="preserve">
+    <value>厳選チェア！</value>
+  </data>
+  <data name="TotalValue" xml:space="preserve">
+    <value>合計値</value>
+  </data>
+  <data name="ConfirmReservation" xml:space="preserve">
+    <value>予約を確認する</value>
+  </data>
 </root>

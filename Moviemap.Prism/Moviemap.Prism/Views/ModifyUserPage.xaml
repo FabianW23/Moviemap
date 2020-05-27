@@ -74,7 +74,8 @@
 
                 <Button Command="{Binding ChangePasswordCommand}"
                         IsEnabled="{Binding IsEnabled}"
-                        Text="{i18n:Translate ChangePassword}"/>
+                        Text="{i18n:Translate ChangePassword}"
+                        Style="{StaticResource DangerButton}"/>
             </StackLayout>
         </StackLayout>
         <busyindicator:SfBusyIndicator AnimationType="DoubleCircle" 

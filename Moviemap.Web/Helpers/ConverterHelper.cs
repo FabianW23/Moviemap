@@ -146,8 +146,8 @@ namespace Moviemap.Web.Helpers
             return new HourResponse
             {
                 Id = model.Id,
-                StartDate = model.StartDateLocal,
-                EndDate = model.EndDateLocal,
+                StartDate = model.StartDate,
+                EndDate = model.EndDate,
                 TicketPrice = model.TicketPrice,
                 Movie = ToMovieResponse(model.Movie),
                 Room = ToRoomResponse(model.Room)

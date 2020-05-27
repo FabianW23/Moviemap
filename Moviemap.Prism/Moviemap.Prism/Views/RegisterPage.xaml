@@ -9,6 +9,7 @@
              xmlns:i18n="clr-namespace:Moviemap.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Moviemap.Prism.Views.RegisterPage"
+             BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
     
     <AbsoluteLayout>
@@ -16,21 +17,23 @@
                      AbsoluteLayout.LayoutFlags="All"
                      Padding="5">
 
-            <ffimageloading:CachedImage Aspect="AspectFit"
+            <ScrollView>
+
+                <ffimageloading:CachedImage Aspect="AspectFit"
                                                 Source="{Binding Image}" 
                                                 CacheDuration= "50"
                                                 HeightRequest="150"
                                                 Margin="5"
                                                 RetryCount= "3"
                                                 RetryDelay= "600">
-                <ffimageloading:CachedImage.Transformations>
-                    <fftransformations:CircleTransformation />
-                </ffimageloading:CachedImage.Transformations>
-                <ffimageloading:CachedImage.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
-                </ffimageloading:CachedImage.GestureRecognizers>
-            </ffimageloading:CachedImage>
-            <ScrollView>
+                    <ffimageloading:CachedImage.Transformations>
+                        <fftransformations:CircleTransformation />
+                    </ffimageloading:CachedImage.Transformations>
+                    <ffimageloading:CachedImage.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
+                    </ffimageloading:CachedImage.GestureRecognizers>
+                </ffimageloading:CachedImage>
+
                 <StackLayout>
 
                     <inputLayout:SfTextInputLayout HorizontalOptions="StartAndExpand"

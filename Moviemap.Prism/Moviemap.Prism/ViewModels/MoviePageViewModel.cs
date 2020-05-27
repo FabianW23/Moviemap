@@ -84,10 +84,13 @@ namespace Moviemap.Prism.ViewModels
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
-            Movie = parameters.GetValue<MovieResponse>("movie");
-            Title = Movie.Name;
-            LoadDate();
-            LoadHours(SelectedDate.Date);
+            if (parameters.Count != 0)
+            {
+                Movie = parameters.GetValue<MovieResponse>("movie");
+                Title = Movie.Name;
+                LoadDate();
+                LoadHours(SelectedDate.Date);
+            }
         }
 
         private async void RegisterAsync()

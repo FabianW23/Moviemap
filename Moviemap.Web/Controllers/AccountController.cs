@@ -13,6 +13,8 @@ using Moviemap.Common.Emuns;
 using Moviemap.Web.Data.Entities;
 using Moviemap.Web.Helpers;
 using Moviemap.Web.Models;
+using Moviemap.Web.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Moviemap.Web.Controllers
 {
@@ -22,17 +24,20 @@ namespace Moviemap.Web.Controllers
         private readonly IConfiguration _configuration;
         private readonly IEmailHelper _mailHelper;
         private readonly IImageHelper _imageHelper;
+        private readonly DataContext _context;
 
         public AccountController(
             IUserHelper userHelper,
             IConfiguration configuration,
             IEmailHelper mailHelper,
-            IImageHelper imageHelper)
+            IImageHelper imageHelper,
+            DataContext context)
         {
             _userHelper = userHelper;
             _configuration = configuration;
             _mailHelper = mailHelper;
             _imageHelper = imageHelper;
+            _context = context;
         }
 
         public IActionResult Register()
@@ -78,7 +83,8 @@ namespace Moviemap.Web.Controllers
                 ModelState.AddModelError(string.Empty, response.Message);
             }
             return View(model);
-        }
+        } 
+
         public async Task<IActionResult> ConfirmEmail(string userId, string token)
         {
             if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(token))
@@ -302,6 +308,53 @@ namespace Moviemap.Web.Controllers
             }
 
             ViewBag.Message = "User not found.";
+            return View(model);
+        }
+
+        public async Task<IActionResult> CinemaAdminIndex()
+        {
+            return View(_context.Users
+                .Include(u => u.Cinemas)
+                .Where(u => u.UserType == UserType.CinemaAdmin)
+                .ToList());
+        }
+
+        public IActionResult CreateCinemaAdmin()
+        {
+            AddUserViewModel model = new AddUserViewModel();
+
+            return View(model);
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateCinemaAdmin(AddUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                string path = model.PicturePath;
+
+                if (model.PictureFile != null)
+                {
+                    path = await _imageHelper.UploadImageAsync(model.PictureFile, "users");
+                }
+                UserEntity user = await _userHelper.AddUserAsync(model, UserType.CinemaAdmin);
+                if (user == null)
+                {
+                    ModelState.AddModelError(string.Empty, "This email is already used.");
+                    return View(model);
+                }
+                string token = await _userHelper.GenerateEmailConfirmationTokenAsync(user);
+                await _userHelper.ConfirmEmailAsync(user, token);
+
+                var response = _mailHelper.SendMail(model.Username, "Your Cinema Admin Account was created", $"Password" + $": {model.Password}");
+                if (response.IsSuccess)
+                {
+                    ViewBag.Message = "The Cinema admin was created";
+                    return View(model);
+                }
+                ModelState.AddModelError(string.Empty, response.Message);
+            }
             return View(model);
         }
     }

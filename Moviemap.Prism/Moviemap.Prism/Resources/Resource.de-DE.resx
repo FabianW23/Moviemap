@@ -351,4 +351,16 @@
   <data name="ChangePhotoNoSoccerUser" xml:space="preserve">
     <value>Benutzer, die von sozialen Netzwerken erstellt wurden, müssen das Foto oder Passwort im sozialen Netzwerk ändern.!</value>
   </data>
+  <data name="Successful" xml:space="preserve">
+    <value>Erfolgreich</value>
+  </data>
+  <data name="SelectedChairs" xml:space="preserve">
+    <value>Ausgewählte Stühle!</value>
+  </data>
+  <data name="TotalValue" xml:space="preserve">
+    <value>Gesamtwert</value>
+  </data>
+  <data name="ConfirmReservation" xml:space="preserve">
+    <value>Buchung bestätigen</value>
+  </data>
 </root>

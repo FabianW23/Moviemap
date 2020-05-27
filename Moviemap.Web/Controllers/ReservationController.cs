@@ -31,6 +31,7 @@ namespace Moviemap.Web.Controllers
                 .ThenInclude(h => h.Movie)
                 .Include(r => r.Hour)
                 .ThenInclude(h => h.Room)
+                .ThenInclude(r => r.Cinema)
                 .Where(r => r.Hour.Room.Cinema.User.Email == User.Identity.Name)
                 .ToListAsync();
             foreach (ReservationEntity reservation1 in reservation)
@@ -52,7 +53,13 @@ namespace Moviemap.Web.Controllers
 
             ReservationEntity reservationEntity = await _context.Reservations
                 .Include(r => r.ReservationChairs)
+                .ThenInclude(rc => rc.Chair)
+                .Include(r => r.User)
                 .Include(r => r.Hour)
+                .ThenInclude(h => h.Movie)
+                .Include(r => r.Hour)
+                .ThenInclude(h => h.Room)
+                .ThenInclude(h => h.Cinema)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (reservationEntity == null)
             {

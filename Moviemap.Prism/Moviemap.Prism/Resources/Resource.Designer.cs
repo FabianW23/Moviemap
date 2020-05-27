@@ -178,6 +178,15 @@ namespace Moviemap.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm reservation.
+        /// </summary>
+        public static string ConfirmReservation {
+            get {
+                return ResourceManager.GetString("ConfirmReservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error in the connection.
         /// </summary>
         public static string ConnectionError {
@@ -700,6 +709,15 @@ namespace Moviemap.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Selected chairs.
+        /// </summary>
+        public static string SelectedChairs {
+            get {
+                return ResourceManager.GetString("SelectedChairs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start date.
         /// </summary>
         public static string StartDate {
@@ -745,11 +763,29 @@ namespace Moviemap.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Successful.
+        /// </summary>
+        public static string Successful {
+            get {
+                return ResourceManager.GetString("Successful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Synopsis.
         /// </summary>
         public static string Synopsis {
             get {
                 return ResourceManager.GetString("Synopsis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total value.
+        /// </summary>
+        public static string TotalValue {
+            get {
+                return ResourceManager.GetString("TotalValue", resourceCulture);
             }
         }
         

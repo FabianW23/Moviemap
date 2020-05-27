@@ -27,6 +27,7 @@ namespace Moviemap.Prism.ViewModels
         private List<ChairResponse> SelectedChairs;
         private RoomResponse _room;
         private HourResponse _hour;
+        private decimal _total;
 
         private DelegateCommand _SelectChairCommand00;
         private DelegateCommand _SelectChairCommand10;
@@ -224,7 +225,17 @@ namespace Moviemap.Prism.ViewModels
         public ObservableCollection<string> ChairsChips
         {
             get => _chairChips;
-            set => SetProperty(ref _chairChips, value);
+            set
+            {
+                SetProperty(ref _chairChips, value);
+                TotalValue = ChairsChips.Count * Hour.TicketPrice;
+            }
+        }
+
+        public decimal TotalValue
+        {
+            get => _total;
+            set => SetProperty(ref _total, value);
         }
 
         public bool IsEnable
@@ -582,9 +593,10 @@ namespace Moviemap.Prism.ViewModels
                     IsEnable = true;
                     return;
                 }
-                await App.Current.MainPage.DisplayAlert("Succes", response.Message, Languages.Accept);
+                await App.Current.MainPage.DisplayAlert(Languages.Successful, response.Message, Languages.Accept);
                 IsRunning = false;
                 IsEnable = true;
+                await _navigationService.NavigateAsync("/MoviemapMasterDetailPage/NavigationPage/MyReservationsPage");
                 return;
             }
             else
@@ -771,6 +783,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair01 = "Blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -778,6 +791,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair01 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -790,6 +804,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair11 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -797,6 +812,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair11 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -809,6 +825,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair21 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -816,6 +833,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair21 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -828,6 +846,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair31 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -835,6 +854,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair31 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -847,6 +867,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair41 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -854,6 +875,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair41 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -866,6 +888,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair51 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -873,6 +896,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair51 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -885,6 +909,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair61 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -892,6 +917,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair61 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -904,6 +930,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair71 = "Blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -911,6 +938,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair71 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -924,6 +952,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair02 = "Blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -931,6 +960,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair02 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -943,6 +973,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair12 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -950,6 +981,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair12 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -962,6 +994,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair22 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -969,6 +1002,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair22 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -981,6 +1015,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair32 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -988,6 +1023,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair32 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -1000,6 +1036,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair42 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -1007,6 +1044,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair42 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -1019,6 +1057,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair52 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -1026,6 +1065,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair52 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -1038,6 +1078,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair62 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -1045,6 +1086,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair62 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -1057,6 +1099,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair72 = "Blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -1064,6 +1107,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair72 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -1077,6 +1121,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair03 = "Blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -1084,6 +1129,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair03 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -1096,6 +1142,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair13 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -1103,6 +1150,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair13 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -1115,6 +1163,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair23 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -1122,6 +1171,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair23 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -1134,6 +1184,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair33 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -1141,6 +1192,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair33 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -1153,6 +1205,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair43 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -1160,6 +1213,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair43 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -1172,6 +1226,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair53 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -1179,6 +1234,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair53 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -1191,6 +1247,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair63 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -1198,6 +1255,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair63 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -1210,6 +1268,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair73 = "Blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -1217,6 +1276,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair73 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -1230,6 +1290,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair04 = "Blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -1237,6 +1298,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair04 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -1249,6 +1311,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair14 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -1256,6 +1319,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair14 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -1268,6 +1332,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair24 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -1275,6 +1340,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair24 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -1287,6 +1353,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair34 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -1294,6 +1361,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair34 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -1306,6 +1374,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair44 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -1313,6 +1382,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair44 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -1325,6 +1395,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair54 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -1332,6 +1403,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair54 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -1344,6 +1416,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair64 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -1351,6 +1424,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair64 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -1363,6 +1437,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair74 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -1370,6 +1445,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair74 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }
@@ -1382,6 +1458,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair84 = "blue";
                 SelectedChairs.Remove(chair);
                 chair.ChairType = ChairType.Available;
+                ChargeChairsChips();
                 return;
             }
             if (chair.ChairType == ChairType.Available && await ChairsCount())
@@ -1389,6 +1466,7 @@ namespace Moviemap.Prism.ViewModels
                 Chair84 = "Green";
                 chair.ChairType = ChairType.Selected;
                 SelectedChairs.Add(chair);
+                ChargeChairsChips();
                 return;
             }
         }

@@ -66,7 +66,7 @@ namespace Moviemap.Web.Controllers.API
                 .ToListAsync();
             if (reservations.Count == 0)
             {
-                return BadRequest(Resource.UserWithOutTrips);
+                return BadRequest(Resource.UserWithOutReservations);
             }
             else
             {
