@@ -363,4 +363,7 @@
   <data name="ConfirmReservation" xml:space="preserve">
     <value>Buchung bestätigen</value>
   </data>
+  <data name="Billboard" xml:space="preserve">
+    <value>Wideboard</value>
+  </data>
 </root>

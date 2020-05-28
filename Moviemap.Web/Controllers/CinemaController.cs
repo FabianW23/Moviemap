@@ -6,6 +6,7 @@ using Moviemap.Web.Data.Entities;
 using Moviemap.Web.Helpers;
 using Moviemap.Web.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -134,6 +135,36 @@ namespace Moviemap.Web.Controllers
             _context.Cinemas.Remove(cinemaEntity);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Cinemas()
+        {
+            return View(await _context.Cinemas
+                .Include(c => c.Brand)
+                .ToListAsync());
+        }
+
+        public async Task<IActionResult> CinemaMovies(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            List<MovieEntity> movies = await _context.Movies
+                .Include(m => m.Hours)
+                .ThenInclude(h => h.Room)
+                .ThenInclude(r => r.Cinema)
+                .ThenInclude(c => c.Brand)
+                .Where(c =>c.Hours.Any(h => h.Room.Cinema.Id == id && h.IsAvalible == false))
+                .OrderBy(m => m.Name)
+                .ToListAsync();
+            if (movies == null)
+            {
+                return NotFound();
+            }
+
+            return View(movies);
         }
     }
 }

@@ -3,15 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:i18n="clr-namespace:Moviemap.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Moviemap.Prism.Views.CinemaMoviesPage"
              Title="{Binding Title}">
 
     <StackLayout>
+
+        <Label HorizontalOptions="Center"
+               FontSize="Title"
+               Text="{i18n:Translate Billboard}"/>
+
         <CarouselView IndicatorView="indicatorView"
                   ItemsSource="{Binding Movies}"
-                  PeekAreaInsets="50"
-                  >
+                  PeekAreaInsets="50">
         <CarouselView.ItemsLayout>
             <LinearItemsLayout Orientation="Horizontal"
                                SnapPointsType="Mandatory"

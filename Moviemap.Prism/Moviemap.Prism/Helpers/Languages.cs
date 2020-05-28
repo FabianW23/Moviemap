@@ -154,6 +154,8 @@ namespace Moviemap.Prism.Helpers
 
         public static string Cinema => Resource.Cinema;
 
+        public static string Billboard => Resource.Billboard;
+
         public static string StatusC => Resource.StatusC;
 
         public static string Map => Resource.Map; 

@@ -363,4 +363,7 @@
   <data name="ConfirmReservation" xml:space="preserve">
     <value>予約を確認する</value>
   </data>
+  <data name="Billboard" xml:space="preserve">
+    <value>ビルボード コントロール|</value>
+  </data>
 </root>

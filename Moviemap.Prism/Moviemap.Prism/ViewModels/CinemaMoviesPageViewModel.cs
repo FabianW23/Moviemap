@@ -59,6 +59,7 @@ namespace Moviemap.Prism.ViewModels
             {
                 base.OnNavigatedTo(parameters);
                 Cinema = parameters.GetValue<CinemaResponse>("cinema");
+                Title = Cinema.Name;
                 LoadCinemaMoviesAsync();
             }
         }

@@ -88,6 +88,15 @@ namespace Moviemap.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Billboard.
+        /// </summary>
+        public static string Billboard {
+            get {
+                return ResourceManager.GetString("Billboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Cancel {
