@@ -366,4 +366,13 @@
   <data name="Billboard" xml:space="preserve">
     <value>Billboard</value>
   </data>
+  <data name="Avalible" xml:space="preserve">
+    <value>Avalible</value>
+  </data>
+  <data name="NotAvalible" xml:space="preserve">
+    <value>Not avalible</value>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>Selected</value>
+  </data>
 </root>

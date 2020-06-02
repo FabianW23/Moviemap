@@ -60,7 +60,7 @@ namespace Moviemap.Web.Helpers
             chairsList.Add(new ChairEntity { Name = "E6", Room = _context.Rooms.Find(roomId), ColumnLocation = 5, RowLocation = 4, ChairType = ChairType.Available });
             chairsList.Add(new ChairEntity { Name = "E7", Room = _context.Rooms.Find(roomId), ColumnLocation = 6, RowLocation = 4, ChairType = ChairType.Available });
             chairsList.Add(new ChairEntity { Name = "E8", Room = _context.Rooms.Find(roomId), ColumnLocation = 7, RowLocation = 4, ChairType = ChairType.Available });
-            chairsList.Add(new ChairEntity { Name = "E8", Room = _context.Rooms.Find(roomId), ColumnLocation = 8, RowLocation = 4, ChairType = ChairType.Available });
+            chairsList.Add(new ChairEntity { Name = "E9", Room = _context.Rooms.Find(roomId), ColumnLocation = 8, RowLocation = 4, ChairType = ChairType.Available });
             return chairsList;
         }
 
@@ -106,7 +106,7 @@ namespace Moviemap.Web.Helpers
             _context.Chairs.Add(new ChairEntity { Name = "E6", Room = room, ColumnLocation = 5, RowLocation = 4, ChairType = ChairType.Available });
             _context.Chairs.Add(new ChairEntity { Name = "E7", Room = room, ColumnLocation = 6, RowLocation = 4, ChairType = ChairType.Available });
             _context.Chairs.Add(new ChairEntity { Name = "E8", Room = room, ColumnLocation = 7, RowLocation = 4, ChairType = ChairType.Available });
-            _context.Chairs.Add(new ChairEntity { Name = "E8", Room = room, ColumnLocation = 8, RowLocation = 4, ChairType = ChairType.Available });
+            _context.Chairs.Add(new ChairEntity { Name = "E9", Room = room, ColumnLocation = 8, RowLocation = 4, ChairType = ChairType.Available });
         }
     }
 }

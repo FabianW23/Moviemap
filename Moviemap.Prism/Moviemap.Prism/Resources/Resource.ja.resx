@@ -366,4 +366,13 @@
   <data name="Billboard" xml:space="preserve">
     <value>ビルボード コントロール|</value>
   </data>
+  <data name="Avalible" xml:space="preserve">
+    <value>あります</value>
+  </data>
+  <data name="NotAvalible" xml:space="preserve">
+    <value>利用できません</value>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>選択済み</value>
+  </data>
 </root>

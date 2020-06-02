@@ -58,7 +58,7 @@ namespace Moviemap.Prism.ViewModels
             }
             else
             {
-                Picture = "IconApp";
+                Picture = "IconApp2";
             }
         }
 
@@ -87,6 +87,18 @@ namespace Moviemap.Prism.ViewModels
 
         private void LoadMenus()
         {
+            if (Settings.IsLogin)
+            {
+                LoadUserMenu();
+            }
+            else
+            {
+                LoadNologInMenu();
+            }       
+        }
+
+        private void LoadUserMenu()
+        {
             List<Menu> menus = new List<Menu>
             {
                 new Menu
@@ -106,6 +118,39 @@ namespace Moviemap.Prism.ViewModels
                     Icon = "AccountIcon",
                     PageName = "ModifyUserPage",
                     Title = Languages.ModifyUserMenu
+                },
+                new Menu
+                {
+                    Icon = "MapIcon",
+                    PageName = "MapPage",
+                    Title = Languages.Map
+                },
+                new Menu
+                {
+                    Icon = "LoginIcon",
+                    PageName = "LoginPage",
+                    Title = Settings.IsLogin ? Languages.LogOut : Languages.LogInMenu
+                }
+            };
+
+            Menus = new ObservableCollection<MenuItemViewModel>(
+                menus.Select(m => new MenuItemViewModel(_navigationService)
+                {
+                    Icon = m.Icon,
+                    PageName = m.PageName,
+                    Title = m.Title
+                }).ToList());
+        }
+
+        private void LoadNologInMenu()
+        {
+            List<Menu> menus = new List<Menu>
+            {
+                new Menu
+                {
+                    Icon = "CinemasIcon",
+                    PageName = "CinemasPage",
+                    Title = Languages.Cinemas
                 },
                 new Menu
                 {

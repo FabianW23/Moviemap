@@ -177,5 +177,11 @@ namespace Moviemap.Prism.Helpers
         public static string SelectedChairs => Resource.SelectedChairs;
 
         public static string ConfirmReservation => Resource.ConfirmReservation;
+
+        public static string Avalible => Resource.Avalible;
+
+        public static string NotAvalible => Resource.NotAvalible;
+
+        public static string Selected => Resource.Selected;
     }
 }

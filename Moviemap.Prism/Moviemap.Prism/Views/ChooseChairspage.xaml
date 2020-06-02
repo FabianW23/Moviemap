@@ -17,6 +17,7 @@
                                     RetryCount= "3"
                                     WidthRequest="150"
                                     HeightRequest="150"/>
+            <Label Text=" "/>
             <StackLayout>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -249,10 +250,62 @@
                     </Image>
                 </Grid>
             </StackLayout>
-            
-            <Label Text="{i18n:Translate SelectedChairs}"/>
 
-            <ScrollView Orientation="Vertical" Margin="0">
+            <BoxView BackgroundColor="{StaticResource ColorPrimary}"
+                     HeightRequest="3"
+                     WidthRequest="330"
+                     HorizontalOptions="Center"
+                     Margin="5"/>
+
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Column="0"
+                       Grid.Row="0"
+                       HorizontalOptions="Center"
+                       Source="red"/>
+                <Label Grid.Column="0"
+                       Grid.Row="1"
+                       HorizontalOptions="Center"
+                       Text="{i18n:Translate NotAvalible}"/>
+
+                <Image Grid.Column="1"
+                       Grid.Row="0"
+                       HorizontalOptions="Center"
+                       Source="blue"/>
+                <Label Grid.Column="1"
+                       Grid.Row="1"
+                       HorizontalOptions="Center"
+                       Text="{i18n:Translate Avalible}"/>
+
+                <Image Grid.Column="2"
+                       Grid.Row="0"
+                       HorizontalOptions="Center"
+                       Source="Green"/>
+                <Label Grid.Column="2"
+                       Grid.Row="1"
+                       HorizontalOptions="Center"
+                       Text="{i18n:Translate Selected}"/>
+            </Grid>
+
+            <BoxView BackgroundColor="{StaticResource ColorPrimary}"
+                     HeightRequest="3"
+                     WidthRequest="330"
+                     HorizontalOptions="Center"
+                     Margin="5"/>
+
+            <Label Text="{i18n:Translate SelectedChairs}"
+                   HorizontalOptions="Center"/>
+
+            <ScrollView Orientation="Vertical" Margin="5">
                 <buttons:SfChipGroup HorizontalOptions="Center"
                                  VerticalOptions="Center"
                                  ItemsSource="{Binding ChairsChips}"
@@ -264,15 +317,15 @@
                 </buttons:SfChipGroup>
             </ScrollView>
 
-            <StackLayout Orientation="Horizontal">
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="Center">
                 <Label Text="{i18n:Translate TotalValue}"/>
                 <Label Text="{Binding TotalValue}"/>
             </StackLayout>
-
-            <StackLayout>
-                <Button VerticalOptions="EndAndExpand"
-                Command="{Binding ConfirmReservationCommand}" 
-                Text="{i18n:Translate ConfirmReservation}"/>
+            
+            <StackLayout VerticalOptions="EndAndExpand">
+                <Button Command="{Binding ConfirmReservationCommand}" 
+                        Text="{i18n:Translate ConfirmReservation}"/>
             </StackLayout>
         </StackLayout>
         

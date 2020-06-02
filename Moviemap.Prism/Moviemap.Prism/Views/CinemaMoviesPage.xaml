@@ -2,72 +2,91 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:i18n="clr-namespace:Moviemap.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Moviemap.Prism.Views.CinemaMoviesPage"
              Title="{Binding Title}">
 
-    <StackLayout>
-
-        <Label HorizontalOptions="Center"
+    <AbsoluteLayout>
+        <StackLayout>
+            <Label Text=" "/>
+            <Label HorizontalOptions="Center"
+               VerticalOptions="Center"
                FontSize="Title"
+               TextColor="{StaticResource ColorFont}"
                Text="{i18n:Translate Billboard}"/>
 
-        <CarouselView IndicatorView="indicatorView"
-                  ItemsSource="{Binding Movies}"
-                  PeekAreaInsets="50">
-        <CarouselView.ItemsLayout>
-            <LinearItemsLayout Orientation="Horizontal"
+            <CarouselView IndicatorView="indicatorView"
+                          ItemsSource="{Binding Movies}"
+                          PeekAreaInsets="50"
+                          HeightRequest="570">
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"
                                SnapPointsType="Mandatory"
                                SnapPointsAlignment="Start"
-                               ItemSpacing="30"/>            
-        </CarouselView.ItemsLayout>
-           
-        <CarouselView.ItemTemplate>
-            <DataTemplate>
-                <StackLayout>
-                    <Frame HasShadow="True"
-                       BorderColor="DarkGray"
-                       CornerRadius="5"
-                       Margin="5"
-                       HeightRequest="450"
-                       WidthRequest="300"
-                       HorizontalOptions="Center"
-                       VerticalOptions="CenterAndExpand">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding SelectMovieCommand}"/>
-                            </Frame.GestureRecognizers>
-                            <StackLayout>
-                            <Label Text="{Binding Name}"
-                               FontAttributes="Bold"
-                               FontSize="Large"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center" />
-                            <ffimageloading:CachedImage Aspect="AspectFit"
-                                                        Source="{Binding LogoFullPath}" 
-                                                        CacheDuration= "50"
-                                                        Margin="5"
-                                                        RetryCount= "3"
-                                                        RetryDelay= "600"
-                                                        HeightRequest="400"
-                                                        WidthRequest="300"/>
+                               ItemSpacing="20"/>
+                </CarouselView.ItemsLayout>
+
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Frame HasShadow="True"
+                                   BorderColor="DarkGray"
+                                   CornerRadius="5"
+                                   Margin="2"
+                                   HeightRequest="450"
+                                   WidthRequest="350"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="CenterAndExpand">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectMovieCommand}"/>
+                                </Frame.GestureRecognizers>
+                                <StackLayout>
+                                    <Label Text="{Binding Name}"
+                                           TextColor="{StaticResource ColorSecondary}"
+                                           FontAttributes="Italic"
+                                           FontSize="Large"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+
+                                    <BoxView BackgroundColor="{StaticResource ColorPrimary}"
+                                     HeightRequest="3"/>
+
+                                    <ffimageloading:CachedImage Aspect="AspectFill"
+                                                    Source="{Binding LogoFullPath}" 
+                                                    CacheDuration= "50"
+                                                    Margin="5"
+                                                    RetryCount= "3"
+                                                    RetryDelay= "600"
+                                                    HeightRequest="380"
+                                                    WidthRequest="300"/>
+                                </StackLayout>
+                            </Frame>
                         </StackLayout>
-                    </Frame>
-                </StackLayout>
-            </DataTemplate>
-        </CarouselView.ItemTemplate>
-    </CarouselView>
-        <StackLayout>
-            <IndicatorView x:Name="indicatorView"
-                IndicatorColor="LightGray"
-                IndicatorSize="15"
-                SelectedIndicatorColor="DarkGray"
-                VerticalOptions="Start"
-                HorizontalOptions="Center" />
-            <Label Text=" "/>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <StackLayout>
+                <IndicatorView x:Name="indicatorView"
+                                IndicatorColor="{StaticResource ColorBackgroud}"
+                                IndicatorSize="15"
+                                SelectedIndicatorColor="{StaticResource ColorPrimary}"
+                                VerticalOptions="Start"
+                                HorizontalOptions="Center" />
+            </StackLayout>
         </StackLayout>
-    </StackLayout>
-    
-    
+
+        <busyindicator:SfBusyIndicator AnimationType="DoubleCircle" 
+                                       AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                	                   AbsoluteLayout.LayoutFlags="All"
+                	                   HorizontalOptions="Center"
+                	                   TextColor="{StaticResource ColorPrimary}"
+                	                   IsVisible="{Binding IsRunning}"
+                	                   VerticalOptions="Center"
+                	                   ViewBoxWidth="120"
+                	                   ViewBoxHeight="120"/>
+    </AbsoluteLayout>
+
 </ContentPage>

@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Moviemap.Common.Models;
 using Moviemap.Web.Data;
 using Moviemap.Web.Data.Entities;
 using Moviemap.Web.Helpers;
 using Moviemap.Web.Resources;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,6 +35,7 @@ namespace Moviemap.Web.Controllers.API
                 .ThenInclude(h => h.Room)
                 .ThenInclude(r => r.Cinema)
                 .ThenInclude(c => c.Brand)
+                .Where(m => m.Hours.Any(h => h.StartDateLocal >= DateTime.Now.AddHours(-5)))
                 .OrderBy(m => m.Name)
                 .ToListAsync();
             if (movies.Count == 0)

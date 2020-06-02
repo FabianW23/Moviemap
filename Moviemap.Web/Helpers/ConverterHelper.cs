@@ -184,7 +184,7 @@ namespace Moviemap.Web.Helpers
                     EndDate = h.EndDate,
                     TicketPrice = h.TicketPrice,
                     Room = ToRoomResponse(h.Room)
-                }).Where(h => h.Room.Cinema.Id == cinemaId && h.IsAvalible == false)
+                }).Where(h => h.Room.Cinema.Id == cinemaId && h.IsAvalible == false && h.StartDateLocal >= DateTime.Now.AddHours(-5))
                 .ToList()
             };
         }

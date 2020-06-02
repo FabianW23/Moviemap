@@ -88,6 +88,15 @@ namespace Moviemap.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Avalible.
+        /// </summary>
+        public static string Avalible {
+            get {
+                return ResourceManager.GetString("Avalible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Billboard.
         /// </summary>
         public static string Billboard {
@@ -556,6 +565,15 @@ namespace Moviemap.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not avalible.
+        /// </summary>
+        public static string NotAvalible {
+            get {
+                return ResourceManager.GetString("NotAvalible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
         public static string Ok {
@@ -714,6 +732,15 @@ namespace Moviemap.Prism.Resources {
         public static string SelectADate {
             get {
                 return ResourceManager.GetString("SelectADate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selected.
+        /// </summary>
+        public static string Selected {
+            get {
+                return ResourceManager.GetString("Selected", resourceCulture);
             }
         }
         

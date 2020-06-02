@@ -366,4 +366,13 @@
   <data name="Billboard" xml:space="preserve">
     <value>Cartelera</value>
   </data>
+  <data name="Avalible" xml:space="preserve">
+    <value>Disponible</value>
+  </data>
+  <data name="NotAvalible" xml:space="preserve">
+    <value>No disponible</value>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>Seleccionado</value>
+  </data>
 </root>

@@ -223,7 +223,7 @@ namespace Moviemap.Web.Controllers.API
                 return BadRequest(Resource.UserDoesntExists);
             }
 
-            string picturePath = string.Empty;
+            string picturePath = userEntity.PicturePath;
             if (request.PictureArray != null && request.PictureArray.Length > 0)
             {
                 picturePath = _imageHelper.UploadImage(request.PictureArray, "Users");
